@@ -1,0 +1,93 @@
+#!/bin/bash
+
+set -e
+
+# ===========================
+# Check OS
+# ---------------------------
+
+os="Unsupported OS"
+function detecet_os {
+  case $(uname) in
+    "Darwin")
+      os="Mac"
+      ;;
+    "Linux")
+      os="Linux"
+      ;;
+    *)
+      ;;
+  esac
+}
+
+detecet_os
+
+# If the OS is not supported, exit
+if [ $os = "Unsupported OS" ]; then
+  uname
+  echo "ERROR: Unsupported OS. Exiting..."
+  exit 1
+fi
+
+
+# ===========================
+# Clone this repo
+# ---------------------------
+
+# If this repo is not installed at your home, clone it
+if [ ! -d ~/dotfiles ]; then
+  git clone https://github.com/krzmknt/dotfiles
+fi
+
+
+function install_brew(){
+  # Install Homebrew, if not installed
+  case $os in
+    "Mac")
+      if [ ! -f /opt/homebrew/bin/brew ]; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      fi
+      brew bundle --file=~/dotfiles/Brewfile
+      ;;
+
+    "Linux")
+      if [ ! -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+      fi
+      brew bundle --file=~/dotfiles/Brewfile
+      ;;
+
+    *)
+      ;;
+  esac
+}
+
+
+
+function create_link(){
+  package=$1
+
+  # --dir: directory where the dotfiles are
+  # --target: directory where the dotfiles are linked to
+  # stow --verbose=5 --dir=~/dotfiles/config --target=~ $package
+  stow -v -d ~/dotfiles/config -t ~ $package
+}
+
+
+# install_brew
+create_link fish
+create_link karabiner
+create_link nvim
+create_link skhd
+create_link tmux
+create_link wezterm
+create_link yabai
+create_link zsh
+
+function fish(){
+  fish_dir="${HOME}/.config/fish"
+  [ -e ${fish_dir}/functions ] || mkdir -p ${fish_dir}/functions
+  ln -fnsv ${this_dir}/settings/fish/config.fish ${fish_dir}/
+  ln -fnsv ${this_dir}/settings/fish/functions/fish_prompt.fish ${fish_dir}/functions/
+}
+

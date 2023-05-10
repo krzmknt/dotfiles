@@ -1,0 +1,54 @@
+# application
+alt - return : open /Applications/wezterm.app
+alt - n : open -n /Applications/Brave\ Browser.app
+alt - m : open /Applications/Obsidian.app
+
+
+# insert mode
+alt - i : yabai -m window --insert east
+alt + shift - i : yabai -m window --insert south
+
+
+# close
+alt - c : yabai -m window --close
+
+
+# focus
+alt - k : yabai -m window --focus stack.north \
+    || yabai -m window --focus north
+alt - j : yabai -m window --focus stack.south \
+    || yabai -m window --focus south
+alt - h : yabai -m window --focus stack.west \
+    || yabai -m window --focus west
+alt - l : yabai -m window --focus stack.east \
+    || yabai -m window --focus east
+
+
+# full screen
+alt - space : yabai -m window --toggle zoom-fullscreen
+
+
+# resize
+alt + shift - h : yabai -m window --resize left:-40:0 \
+    || yabai -m window --resize right:-40:0
+alt + shift - j : yabai -m window --resize bottom:0:40 \
+    || yabai -m window --resize top:0:40
+alt + shift - k : yabai -m window --resize top:0:-40 \
+    || yabai -m window --resize bottom:0:-40
+alt + shift - l : yabai -m window --resize right:40:0 \
+    || yabai -m window --resize left:40:0
+
+
+# reset split balance
+shift + alt - e : yabai -m space --balance
+
+
+# warp
+alt + lctrl - j : yabai -m window --warp south
+alt + lctrl - k : yabai -m window --warp north
+alt + lctrl - h : yabai -m window --warp west
+alt + lctrl - l : yabai -m window --warp east
+
+
+# toggle mission control
+shift + alt - m : yabai -m space --toggle mission-control
