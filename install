@@ -35,8 +35,9 @@ fi
 
 
 # ===========================
-# Install Homebrew, if not installed
+# Homebrew
 # ---------------------------
+# Install Homebrew, if not installed
 case $os in
   "Mac")
     if [ ! -f /opt/homebrew/bin/brew ]; then
@@ -67,4 +68,13 @@ stow -v -d ~/dotfiles/config -t ~ skhd
 stow -v -d ~/dotfiles/config -t ~ tmux
 stow -v -d ~/dotfiles/config -t ~ wezterm
 stow -v -d ~/dotfiles/config -t ~ yabai
-stow -v -d ~/dotfiles/config -t ~ zsh
+
+
+# ===========================
+# Fish
+# ---------------------------
+# If fish is not the default shell, change it
+if [ ! $SHELL = `which fish` ]; then
+  which fish | sudo tee -a /etc/shells
+  chsh -s `which fish`
+fi

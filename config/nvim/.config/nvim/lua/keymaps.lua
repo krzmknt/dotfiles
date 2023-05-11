@@ -39,6 +39,7 @@ keymap('n', '<Space>q', ':<C-u>q!<Return>', opts)
 
 -- ESC*2 でハイライトやめる
 keymap('n', '<Esc><Esc>', ':<C-u>set nohlsearch<Return>', opts)
+
 -- Telescope
 keymap('n', '<Leader>f', '<cmd>Telescope find_files<cr>', opts)
 keymap('n', '<Leader>v', '<cmd>Telescope file_browser<cr>', opts)

@@ -52,6 +52,7 @@ telescope.setup {
       theme = "ivy",
       initial_mode = "normal",
       hijack_netrw = true,
+      hidden = true,
       mappings = {
         ["i"] = {
           ["<C-w>"] = function() vim.cmd('normal vbd') end,

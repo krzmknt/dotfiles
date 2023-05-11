@@ -1,29 +1,15 @@
-# -----------------------------------------------
+fish_add_path /opt/homebrew/bin
+
+
+# ===========================
 # General
-# -----------------------------------------------
-alias la "exa -abBhHilS --git --icons"
-alias diff colordiff
-alias c "g++ -o $argv $argv[1].cpp && ./$argv[1]"
-alias cat bat
+# ---------------------------
 set --global fish_prompt_pwd_dir_length 3
 
 
-function config
-  vim "$HOME/.config/fish/config.fish"
-  source ~/.config/fish/config.fish
-end
-
-
-function cd
-  builtin cd $argv; and la
-end
-
-
-
-
-# -----------------------------------------------
+# ===========================
 # Color
-# -----------------------------------------------
+# ---------------------------
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
 set --local dark_blue                    4a5e60
@@ -33,28 +19,22 @@ set --local orange                       fd971f
 set --local purple                       ae81ff
 set --local water                        66d9ef
 set --local duck_blue                    007394
-
 set --local green                        00c694
 set --local dark_green                   287480
 set --local pink                         c600c0
 set --local light_pink                   f8bbf6
 set --local yellow                       f7ce3e
-
-
 set --global white                       ffffff
 set --global black                       000000
-
 set --global color_dark                  505050
 set --global color_light                 dddddd
 set --global color_discreet              757575
+
 set --global color_main                  $duck_blue
 set --global color_main_light            $blue
 set --global color_warning               $red
-
 set --global color_git_main              $green
 set --global color_git_dirty             $yellow
-
-
 set --global fish_color_normal           $white
 set --global fish_color_autosuggestion   $color_discreet
 set --global fish_color_cancel           --background=$color_main
@@ -74,36 +54,47 @@ set --global fish_pager_color_completion $white
 set --global fish_pager_color_prefix     $color_main_light
 
 
+# ===========================
+# Aliases
+# ---------------------------
+alias cat   "bat"
+alias d     "docker"
+alias dc    "docker-compose"
+alias dcd   "dc down"
+alias dcl   "dc logs"
+alias dcu   "dc up --build -d"
+alias diff  "colordiff"
+alias dl    "docker ps -a"
+alias ghw   "gh repo view --web"
+alias la    "exa -abBhHilS --git --icons"
+alias poa   "poetry add"
+alias por   "poetry run"
+alias pos   "poetry show"
+alias v     "nvim"
+alias vi    "nvim"
+alias vim   "nvim"
 
+function config
+  set plugin $argv[1]
+  vim ~/dotfiles/config/$plugin
 
-# -----------------------------------------------
-# vim
-# -----------------------------------------------
-alias v nvim
-alias vi nvim
-alias vim nvim
-
-
-
-
-# -----------------------------------------------
-# git
-# -----------------------------------------------
-function ghw
-  gh repo view --web
+  switch $plugin
+    case fish
+      set refresh_cmd "source ~/dotfiles/config/fish/.config/fish/config.fish"
+    case tmux
+      set refresh_cmd "tmux source-file ~/.tmux.conf"
+    case skhd
+      set refresh_cmd "skhd --reload"
+    case yabai
+      set refresh_cmd "brew services restart yabai"
+  end
+  echo $refresh_cmd
+  eval $refresh_cmd
 end
 
-
-
-
-# -----------------------------------------------
-# tmux
-# -----------------------------------------------
-function config_tm
-  vim ~/.tmux.conf
-  tmux source ~/.tmux.conf
+function cd
+  builtin cd $argv; and la
 end
-
 
 function tm
   if [ -n "{$argv}" ]
@@ -112,32 +103,6 @@ function tm
     tmux attach-session || tmux new-session
   end
 end
-
-
-
-
-# -----------------------------------------------
-# docker
-# -----------------------------------------------
-alias d docker
-alias dl "docker ps -a"
-alias dc docker-compose
-
-
-function dcd
-  dc down
-end
-
-
-function dcu
-  dc up --build -d
-end
-
-
-function dcl
-  dc logs
-end
-
 
 function dockerun
     set -l name $argv[1]
@@ -148,36 +113,21 @@ function dockerun
     docker run --name $name --hostname $host -p 8080:8080 -it $image
 end
 
-
 function dockerm
     set -l name $argv[1]
     docker container stop $name > /dev/null 2>&1
     docker container rm $name > /dev/null 2>&1
 end
-eval (direnv hook fish)
 
-
-
-
-# -----------------------------------------------
-# aws
-# -----------------------------------------------
 function awsmc
     open "https://console.aws.amazon.com/console/home?region=us-east-1"
     oathtool --totp --base32 CX2FURPJNXZN3QUISRSFMHSWHVAWTMDIWLKI3BFRWXKPUR3VDMI4GBNNFZKXI3ZX | pbcopy
 end
 
-# -----------------------------------------------
-# Poetry
-# -----------------------------------------------
-alias por "poetry run"
-alias poa "poetry add"
-alias pos "poetry show"
 
-
-# -----------------------------------------------
-# atcoder
-# -----------------------------------------------
+# ===========================
+# AtCoder
+# ---------------------------
 function t
     set -l task $argv[1]
     oj test -c "poetry run python ./$task/main.py" -S -d ./$task/tests/
@@ -215,6 +165,3 @@ function o
         open "https://atcoder.jp/contests/$contest/tasks/$contest""_$d"
     end
 end
-
-
-
