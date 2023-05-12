@@ -165,3 +165,8 @@ function o
         open "https://atcoder.jp/contests/$contest/tasks/$contest""_$d"
     end
 end
+
+# ===========================
+# asdf
+# ---------------------------
+source /opt/homebrew/opt/asdf/libexec/asdf.fish

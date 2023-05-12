@@ -61,6 +61,7 @@ esac
 # ===========================
 # Stow
 # ---------------------------
+stow -v -d ~/dotfiles/config -t ~ asdf
 stow -v -d ~/dotfiles/config -t ~ fish
 stow -v -d ~/dotfiles/config -t ~ karabiner
 stow -v -d ~/dotfiles/config -t ~ nvim
@@ -78,3 +79,16 @@ if [ ! $SHELL = `which fish` ]; then
   which fish | sudo tee -a /etc/shells
   chsh -s `which fish`
 fi
+
+
+# ===========================
+# asdf
+# ---------------------------
+for plugin in `awk '{print $1}' ~/dotfiles/config/asdf/.tool-versions`; do
+  if [ ! -d ~/.asdf/plugins/$plugin ]; then
+    asdf plugin add $plugin
+  fi
+  asdf install $plugin
+  asdf global $plugin `awk -v plugin=$plugin '$1 == plugin {print $2}' ~/dotfiles/config/asdf/.tool-versions`
+done
+
