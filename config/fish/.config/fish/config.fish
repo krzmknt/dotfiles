@@ -165,3 +165,20 @@ function o
         open "https://atcoder.jp/contests/$contest/tasks/$contest""_$d"
     end
 end
+
+
+# ghq + fzf
+function ghq_peco_repo
+  set selected_repository (ghq list -p | peco --prompt="repositories > " --query "$LBUFFER")
+  if [ -n "$selected_repository" ]
+    cd $selected_repository
+    echo "$selected_repository"
+    commandline -f repaint
+  end
+end
+
+# fish key binding
+function fish_user_key_bindings
+  bind \cg ghq_peco_repo
+end
+
