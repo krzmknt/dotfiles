@@ -92,3 +92,7 @@ for plugin in `awk '{print $1}' ~/dotfiles/config/asdf/.tool-versions`; do
   asdf global $plugin `awk -v plugin=$plugin '$1 == plugin {print $2}' ~/dotfiles/config/asdf/.tool-versions`
 done
 
+
+# Install oh-my-fish
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+omf install peco
