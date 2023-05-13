@@ -14,19 +14,21 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 
 set --local dark_blue                    4a5e60
 set --local blue                         00bcc6
-set --local red                          f92672
-set --local orange                       fd971f
+
+set --local red                          EF3D59
+set --local orange                       E17A47
+set --local yellow                       EFC958
+set --local green                        4AB19D
+set --local dark_green                   344E5C
+
 set --local purple                       ae81ff
 set --local water                        66d9ef
 set --local duck_blue                    007394
-set --local green                        00c694
-set --local dark_green                   287480
 set --local pink                         c600c0
 set --local light_pink                   f8bbf6
-set --local yellow                       f7ce3e
 set --global white                       ffffff
 set --global black                       000000
-set --global color_dark                  505050
+set --global color_dark                  303030
 set --global color_light                 dddddd
 set --global color_discreet              757575
 

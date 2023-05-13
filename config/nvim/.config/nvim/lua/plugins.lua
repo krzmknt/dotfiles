@@ -53,16 +53,16 @@ return packer.startup(function(use)
   use({ 'akinsho/bufferline.nvim' })
 
   -- cmp
-  use({ 'hrsh7th/nvim-cmp' })         -- The completion plugin
-  use({ 'hrsh7th/cmp-buffer' })       -- buffer completions
-  use({ 'hrsh7th/cmp-path' })         -- path completions
-  use({ 'hrsh7th/cmp-cmdline' })      -- cmdline completions
-  use({ 'saadparwaiz1/cmp_luasnip' }) -- snippet completions
-  use({ 'hrsh7th/cmp-nvim-lsp' })
-  use({ 'hrsh7th/cmp-nvim-lua' })
-  use({ 'onsails/lspkind-nvim' }) -- pictgram
-  use({ 'hrsh7th/vim-vsnip' })
-  use({ 'L3MON4D3/LuaSnip' })     --snippet engine
+  -- use({ 'hrsh7th/nvim-cmp' })         -- The completion plugin
+  -- use({ 'hrsh7th/cmp-buffer' })       -- buffer completions
+  -- use({ 'hrsh7th/cmp-path' })         -- path completions
+  -- use({ 'hrsh7th/cmp-cmdline' })      -- cmdline completions
+  -- use({ 'saadparwaiz1/cmp_luasnip' }) -- snippet completions
+  -- use({ 'hrsh7th/cmp-nvim-lsp' })
+  -- use({ 'hrsh7th/cmp-nvim-lua' })
+  -- use({ 'onsails/lspkind-nvim' }) -- pictgram
+  -- use({ 'hrsh7th/vim-vsnip' })
+  -- use({ 'L3MON4D3/LuaSnip' })     --snippet engine
 
   use({ 'neoclide/coc.nvim', branch = 'release' })
 
@@ -101,6 +101,9 @@ return packer.startup(function(use)
 
   -- Treesitter
   use({ 'nvim-treesitter/nvim-treesitter' })
+
+  -- Color code highlights
+  use({ 'norcalli/nvim-colorizer.lua' })
 
   -- git
   use({ 'lewis6991/gitsigns.nvim' })
