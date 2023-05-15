@@ -1,16 +1,17 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
-    "markdown",
-    "json",
+    "go",
     "html",
     "javascript",
-    "typescript",
-    "go",
-    "yaml",
-    "xml",
+    "json",
+    "markdown",
     "python",
-    "sh"
+    "sh",
+    "typescript",
+    "typescriptreact",
+    "xml",
+    "yaml"
   ],
   "languageserver": {
     "go": {
