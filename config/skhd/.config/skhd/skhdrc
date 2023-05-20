@@ -1,12 +1,14 @@
 # application
-alt - return : open /Applications/wezterm.app
+alt - return : open /Applications/WezTerm.app
 alt - n : open -n /Applications/Brave\ Browser.app
-alt - m : open /Applications/Obsidian.app
+alt - m : open /Applications/Kindle.app
 
 
 # insert mode
-alt - i : yabai -m window --insert east
-alt + shift - i : yabai -m window --insert south
+shift + lctrl + alt - h : yabai -m window --insert west
+shift + lctrl + alt - j : yabai -m window --insert south
+shift + lctrl + alt - k : yabai -m window --insert north
+shift + lctrl + alt - l : yabai -m window --insert east
 
 
 # close
