@@ -130,10 +130,10 @@ return packer.startup(function(use)
   use "brglng/vim-im-select"
 
   -- light filer
-  use({ 'lambdalisue/fern.vim' })
-  use({ 'lambdalisue/nerdfont.vim' })
-  use({ 'lambdalisue/fern-renderer-nerdfont.vim' })
-  vim.g['fern#renderer'] = 'nerdfont'
+--   use({ 'lambdalisue/fern.vim' })
+--   use({ 'lambdalisue/nerdfont.vim' })
+--   use({ 'lambdalisue/fern-renderer-nerdfont.vim' })
+--   vim.g['fern#renderer'] = 'nerdfont'
 
   -- transparent
   use({ 'xiyaowong/transparent.nvim' })

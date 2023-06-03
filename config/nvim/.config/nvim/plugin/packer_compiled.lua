@@ -94,16 +94,6 @@ _G.packer_plugins = {
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/copilot.vim",
     url = "https://github.com/github/copilot.vim"
   },
-  ["fern-renderer-nerdfont.vim"] = {
-    loaded = true,
-    path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/fern-renderer-nerdfont.vim",
-    url = "https://github.com/lambdalisue/fern-renderer-nerdfont.vim"
-  },
-  ["fern.vim"] = {
-    loaded = true,
-    path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/fern.vim",
-    url = "https://github.com/lambdalisue/fern.vim"
-  },
   ["fine-cmdline.nvim"] = {
     loaded = true,
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/fine-cmdline.nvim",
@@ -143,11 +133,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
-  },
-  ["nerdfont.vim"] = {
-    loaded = true,
-    path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/nerdfont.vim",
-    url = "https://github.com/lambdalisue/nerdfont.vim"
   },
   ["nightfox.nvim"] = {
     loaded = true,
