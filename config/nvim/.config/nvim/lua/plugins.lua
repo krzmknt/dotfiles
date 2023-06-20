@@ -68,7 +68,7 @@ return packer.startup(function(use)
 
 
   -- tag completion
-  use({ 'windwp/nvim-ts-autotag' })
+  -- use({ 'windwp/nvim-ts-autotag' })
 
   -- LSP
   use({ 'neovim/nvim-lspconfig' })             -- config preset for each language server
@@ -124,7 +124,7 @@ return packer.startup(function(use)
   use "lukas-reineke/indent-blankline.nvim"
 
   -- ime
-  use "brglng/vim-im-select"
+--   use "brglng/vim-im-select"
 
   -- light filer
   use({ 'lambdalisue/fern.vim' })
