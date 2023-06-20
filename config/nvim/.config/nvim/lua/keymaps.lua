@@ -119,6 +119,8 @@ keymap('n', '<Space>l', '$', opts)
 -- Paragraph
 keymap('n', '<S-j>', '}', opts)
 keymap('n', '<S-k>', '{', opts)
+keymap('v', '<S-j>', '}', opts)
+keymap('v', '<S-k>', '{', opts)
 
 -- Page
 keymap('n', '}', '<C-F>', opts)

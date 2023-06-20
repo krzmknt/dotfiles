@@ -5,4 +5,5 @@ vim.cmd [[
   "highlight Normal ctermbg=none guibg=none
   "highlight NonText ctermbg=none guibg=none
   "highlight NvimTreeNormal ctermbg=none guibg=none
+  command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 ]]

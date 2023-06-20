@@ -74,11 +74,14 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+<<<<<<< HEAD
   LuaSnip = {
     loaded = true,
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+=======
+>>>>>>> be00d31903d3093c1a74b374db6c6a64889504c8
   ["black-nvim"] = {
     loaded = true,
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/black-nvim",
@@ -89,6 +92,7 @@ _G.packer_plugins = {
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
     url = "https://github.com/akinsho/bufferline.nvim"
   },
+<<<<<<< HEAD
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -119,6 +123,8 @@ _G.packer_plugins = {
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+=======
+>>>>>>> be00d31903d3093c1a74b374db6c6a64889504c8
   ["coc.nvim"] = {
     loaded = true,
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/coc.nvim",
@@ -129,6 +135,7 @@ _G.packer_plugins = {
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/copilot.vim",
     url = "https://github.com/github/copilot.vim"
   },
+<<<<<<< HEAD
   ["fern-renderer-nerdfont.vim"] = {
     loaded = true,
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/fern-renderer-nerdfont.vim",
@@ -139,6 +146,8 @@ _G.packer_plugins = {
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/fern.vim",
     url = "https://github.com/lambdalisue/fern.vim"
   },
+=======
+>>>>>>> be00d31903d3093c1a74b374db6c6a64889504c8
   ["fine-cmdline.nvim"] = {
     loaded = true,
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/fine-cmdline.nvim",
@@ -159,11 +168,14 @@ _G.packer_plugins = {
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+<<<<<<< HEAD
   ["lspkind-nvim"] = {
     loaded = true,
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
   },
+=======
+>>>>>>> be00d31903d3093c1a74b374db6c6a64889504c8
   ["lspsaga.nvim"] = {
     loaded = true,
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
@@ -184,11 +196,14 @@ _G.packer_plugins = {
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+<<<<<<< HEAD
   ["nerdfont.vim"] = {
     loaded = true,
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/nerdfont.vim",
     url = "https://github.com/lambdalisue/nerdfont.vim"
   },
+=======
+>>>>>>> be00d31903d3093c1a74b374db6c6a64889504c8
   ["nightfox.nvim"] = {
     loaded = true,
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
@@ -209,10 +224,15 @@ _G.packer_plugins = {
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
   },
-  ["nvim-cmp"] = {
+  ["nvim-colorizer.lua"] = {
     loaded = true,
+<<<<<<< HEAD
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+=======
+    path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
+>>>>>>> be00d31903d3093c1a74b374db6c6a64889504c8
   },
   ["nvim-dap"] = {
     loaded = true,
@@ -284,10 +304,17 @@ _G.packer_plugins = {
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/vim-floaterm",
     url = "https://github.com/voldikss/vim-floaterm"
   },
+<<<<<<< HEAD
   ["vim-vsnip"] = {
     loaded = true,
     path = "/home/krzmknt/.local/share/nvim/site/pack/packer/start/vim-vsnip",
     url = "https://github.com/hrsh7th/vim-vsnip"
+=======
+  ["vim-im-select"] = {
+    loaded = true,
+    path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/vim-im-select",
+    url = "https://github.com/brglng/vim-im-select"
+>>>>>>> be00d31903d3093c1a74b374db6c6a64889504c8
   }
 }
 

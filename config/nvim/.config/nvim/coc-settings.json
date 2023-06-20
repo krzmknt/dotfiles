@@ -1,26 +1,31 @@
 {
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "go",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "markdown",
+    "python",
+    "sh",
+    "typescript",
+    "typescriptreact",
+    "xml",
+    "yaml"
+  ],
   "languageserver": {
     "go": {
       "command": "gopls",
-      "rootPatterns": [
-        "go.mod"
-      ],
+      "rootPatterns": ["go.mod"],
       "trace.server": "verbose",
-      "filetypes": [
-        "go"
-      ]
+      "filetypes": ["go"]
     },
     "bash": {
       "command": "bash-language-server",
-      "args": [
-        "start"
-      ],
-      "filetypes": [
-        "sh"
-      ],
-      "ignoredRootPaths": [
-        "~"
-      ]
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
     }
   }
 }
