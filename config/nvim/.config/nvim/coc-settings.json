@@ -27,5 +27,6 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     }
-  }
+  },
+  "http.proxyStrictSSL": false
 }
