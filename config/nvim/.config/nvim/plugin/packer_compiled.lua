@@ -174,6 +174,11 @@ _G.packer_plugins = {
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
     url = "https://github.com/rcarriga/nvim-dap-ui"
   },
+  ["nvim-dap-vscode-js"] = {
+    loaded = true,
+    path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/nvim-dap-vscode-js",
+    url = "https://github.com/mxsdev/nvim-dap-vscode-js"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -238,6 +243,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/vim-im-select",
     url = "https://github.com/brglng/vim-im-select"
+  },
+  ["vscode-js-debug"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/opt/vscode-js-debug",
+    url = "https://github.com/microsoft/vscode-js-debug"
   }
 }
 

@@ -67,15 +67,18 @@ keymap('n', 'dw', 'vb"_d', opts)
 -- Tab
 -- ----------------------------------------------
 -- New tab
-keymap('n', 'te', ':tabedit ', opts)
-keymap('n', 'tn', ':tabnew<Return>', opts)
+keymap('n', 'fe', ':tabedit ', opts)
+keymap('n', 'fn', ':tabnew<Return>', opts)
 
 -- Close
-keymap('n', 'tw', ':tabclose<Return>', opts)
+keymap('n', 'fw', ':tabclose<Return>', opts)
 
 -- Move
-keymap('n', 'tl', ':tabnext<Return>', opts)
-keymap('n', 'th', ':tabprevious<Return>', opts)
+keymap('n', 'fl', ':tabnext<Return>', opts)
+keymap('n', 'fh', ':tabprevious<Return>', opts)
+
+keymap('n', 'gd', ":call CocAction('jumpDefinition', 'tab drop')<Return>", opts)
+
 
 
 -- ----------------------------------------------
