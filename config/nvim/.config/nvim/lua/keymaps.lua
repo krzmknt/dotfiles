@@ -77,6 +77,9 @@ keymap('n', 'fw', ':tabclose<Return>', opts)
 keymap('n', 'fl', ':tabnext<Return>', opts)
 keymap('n', 'fh', ':tabprevious<Return>', opts)
 
+keymap('n', 'gd', ":call CocAction('jumpDefinition', 'tab drop')<Return>", opts)
+
+
 
 -- ----------------------------------------------
 -- Window

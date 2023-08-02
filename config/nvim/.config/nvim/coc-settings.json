@@ -28,5 +28,12 @@
       "ignoredRootPaths": ["~"]
     }
   },
-  "http.proxyStrictSSL": false
+  "http.proxyStrictSSL": false,
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-11",
+      "path": "~/.asdf/installs/java/corretto-11.0.19.7.1",
+      "default": true
+    }
+  ]
 }
