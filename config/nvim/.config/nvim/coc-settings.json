@@ -35,5 +35,11 @@
       "path": "~/.asdf/installs/java/corretto-11.0.19.7.1",
       "default": true
     }
-  ]
+  ],
+  "python.autoComplete.extraPaths": ["./"],
+  "python.pythonPath": "pipenv",
+  "python.venvPath": "./.venv",
+  "python.formatting.provider": "black",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true
 }
