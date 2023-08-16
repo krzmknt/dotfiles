@@ -149,6 +149,23 @@ return packer.startup(function(use)
   use({ 'github/copilot.vim' })
 
 
+  -- GPT
+  use({
+    "jackMort/ChatGPT.nvim",
+    commit = '24bcca7',
+    -- Because the latest version (at 2023/8/16) return cURL error
+      config = function()
+        require("chatgpt").setup({
+          api_host_cmd = 'api.openai.com'
+        })
+      end,
+      requires = {
+        "MunifTanjim/nui.nvim",
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim"
+      }
+  })
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
