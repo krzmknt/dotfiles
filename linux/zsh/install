@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+if [[ "$SHELL" == "/usr/bin/zsh" ]]; then
+  echo "Alreadly installed: zsh (set as default shell)"
+else
+  sudo apt-get -y update
+  sudo apt-get -y install zsh
+  if [[ -e ~/.zshrc ]]; then
+    :
+  else
+    touch ~/.zshrc
+  fi
+  chsh -s /usr/bin/zsh
+
+  # zplug
+  sudo apt-get -y install git
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
+
+
+stow -v -d . -t ~ .

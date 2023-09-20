@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+set -Cuo pipefail
+
+# Dependencies:
+#   rust
+#   zsh
+
+which starship >> /dev/null
+if [[ $? -eq 0 ]]; then
+  echo "Alreadly installed: starship"
+else
+  set -e
+  sudo apt -y update
+  sudo apt -y install build-essential
+  curl -sS https://starship.rs/install.sh | sh
+  set +e
+fi
+
+bootstrap_cmd="eval \"$(starship init zsh)\""
+grep $bootstrap_cmd ~/.zshrc >> /dev/null
+if [[ $? -eq 1 ]]; then
+  echo $bootstrap_cmd >> ~/.zshrc
+fi
+
+exit

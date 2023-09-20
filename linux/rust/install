@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Dependencies:
+#   asdf
+#
+
+which rustc >> /dev/null
+if [[ $? -eq 0 ]]; then
+  echo "Alreadly installed: rustc, cargo"
+  exit
+fi
+
+asdf plugin add rust
+# You can list the all available rust versions with `asdf list all rust`
+RUST_VERSION="1.72.1"
+asdf install rust $RUST_VERSION
+asdf global rust $RUST_VERSION
+
+echo 'export PATH=$HOME/.asdf/installs/rust/1.72.1/bin/:$PATH' >> ~/.zshrc
