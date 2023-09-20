@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# stow
+which stow >> /dev/null
+if [[ $? -eq 0 ]];then
+  echo "Alreadly installed: stow"
+else
+  sudo apt-get -y install stow
+fi
+stow -v -d $HOME/ghq/github.com/krzmknt/dotfiles/config -t ~ nvim
+
+
+# zsh with starship(installed with cargo)
+./zsh/install
+./asdf/install
+./rust/install
+./starship/install
+
+./docker/install
+
+./go/install
+
+./nvim/install
+
+
+# exa
+cargo install exa
+
+# bat
+cargo install --locked bat
+
+# peco
+which peco >> /dev/null
+if [[ $? -eq 0 ]];then
+  echo "Alreadly installed: peco"
+else
+  wget https://github.com/peco/peco/releases/download/v0.5.7/peco_linux_386.tar.gz
+  tar xzvf peco_linux_386.tar.gz
+  cd peco_linux_386
+  sudo cp peco /usr/local/bin
+  peco --version
+  rm -rf peco_linux_386
+  rm -f peco_linux_386.tar.gz
+fi
+
+# ghq
+which ghq >> /dev/null
+if [[ $? -eq 0 ]];then
+  echo "Alreadly installed: ghq"
+else
+  go install github.com/x-motemen/ghq@latest
+fi

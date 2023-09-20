@@ -1,0 +1,21 @@
+#!/bin/bash
+
+
+# https://asdf-vm.com/guide/getting-started.html
+# Dependencies: zsh
+
+if [[ -d ~/.asdf ]]; then
+  echo "Alreadly installed: adsf"
+else
+  sudo apt-get -y update
+  sudo apt install -y curl git
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
+fi
+
+bootstrap_cmd=". $HOME/.asdf/asdf.sh"
+grep $bootstrap_cmd ~/.zshrc >> /dev/null
+if [[ $? -eq 1 ]]; then
+  echo $bootstrap_cmd > ~/.zshrc
+fi
+
+exit

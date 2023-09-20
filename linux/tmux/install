@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+# tmux
+which tmux >> /dev/null
+if [[ $? -eq 0 ]];then
+  echo "Alreadly installed: tmux"
+else
+  sudo apt-get -y install tmux
+fi
+
+
+tmux source-file ~/.tmux.conf
+stow -v -d $HOME/ghq/github.com/krzmknt/dotfiles/config -t ~ tmux

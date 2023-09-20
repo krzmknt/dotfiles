@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Dependencies:
+#   asdf
+
+which go >> /dev/null
+if [[ $? -eq 0 ]]; then
+  echo "Alreadly installed: go"
+  exit
+fi
+
+asdf plugin add golang
+# You can list the all available rust versions with `asdf list all rust`
+GO_VERSION="1.21.1"
+asdf install golang $GO_VERSION
+asdf global golang $GO_VERSION
+
+echo 'export GOPATH=$(go env GOPATH)' >> ~/.zshrc
+echo 'export PATH=$GOPATH/bin:$PATH' >> ~/.zshrc
