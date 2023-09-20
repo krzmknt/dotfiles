@@ -5,3 +5,4 @@ golang 1.20.4
 rust 1.69.0
 deno 1.33.2
 java corretto-17.0.7.7.1
+poetry 1.6.1

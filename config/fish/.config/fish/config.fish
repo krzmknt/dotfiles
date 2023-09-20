@@ -144,7 +144,7 @@ function s
     # If some test case failed, cancel the submit
     t $task
     if test $status = 1
-        echo "Error: test failed"
+        echo "[ERROR] test failed"
         return 1
     end
 
@@ -156,18 +156,6 @@ function s
 end
 
 
-function o
-    set contest (basename (pwd))
-    for d in (ls -d */);
-
-        # URL 規則の例外処理
-        if test $d = "ex/"
-            set d "h/"
-        end
-
-        open "https://atcoder.jp/contests/$contest/tasks/$contest""_$d"
-    end
-end
 
 
 # ===========================

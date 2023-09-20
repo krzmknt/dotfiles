@@ -23,4 +23,3 @@ autocmd({ 'BufReadPost' }, {
 		vim.api.nvim_exec('silent! normal! g`"zv', false)
 	end,
 })
-
