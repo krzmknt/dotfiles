@@ -36,8 +36,7 @@
       "default": true
     }
   ],
-  "python.autoComplete.extraPaths": ["./"],
-  "python.pythonPath": "pipenv",
+  "python.pythonPath": "~/.asdf/shims/python",
   "python.venvPath": "./.venv",
   "python.formatting.provider": "black",
   "python.linting.enabled": true,

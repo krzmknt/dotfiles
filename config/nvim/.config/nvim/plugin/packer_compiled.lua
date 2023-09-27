@@ -140,6 +140,11 @@ _G.packer_plugins = {
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["monokai.nvim"] = {
+    loaded = true,
+    path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/monokai.nvim",
+    url = "https://github.com/tanvirtin/monokai.nvim"
+  },
   ["nightfox.nvim"] = {
     loaded = true,
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
