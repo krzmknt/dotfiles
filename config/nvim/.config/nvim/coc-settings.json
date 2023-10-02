@@ -1,4 +1,5 @@
 {
+  "coc.preferences.willSaveHandlerTimeout": 3000,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "go",
@@ -14,6 +15,8 @@
     "xml",
     "yaml"
   ],
+  "coc.preferences.formatOnSaveTimeout": 3000,
+
   "languageserver": {
     "go": {
       "command": "gopls",
@@ -29,6 +32,7 @@
     }
   },
   "http.proxyStrictSSL": false,
+
   "java.configuration.runtimes": [
     {
       "name": "JavaSE-11",
@@ -36,9 +40,19 @@
       "default": true
     }
   ],
-  "python.pythonPath": "~/.asdf/shims/python",
+
+  "python.jediEnabled": false,
+  "pyright.enable": true,
+  "python.pythonPath": "~/.venv",
   "python.venvPath": "./.venv",
   "python.formatting.provider": "black",
+  "python.formatting.blackPath": "./.venv/bin/black",
+  "python.formatting.blackArgs": [],
+  "python.sortImports.path": "./.venv/bin/isort",
+  "python.sortImports.args": ["--profile", "black"],
   "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true
+  "python.linting.pylintEnabled": true,
+  "python.linting.mypyEnabled": true,
+
+  "Lua.diagnostics.globals": ["vim"]
 }

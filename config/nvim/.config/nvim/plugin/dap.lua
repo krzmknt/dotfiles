@@ -43,10 +43,39 @@ for _, language in ipairs({ "typescript", "javascript" }) do
   }
 end
 
+
 -- ====================================
 -- Python debugger
--- ====================================
+-- ------------------------------------
 local venv = os.getenv('VIRTUAL_ENV')
-command = string.format('%s/bin/python', venv)
+local command = string.format('%s/bin/python', venv)
 
 require('dap-python').setup(command)
+
+
+-- ====================================
+-- DAP UI
+-- ------------------------------------
+require("dapui").setup({
+  icons = { expanded = "", collapsed = "" },
+  layouts = {
+    {
+      elements = {
+        { id = "watches",     size = 0.20 },
+        { id = "stacks",      size = 0.20 },
+        { id = "breakpoints", size = 0.20 },
+        { id = "scopes",      size = 0.40 },
+      },
+      size = 64,
+      position = "right",
+    },
+    {
+      elements = {
+        "repl",
+        "console",
+      },
+      size = 0.20,
+      position = "bottom",
+    },
+  },
+})

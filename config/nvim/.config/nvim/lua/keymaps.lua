@@ -1,11 +1,9 @@
---[[
-Keymaps
-]]
+-- luacheck: globals vim
 
 local map = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
-mode = {
+local mode = {
   normal = 'n',
   insert = 'i',
   visual = 'v',

@@ -20,36 +20,33 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
 end
 
-
-
 protocol.CompletionItemKind = {
+  '', -- Color
+  '', -- Constant
+  '', -- TypeParameter
   '', -- Text
-  '', -- Method
-  '', -- Function
-  '', -- Constructor
+  '', -- Property
   '', -- Field
   '', -- Variable
-  '', -- Class
-  'ﰮ', -- Interface
-  '', -- Module
-  '', -- Property
-  '', -- Unit
-  '', -- Value
   '', -- Enum
-  '', -- Keyword
-  '﬌', -- Snippet
-  '', -- Color
-  '', -- File
-  '', -- Reference
-  '', -- Folder
-  '', -- EnumMember
-  '', -- Constant
   '', -- Struct
   '', -- Event
+  '', -- Class
+  '', -- Folder
+  '', -- File
+  '', -- EnumMember
+  '', -- Unit
+  '', -- Reference
+  '', -- Constructor
+  '', -- Function
+  '', -- Method
+  '', -- Keyword
+  '', -- Value
+  '', -- Module
+  '﬌', -- Snippet
   'ﬦ', -- Operator
-  '', -- TypeParameter
+  'ﰮ', -- Interface
 }
-
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -63,7 +60,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
--- Diagnostic symbols in the sign column (gutter)
 local signs = {
   Error = " ",
   Warn = " ",
@@ -89,48 +85,3 @@ vim.diagnostic.config({
     source = "always", -- Or "if_many"
   },
 })
-
-
--- local status, nvim_lsp = pcall(require, "lspconfig")
--- if (not status) then return end
---
--- -- Set up completion using nvim_cmp with LSP source
--- local capabilities = require('cmp_nvim_lsp').default_capabilities()
---
--- nvim_lsp.flow.setup {
---   on_attach = on_attach,
---   capabilities = capabilities
--- }
---
--- nvim_lsp.tsserver.setup {
---   on_attach = on_attach,
---   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
---   cmd = { "typescript-language-server", "--stdio" },
---   capabilities = capabilities
--- }
---
--- nvim_lsp.sourcekit.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
---
--- nvim_lsp.tailwindcss.setup {
---   on_attach = on_attach,
---   capabilities = capabilities
--- }
---
--- nvim_lsp.cssls.setup {
---   on_attach = on_attach,
---   filetypes = { "css" },
---   capabilities = capabilities
--- }
---
--- nvim_lsp.astro.setup {
---   on_attach = on_attach,
---   capabilities = capabilities
--- }
---
--- nvim_lsp.pyright.setup {
---   on_attach = on_attach,
---   capabilities = capabilities
--- }

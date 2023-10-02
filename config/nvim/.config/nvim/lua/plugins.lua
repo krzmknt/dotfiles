@@ -68,6 +68,7 @@ return packer.startup(function(use)
   use({ 'neoclide/coc.nvim', branch = 'release' })
 
 
+
   -- tag completion
   -- use({ 'windwp/nvim-ts-autotag' })
 
@@ -129,9 +130,42 @@ return packer.startup(function(use)
 
   -- Formatter
   use({ 'averms/black-nvim' })
+  use 'brentyi/isort.vim'
 
   -- indent-blankline
-  use "lukas-reineke/indent-blankline.nvim"
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      local hooks = require "ibl.hooks"
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+          vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+          vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+          vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+          vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+          vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+          vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+          vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+      end)
+
+      local highlight = {
+          "RainbowRed",
+          "RainbowYellow",
+          "RainbowBlue",
+          "RainbowOrange",
+          "RainbowGreen",
+          "RainbowViolet",
+          "RainbowCyan",
+      }
+
+      require("ibl").setup(
+        -- {
+        --   indent = {
+        --     highlight = highlight
+        --   },
+        -- }
+      )
+    end
+  }
 
   -- ime
 --   use "brglng/vim-im-select"
@@ -143,7 +177,27 @@ return packer.startup(function(use)
 --   vim.g['fern#renderer'] = 'nerdfont'
 
   -- transparent
-  use({ 'xiyaowong/transparent.nvim' })
+  use {
+    'xiyaowong/transparent.nvim',
+    config = function()
+      require("transparent").setup({
+
+        -- table: default groups
+        groups = {
+          'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+          'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+          'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
+          'SignColumn', 'CursorLineNr', 'EndOfBuffer',
+        },
+
+        -- table: additional groups that should be cleared
+        extra_groups = {},
+
+        -- table: groups you don't want to clear
+        exclude_groups = {},
+      })
+    end
+  }
 
 
   -- copilot
