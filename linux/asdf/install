@@ -4,13 +4,16 @@
 # https://asdf-vm.com/guide/getting-started.html
 # Dependencies: zsh
 
+
+# Install asdf
 if [[ -d ~/.asdf ]]; then
   echo "Alreadly installed: adsf"
 else
   sudo apt-get -y update
-  sudo apt install -y curl git
+  sudo apt-get -y install curl git
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
 fi
+
 
 bootstrap_cmd=". $HOME/.asdf/asdf.sh"
 grep $bootstrap_cmd ~/.zshrc >> /dev/null
@@ -18,4 +21,17 @@ if [[ $? -eq 1 ]]; then
   echo $bootstrap_cmd > ~/.zshrc
 fi
 
-exit
+
+# Install each plugin
+cat .tool-versions | while read line
+do
+  # line="plugin version"
+  splitted_line=($line)
+  plugin=${splitted_line[0]}
+  version=${splitted_line[1]}
+
+  asdf plugin add $plugin
+  asdf install $plugin $version
+  asdf global $plugin $version
+done
+
