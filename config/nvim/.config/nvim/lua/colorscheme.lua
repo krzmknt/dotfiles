@@ -12,3 +12,6 @@ require('monokai').setup {
   -- palette = require('monokai').ristretto,
   italics = false
 }
+
+vim.cmd.colorscheme "catppuccin"
+

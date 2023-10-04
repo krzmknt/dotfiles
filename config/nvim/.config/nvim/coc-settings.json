@@ -1,5 +1,6 @@
 {
   "coc.preferences.willSaveHandlerTimeout": 3000,
+  "coc.preferences.formatOnSaveTimeout": 3000,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "go",
@@ -15,7 +16,6 @@
     "xml",
     "yaml"
   ],
-  "coc.preferences.formatOnSaveTimeout": 3000,
 
   "languageserver": {
     "go": {

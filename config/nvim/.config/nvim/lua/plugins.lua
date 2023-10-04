@@ -40,13 +40,20 @@ packer.init({
 -- Install your plugins here
 return packer.startup(function(use)
   -- general
-  use({ 'wbthomason/packer.nvim' }) -- package management
-  use({ 'nvim-lua/plenary.nvim' })  -- Common utilities
-  use({ 'nvim-lua/popup.nvim' })
+  use 'wbthomason/packer.nvim'  -- package management
+  use 'nvim-lua/plenary.nvim'   -- Common utilities
+  use 'nvim-lua/popup.nvim'
 
   -- Colorschemes
-  use({ 'EdenEast/nightfox.nvim' })      -- Color scheme
-  use({ 'tanvirtin/monokai.nvim' })      -- Color scheme
+  use 'EdenEast/nightfox.nvim'       -- Color scheme
+  use 'tanvirtin/monokai.nvim'       -- Color scheme
+  use {
+    'catppuccin/nvim',
+    as = 'catppuccin'
+  }
+
+  --colorizer
+  use 'chrisbra/Colorizer'
 
   use({ 'nvim-lualine/lualine.nvim' })   -- Statusline
   use({ 'windwp/nvim-autopairs' })       -- Autopairs, integrates with both cmp and treesitter
@@ -221,8 +228,6 @@ return packer.startup(function(use)
       }
   })
 
-  --colorizer
-  use 'chrisbra/Colorizer'
 
 
   -- Automatically set up your configuration after cloning packer.nvim

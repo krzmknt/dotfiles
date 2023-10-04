@@ -55,7 +55,7 @@ map(mode.insert, '<C-d>', '<ESC>bcw', opts)
 -- Tab
 
 -- New
-map(mode.normal, 'fn', ':tabnew<Return>', opts)
+map(mode.normal, 'fn', ':tab sp<Return>', opts)
 
 -- Move
 map(mode.normal, 'fl', ':tabnext<Return>', opts)
