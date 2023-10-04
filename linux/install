@@ -29,6 +29,9 @@ cargo install exa
 # bat
 cargo install --locked bat
 
+# git-delta (side-by-side git diff)
+cargo install git-delta
+
 # peco
 which peco >> /dev/null
 if [[ $? -eq 0 ]];then
