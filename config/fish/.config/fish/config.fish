@@ -18,7 +18,7 @@ set --local blue                         006cc6 #006cc6
 set --local red                          f00050 #f00050
 set --local orange                       E17A47 #E17A47
 set --local yellow                       e0c050 #E0C050
-set --local green                        006cc6 #006cc6
+set --local green                        00a050 #00a050
 set --local dark_green                   344E5C #344E5C
 
 set --local purple                       ae81ff #ae81ff
