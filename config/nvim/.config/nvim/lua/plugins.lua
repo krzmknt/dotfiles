@@ -83,7 +83,6 @@ return packer.startup(function(use)
   use({ 'neovim/nvim-lspconfig' })             -- config preset for each language server
   use({ 'williamboman/mason.nvim' })           -- installer for language server,  formatter and linter
   use({ 'williamboman/mason-lspconfig.nvim' }) --
-  use({ 'jose-elias-alvarez/null-ls.nvim' })   -- for formatters and linters
   use({ 'glepnir/lspsaga.nvim' })              -- LSP UIs
 
   -- DAP

@@ -5,6 +5,7 @@
     "css",
     "go",
     "html",
+    "java",
     "javascript",
     "javascriptreact",
     "json",
@@ -40,6 +41,10 @@
       "default": true
     }
   ],
+  "java.format.settings.url": "./eclipse-java-google-style.xml",
+  "java.format.onType.enabled": true,
+  "java.checkstyle.enabled": true,
+  "java.checkstyle.": "./checkstyle.xml",
 
   "python.jediEnabled": false,
   "pyright.enable": true,

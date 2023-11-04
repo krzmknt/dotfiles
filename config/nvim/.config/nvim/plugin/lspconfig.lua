@@ -1,3 +1,35 @@
+local lspconfig = require("lspconfig")
+
+lspconfig.efm.setup({
+  init_options = {
+    documentFormatting = true,
+    documentRangeFormatting = true,
+  },
+  settings = {
+    rootMarkers = { ".git/" },
+    languages = {
+      lua = {
+        {
+          formatCommand = "stylua --color Never --config-path ~/.config/.stylua.toml -",
+        },
+        {
+          lintCommand = "luacheck --no-color --quiet --config ~/.config/.luacheckrc -",
+          lintFormats = { "%f:%l:%c: %m" },
+        },
+      },
+      java = {
+        {
+          lintCommand = "checkstyle -c /path/to/checkstyle.xml",
+          lintFormats = { "%f:%l:%c: %m" },
+        },
+      },
+    },
+  },
+  filetypes = { "lua", "java" },
+})
+
+
+
 local protocol = require('vim.lsp.protocol')
 
 local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
