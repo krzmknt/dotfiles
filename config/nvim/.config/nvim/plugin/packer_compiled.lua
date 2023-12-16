@@ -161,6 +161,11 @@ _G.packer_plugins = {
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/monokai.nvim",
     url = "https://github.com/tanvirtin/monokai.nvim"
   },
+  nerdcommenter = {
+    loaded = true,
+    path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/nerdcommenter",
+    url = "https://github.com/scrooloose/nerdcommenter"
+  },
   ["nightfox.nvim"] = {
     loaded = true,
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/nightfox.nvim",

@@ -5,17 +5,17 @@
 
 
 # insert mode
-shift + lctrl + alt - h : yabai -m window --insert west
-shift + lctrl + alt - j : yabai -m window --insert south
-shift + lctrl + alt - k : yabai -m window --insert north
-shift + lctrl + alt - l : yabai -m window --insert east
+# shift + lctrl + alt - h : yabai -m window --insert west
+# shift + lctrl + alt - j : yabai -m window --insert south
+# shift + lctrl + alt - k : yabai -m window --insert north
+# shift + lctrl + alt - l : yabai -m window --insert east
 
 
 # close
 alt - c : yabai -m window --close
 
 
-# focus
+# focus window
 alt - k : yabai -m window --focus stack.north \
     || yabai -m window --focus north
 alt - j : yabai -m window --focus stack.south \
@@ -24,6 +24,22 @@ alt - h : yabai -m window --focus stack.west \
     || yabai -m window --focus west
 alt - l : yabai -m window --focus stack.east \
     || yabai -m window --focus east
+
+
+# focus display
+# lctrl + alt - k : yabai -m display --focus stack.north \
+#     || yabai -m display --focus north
+# lctrl + alt - j : yabai -m display --focus stack.south \
+#     || yabai -m display --focus south
+# lctrl + alt - h : yabai -m display --focus stack.west \
+#     || yabai -m display --focus
+# lctrl + alt - l : yabai -m display --focus stack.east \
+#     || yabai -m display --focus east
+
+lctrl + alt - k : yabai -m display --focus next
+lctrl + alt - j : yabai -m display --focus prev
+lctrl + alt - h : yabai -m display --focus prev
+lctrl + alt - l : yabai -m display --focus next
 
 
 # full screen
@@ -46,10 +62,10 @@ shift + alt - e : yabai -m space --balance
 
 
 # warp
-alt + lctrl - j : yabai -m window --warp south
-alt + lctrl - k : yabai -m window --warp north
-alt + lctrl - h : yabai -m window --warp west
-alt + lctrl - l : yabai -m window --warp east
+shift + alt + lctrl - j : yabai -m window --warp south
+shift + alt + lctrl - k : yabai -m window --warp north
+shift + alt + lctrl - h : yabai -m window --warp west
+shift + alt + lctrl - l : yabai -m window --warp east
 
 
 # toggle mission control

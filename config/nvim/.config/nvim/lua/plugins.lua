@@ -227,6 +227,8 @@ return packer.startup(function(use)
       }
   })
 
+  -- NerdCommenter
+  use 'scrooloose/nerdcommenter'
 
 
   -- Automatically set up your configuration after cloning packer.nvim
