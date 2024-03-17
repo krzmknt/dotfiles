@@ -26,6 +26,9 @@ set --local water                        006cc6 #006cc6
 set --local duck_blue                    006cc6 #006cc6
 set --local pink                         c600c0 #c600c0
 set --local light_pink                   f8bbf6 #f8bbf6
+set --local night_blue                   255D83 #255D83
+
+set --local framingo                     ff687e #ff687e
 
 set --global white                       ffffff #ffffff
 set --global black                       000000 #000000
@@ -33,9 +36,9 @@ set --global color_dark                  303030 #303030
 set --global color_light                 dddddd #dddddd
 set --global color_discreet              757575 #757575
 
-set --global color_main                  $duck_blue
+set --global color_main                  $night_blue
 set --global color_main_light            $blue
-set --global color_warning               $red
+set --global color_warning               $framingo
 set --global color_git_main              $green
 set --global color_git_dirty             $yellow
 set --global fish_color_normal           $white

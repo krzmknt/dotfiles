@@ -16,10 +16,10 @@ config.default_cursor_style = 'SteadyBar'
 -----------------------------
 config.adjust_window_size_when_changing_font_size = false
 config.window_padding = {
-  left = '10px',
-  right = '10px',
-  top = '10px',
-  bottom = '10px',
+  left = '0px',
+  right = '0px',
+  top = '0px',
+  bottom = '0px',
 }
 config.window_decorations = "RESIZE"
 
@@ -34,7 +34,7 @@ config.keys = {
 -----------------------------
 -- background
 -----------------------------
-config.window_background_opacity = 0.1
+config.window_background_opacity = 0.0
 config.macos_window_background_blur = 0
 
 -----------------------------
@@ -54,7 +54,7 @@ config.font_size = 12
 -- config.font = wezterm.font 'MesloLGS NF'
 config.font = wezterm.font 'Maple Mono'
 config.cell_width = 1.0
-config.line_height = 1.2
+config.line_height = 1.3
 
 -----------------------------
 -- color

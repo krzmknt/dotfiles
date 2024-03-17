@@ -1,67 +1,76 @@
-# -----------------------------------------------
-# Prompt
-# -----------------------------------------------
+
+# ===============================================
+# Variables
+
 set last_status
-set total_segment_length
+
+set left_half_circle ''
+set right_half_circle ''
+
+# ===============================================
+# Prompt
 
 function fish_prompt
     set last_status $status
-    set total_segment_length 0
 
-    # left_top
+    # Left top
     set_color $color_dark
     printf '\n╭─'
     set_color normal
 
+    # Prompt body
     _prompt_directory
     _prompt_username
     _prompt_git
 
-  # set_color $color_dark
-  # set --local time_segment_length 12
-  # string repeat -Nm(math $COLUMNS - $total_segment_length - $time_segment_length) '─'
-  # set_color normal
-
-  # _prompt_time
-
-    # left_bottom
+    # Left_bottom
     set_color $color_dark
     printf '\n╰─ '
     set_color normal
 end
 
-
 function fish_right_prompt
     ;
 end
 
+# ===============================================
+# Segment
 
-
-
-# -----------------------------------------------
-# segment
-# -----------------------------------------------
 function _segment
     set --local command_name $argv[1]
     set --local background_color $argv[2]
     set --local text_color $argv[3]
-    set_color --background $background_color $text_color
+    set --local position $argv[4]
 
-    set --local body ' '($command_name)' '
-    echo -n $body
-    set total_segment_length (math $total_segment_length + (string length $body))
+    # Round left-most segment
+    set_color --background $background_color $text_color
+    if [ $position = 'left' ]
+        set_color --background normal $background_color
+        printf $left_half_circle
+    else
+        echo -n ' '
+    end
+
+    # Show segment body
+    set_color --background $background_color $text_color
+    echo -n ($command_name)
+
+    # Round right-most segment
+    if [ $position = 'right' ]
+        set_color --background normal $background_color
+        printf $right_half_circle
+    else
+        echo -n ' '
+    end
 
     set_color normal
 end
 
-
-
-
-# -----------------------------------------------
+# ===============================================
 # directory
-# -----------------------------------------------
+
 function _prompt_directory
-    _segment _prompt_directory_body $color_dark $color_light
+    _segment _prompt_directory_body $color_dark $color_light 'left'
 end
 
 
@@ -69,19 +78,21 @@ function _prompt_directory_body
     prompt_pwd
 end
 
-
-
-
-# -----------------------------------------------
+# ===============================================
 # username
-# -----------------------------------------------
+
 function _prompt_username
     if [ $last_status -eq 0 ]
         set color_username $color_main
     else
         set color_username $color_warning
     end
-    _segment _prompt_username_body $color_username $color_light
+
+    if command git rev-parse --is-inside-work-tree >/dev/null 2>&1
+      _segment _prompt_username_body $color_username $color_light 'internal'
+    else
+      _segment _prompt_username_body $color_username $color_light 'right'
+    end
 end
 
 
@@ -91,27 +102,9 @@ function _prompt_username_body
     echo -n (whoami)@$(prompt_hostname)
 end
 
-
-
-
-# -----------------------------------------------
-# date
-# -----------------------------------------------
-function _prompt_time
-    _segment _prompt_time_body $color_dark $color_light
-end
-
-
-function _prompt_time_body
-    date +"%H:%M:%S"
-end
-
-
-
-
-# -----------------------------------------------
+# ===============================================
 # git
-# -----------------------------------------------
+
 function _prompt_git
     if command git rev-parse --is-inside-work-tree >/dev/null 2>&1
         if [ (_is_git_dirty) ]
@@ -120,15 +113,14 @@ function _prompt_git
             set color_git_status_bar $color_git_main
         end
 
-        _segment _prompt_git_body $color_git_status_bar $color_dark
+        _segment _prompt_git_body $color_git_status_bar $color_dark 'right'
     end
 end
 
-
+# Check if the current git branch is changed
 function _is_git_dirty
     echo (command git status -s --ignore-submodules=dirty 2> /dev/null)
 end
-
 
 function _prompt_git_body
     set --local git_branch (command git symbolic-ref HEAD 2> /dev/null | sed -e 's|^refs/heads/||')

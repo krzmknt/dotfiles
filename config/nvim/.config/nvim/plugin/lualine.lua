@@ -29,8 +29,8 @@ lualine.setup {
         'mode',
         fmt = function(mode) return mode_icons[mode] end,    -- Format function or string to format the component's value.
         icons_enabled = true, -- Enables the display of icons alongside the component.
-        separator = { left = '', right = ''},
-        padding = { left = 1, right = 1 },
+        separator = { left = '', right = ''},
+        padding = { left = 0, right = 1 },
       }
     },
 
@@ -123,7 +123,8 @@ lualine.setup {
 
       {
         'location',
-        padding = { left = 0, right = 1 },
+        padding = { left = 0, right = 0 },
+        separator = { left = '', right = ''},
       }
     }
   },
