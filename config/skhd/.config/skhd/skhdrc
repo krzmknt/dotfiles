@@ -36,10 +36,8 @@ alt - l : yabai -m window --focus stack.east \
 # lctrl + alt - l : yabai -m display --focus stack.east \
 #     || yabai -m display --focus east
 
-lctrl + alt - k : yabai -m display --focus next
-lctrl + alt - j : yabai -m display --focus prev
-lctrl + alt - h : yabai -m display --focus prev
-lctrl + alt - l : yabai -m display --focus next
+lctrl + alt - h : yabai -m display --focus next
+lctrl + alt - l : yabai -m display --focus prev
 
 
 # full screen

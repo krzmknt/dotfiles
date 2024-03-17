@@ -7,10 +7,13 @@ treesitter.setup {
     "css",
     "fish",
     "html",
+    "java",
+    "javascript",
     "json",
     "lua",
     "python",
     "tsx",
+    "typescript",
     "vim",
     "yaml"
   },

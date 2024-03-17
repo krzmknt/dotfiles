@@ -34,7 +34,7 @@ config.keys = {
 -----------------------------
 -- background
 -----------------------------
-config.window_background_opacity = 0.5
+config.window_background_opacity = 0.1
 config.macos_window_background_blur = 0
 
 -----------------------------
@@ -50,9 +50,10 @@ config.hide_mouse_cursor_when_typing = true
 -----------------------------
 -- font
 -----------------------------
-config.font_size = 12.0
-config.font = wezterm.font 'MesloLGS NF'
-config.cell_width = 1.1
+config.font_size = 12
+-- config.font = wezterm.font 'MesloLGS NF'
+config.font = wezterm.font 'Maple Mono'
+config.cell_width = 1.0
 config.line_height = 1.2
 
 -----------------------------

@@ -1,8 +1,9 @@
 {
-  "coc.preferences.willSaveHandlerTimeout": 3000,
-  "coc.preferences.formatOnSaveTimeout": 3000,
+  "coc.preferences.willSaveHandlerTimeout": 10000,
+  "coc.preferences.formatOnSaveTimeout": 10000,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
+    "scss",
     "go",
     "html",
     "java",
@@ -17,6 +18,8 @@
     "xml",
     "yaml"
   ],
+
+  "prettier.disableLanguages": ["java"],
 
   "languageserver": {
     "go": {
@@ -34,17 +37,13 @@
   },
   "http.proxyStrictSSL": false,
 
-  "java.configuration.runtimes": [
-    {
-      "name": "JavaSE-11",
-      "path": "~/.asdf/installs/java/corretto-11.0.19.7.1",
-      "default": true
-    }
-  ],
-  "java.format.settings.url": "./eclipse-java-google-style.xml",
-  "java.format.onType.enabled": true,
-  "java.checkstyle.enabled": true,
+  "java.jdt.ls.vmargs": "-javaagent:/Users/krzmknt/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar",
+  "java.jdt.ls.java.home": "~/.asdf/installs/java/corretto-21.0.1.12.1",
   "java.checkstyle.": "./checkstyle.xml",
+  "java.checkstyle.enabled": true,
+  "java.format.onType.enabled": true,
+  "java.format.settings.url": "./eclipse-java-google-style.xml",
+  "java.format.settings.profile": "GoogleStyle",
 
   "python.jediEnabled": false,
   "pyright.enable": true,

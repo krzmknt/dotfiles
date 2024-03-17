@@ -17,12 +17,12 @@ function fish_prompt
     _prompt_username
     _prompt_git
 
-    set_color $color_dark
-    set --local time_segment_length 12
-    string repeat -Nm(math $COLUMNS - $total_segment_length - $time_segment_length) '─'
-    set_color normal
+  # set_color $color_dark
+  # set --local time_segment_length 12
+  # string repeat -Nm(math $COLUMNS - $total_segment_length - $time_segment_length) '─'
+  # set_color normal
 
-    _prompt_time
+  # _prompt_time
 
     # left_bottom
     set_color $color_dark

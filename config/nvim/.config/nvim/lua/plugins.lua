@@ -45,6 +45,8 @@ return packer.startup(function(use)
   use 'nvim-lua/popup.nvim'
 
   -- Colorschemes
+  use 'oxfist/night-owl.nvim'
+  use 'sainnhe/sonokai'             -- Color scheme
   use 'EdenEast/nightfox.nvim'       -- Color scheme
   use 'tanvirtin/monokai.nvim'       -- Color scheme
   use {
@@ -211,21 +213,21 @@ return packer.startup(function(use)
 
 
   -- GPT
-  use({
-    "jackMort/ChatGPT.nvim",
-    commit = '24bcca7',
-    -- Because the latest version (at 2023/8/16) return cURL error
-      config = function()
-        require("chatgpt").setup({
-          api_host_cmd = 'api.openai.com'
-        })
-      end,
-      requires = {
-        "MunifTanjim/nui.nvim",
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope.nvim"
-      }
-  })
+  -- use({
+  --   "jackMort/ChatGPT.nvim",
+  --   commit = '24bcca7',
+  --   -- Because the latest version (at 2023/8/16) return cURL error
+  --     config = function()
+  --       require("chatgpt").setup({
+  --         api_host_cmd = 'api.openai.com'
+  --       })
+  --     end,
+  --     requires = {
+  --       "MunifTanjim/nui.nvim",
+  --       "nvim-lua/plenary.nvim",
+  --       "nvim-telescope/telescope.nvim"
+  --     }
+  -- })
 
   -- NerdCommenter
   use 'scrooloose/nerdcommenter'
