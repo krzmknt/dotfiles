@@ -1,17 +1,18 @@
 {
-  "coc.preferences.willSaveHandlerTimeout": 10000,
-  "coc.preferences.formatOnSaveTimeout": 10000,
+  "coc.preferences.willSaveHandlerTimeout": 5000,
+  "coc.preferences.formatOnSaveTimeout": 5000,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
-    "scss",
     "go",
     "html",
     "java",
     "javascript",
     "javascriptreact",
     "json",
+    "lua",
     "markdown",
     "python",
+    "scss",
     "sh",
     "typescript",
     "typescriptreact",
@@ -35,6 +36,7 @@
       "ignoredRootPaths": ["~"]
     }
   },
+
   "http.proxyStrictSSL": false,
 
   "java.jdt.ls.vmargs": "-javaagent:/Users/krzmknt/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar",

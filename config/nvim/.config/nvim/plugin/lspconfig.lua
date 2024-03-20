@@ -25,6 +25,7 @@ lspconfig.efm.setup({
       },
     },
   },
+
   filetypes = { "lua", "java" },
 })
 

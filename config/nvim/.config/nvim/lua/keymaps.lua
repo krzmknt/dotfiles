@@ -1,7 +1,7 @@
 -- luacheck: globals vim
 
 local map = vim.api.nvim_set_keymap
-local opts = {noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
 
 local mode = {
   normal = 'n',
@@ -104,7 +104,6 @@ map(mode.normal_visual, '<S-j>', '}', opts)
 -- Jump cursor to the beginning of the paragraph
 map(mode.normal_visual, '<S-k>', '{', opts)
 
-
 -----------------------------
 -- Launcher
 
@@ -118,7 +117,8 @@ map(mode.normal, '<Leader>v', '<cmd>Telescope file_browser<cr>', opts)
 map(mode.normal, '<Leader>g', '<cmd>Telescope live_grep<cr>', opts)
 
 -- Floaterm
-map(mode.normal, '<C-T>', '<cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center<CR>', opts)
+map(mode.normal, '<C-T>',
+  '<cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center<CR>', opts)
 
 -- Procon
 map(mode.normal, '<Leader>at', '<cmd>ProconTest<CR>', opts)

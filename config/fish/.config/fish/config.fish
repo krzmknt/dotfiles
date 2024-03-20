@@ -1,6 +1,5 @@
 fish_add_path /opt/homebrew/bin
 
-
 # ===========================
 # General
 # ---------------------------
@@ -21,7 +20,7 @@ set --local yellow                       e0c050 #E0C050
 set --local green                        00a050 #00a050
 set --local dark_green                   344E5C #344E5C
 
-set --local purple                       ae81ff #ae81ff
+set --local purple                       ae81ff #ae81f
 set --local water                        006cc6 #006cc6
 set --local duck_blue                    006cc6 #006cc6
 set --local pink                         c600c0 #c600c0

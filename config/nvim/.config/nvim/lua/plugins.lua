@@ -40,66 +40,48 @@ packer.init({
 -- Install your plugins here
 return packer.startup(function(use)
   -- general
-  use 'wbthomason/packer.nvim'  -- package management
-  use 'nvim-lua/plenary.nvim'   -- Common utilities
+  use 'wbthomason/packer.nvim' -- package management
+  use 'nvim-lua/plenary.nvim'  -- Common utilities
   use 'nvim-lua/popup.nvim'
 
+
   -- Colorschemes
-  use 'oxfist/night-owl.nvim'
-  use 'sainnhe/sonokai'             -- Color scheme
-  use 'EdenEast/nightfox.nvim'       -- Color scheme
-  use 'tanvirtin/monokai.nvim'       -- Color scheme
   use {
     'catppuccin/nvim',
     as = 'catppuccin'
   }
 
+
   --colorizer
-  use 'chrisbra/Colorizer'
+  -- use 'chrisbra/Colorizer'
+  use 'norcalli/nvim-colorizer.lua'
 
   use({ 'nvim-lualine/lualine.nvim' })   -- Statusline
   use({ 'windwp/nvim-autopairs' })       -- Autopairs, integrates with both cmp and treesitter
   use({ 'nvim-tree/nvim-web-devicons' }) -- File icons
   use({ 'akinsho/bufferline.nvim' })
 
-  -- cmp
-  -- use({ 'hrsh7th/nvim-cmp' })         -- The completion plugin
-  -- use({ 'hrsh7th/cmp-buffer' })       -- buffer completions
-  -- use({ 'hrsh7th/cmp-path' })         -- path completions
-  -- use({ 'hrsh7th/cmp-cmdline' })      -- cmdline completions
-  -- use({ 'saadparwaiz1/cmp_luasnip' }) -- snippet completions
-  -- use({ 'hrsh7th/cmp-nvim-lsp' })
-  -- use({ 'hrsh7th/cmp-nvim-lua' })
-  -- use({ 'onsails/lspkind-nvim' }) -- pictgram
-  -- use({ 'hrsh7th/vim-vsnip' })
-  -- use({ 'L3MON4D3/LuaSnip' })     --snippet engine
 
+  -- Completion
   use({ 'neoclide/coc.nvim', branch = 'release' })
-
 
 
   -- tag completion
   -- use({ 'windwp/nvim-ts-autotag' })
 
+
   -- LSP
-  use({ 'neovim/nvim-lspconfig' })             -- config preset for each language server
-  use({ 'williamboman/mason.nvim' })           -- installer for language server,  formatter and linter
-  use({ 'williamboman/mason-lspconfig.nvim' }) --
-  use({ 'glepnir/lspsaga.nvim' })              -- LSP UIs
+  use({ 'neovim/nvim-lspconfig' }) -- config preset for each language server
+  -- use({ 'williamboman/mason.nvim' })           -- installer for language server,  formatter and linter
+  -- use({ 'williamboman/mason-lspconfig.nvim' }) --
+  -- use({ 'glepnir/lspsaga.nvim' })              -- LSP UIs
+
 
   -- DAP
   use({ 'mfussenegger/nvim-dap' })
   use({ 'rcarriga/nvim-dap-ui' })
   use({ 'https://github.com/mfussenegger/nvim-dap-python' })
-  use { "mxsdev/nvim-dap-vscode-js", requires = {"mfussenegger/nvim-dap"} }
-  use {
-    "microsoft/vscode-js-debug",
-    opt = true,
-    run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
-  }
 
-  -- Formatter
-  use({ 'MunifTanjim/prettier.nvim' })
 
   -- Telescope
   use({ 'nvim-telescope/telescope.nvim' })
@@ -118,12 +100,15 @@ return packer.startup(function(use)
   -- Treesitter
   use({ 'nvim-treesitter/nvim-treesitter' })
 
+
   -- Color code highlights
   use({ 'norcalli/nvim-colorizer.lua' })
+
 
   -- git
   use({ 'lewis6991/gitsigns.nvim' })
   use({ 'dinhhuy258/git.nvim' })
+
 
   -- fine-cmdline
   use({
@@ -133,12 +118,16 @@ return packer.startup(function(use)
     }
   })
 
+
   -- Floatterm
   use({ 'voldikss/vim-floaterm' })
 
+
   -- Formatter
+  use({ 'MunifTanjim/prettier.nvim' })
   use({ 'averms/black-nvim' })
   use 'brentyi/isort.vim'
+
 
   -- indent-blankline
   use {
@@ -146,50 +135,41 @@ return packer.startup(function(use)
     config = function()
       local hooks = require "ibl.hooks"
       hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-          vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-          vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-          vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-          vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-          vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-          vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-          vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+        vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+        vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+        vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+        vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+        vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+        vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+        vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
       end)
 
       local highlight = {
-          "RainbowRed",
-          "RainbowYellow",
-          "RainbowBlue",
-          "RainbowOrange",
-          "RainbowGreen",
-          "RainbowViolet",
-          "RainbowCyan",
+        "RainbowRed",
+        "RainbowYellow",
+        "RainbowBlue",
+        "RainbowOrange",
+        "RainbowGreen",
+        "RainbowViolet",
+        "RainbowCyan",
       }
 
       require("ibl").setup(
-        -- {
-        --   indent = {
-        --     highlight = highlight
-        --   },
-        -- }
+      -- {
+      --   indent = {
+      --     highlight = highlight
+      --   },
+      -- }
       )
     end
   }
 
-  -- ime
---   use "brglng/vim-im-select"
-
-  -- light filer
---   use({ 'lambdalisue/fern.vim' })
---   use({ 'lambdalisue/nerdfont.vim' })
---   use({ 'lambdalisue/fern-renderer-nerdfont.vim' })
---   vim.g['fern#renderer'] = 'nerdfont'
 
   -- transparent
   use {
     'xiyaowong/transparent.nvim',
     config = function()
       require("transparent").setup({
-
         -- table: default groups
         groups = {
           'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
@@ -211,27 +191,36 @@ return packer.startup(function(use)
   -- copilot
   use({ 'github/copilot.vim' })
 
-
-  -- GPT
-  -- use({
-  --   "jackMort/ChatGPT.nvim",
-  --   commit = '24bcca7',
-  --   -- Because the latest version (at 2023/8/16) return cURL error
-  --     config = function()
-  --       require("chatgpt").setup({
-  --         api_host_cmd = 'api.openai.com'
-  --       })
-  --     end,
-  --     requires = {
-  --       "MunifTanjim/nui.nvim",
-  --       "nvim-lua/plenary.nvim",
-  --       "nvim-telescope/telescope.nvim"
-  --     }
-  -- })
-
   -- NerdCommenter
   use 'scrooloose/nerdcommenter'
 
+  -- Scrollbar
+  use("petertriho/nvim-scrollbar")
+
+  -- Arguement highlight
+  use { 'm-demare/hlargs.nvim' }
+
+
+
+  -- barbecue ; satusbar
+  use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig"
+  }
+
+  use({
+    "utilyre/barbecue.nvim",
+    tag = "*",
+    requires = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    after = "nvim-web-devicons",     -- keep this if you're using NvChad
+    config = function()
+      require("barbecue").setup()
+      require("barbecue").navigate(2)
+    end,
+  })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
