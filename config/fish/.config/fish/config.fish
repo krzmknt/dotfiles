@@ -159,12 +159,17 @@ function s
 end
 
 
-
-
 # ===========================
 # asdf
 # ---------------------------
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
+# Ver. 0.14.0 から tmux 利用時に不具合（pathがプリペンドされない）
+# -> mise に移行
+# source /opt/homebrew/opt/asdf/libexec/asdf.fish
+
+# ===========================
+# mise
+# ---------------------------
+~/.local/bin/mise activate fish | source
 
 
 # ===========================

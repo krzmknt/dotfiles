@@ -1,7 +1,6 @@
 -----------------------------
 -- Options
------------------------------
-
+--
 
 --- Configure global options.
 -- Add the directory containing the procon-tools.lua file to the package path.
@@ -225,10 +224,10 @@ configureOptions()
 
 
 -----------------------------
--- Theme
+-- Colorscheme
 --
 
-require('colorscheme')
+vim.cmd [[colorscheme catppuccin]]
 
 
 -----------------------------
@@ -297,11 +296,13 @@ configureAutocommands()
 require('plugins')
 
 
-
 -----------------------------
 -- Procon Tools
 --
 -- Load the procon-tools module.
+-- This setting depends on the external module which is not included in this repository.
+-- If you want to use this setting, you need to install the procon-tools module.
+-- Otherwise, you can comment out these lines.
 --
 
 local home = os.getenv('HOME') or os.getenv('USERPROFILE')

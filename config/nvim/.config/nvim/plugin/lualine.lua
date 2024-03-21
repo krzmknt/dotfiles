@@ -5,6 +5,7 @@ if (not status) then return end
 local mode_icons = {
   ["NORMAL"]  = "",
   ["INSERT"]  = "",
+  ["VISUAL"]  = "󰍉",
   ["V-LINE"]  = "󰍉",
   ["V-BLOCK"] = "󰍉",
   ["COMMAND"] = "",
@@ -100,11 +101,9 @@ lualine.setup {
           newfile = '[New]',     -- Text to show for newly created file before first write
         }
       },
-      { '', color = { bg = '#abcdef' } }, -- 空のコンポーネントで背景色を変更
     },
 
     lualine_x = {
-      { '', color = { bg = '#abcdef' } }, -- 空のコンポーネントで背景色を変更
       {
         'diagnostics',
         color = { bg = 'null' },
@@ -148,12 +147,6 @@ lualine.setup {
     },
 
     lualine_z = {
-      -- {
-      --   'progress',
-      --   separator = { left = '', right = '' },
-      --   padding = { left = 1, right = 1 },
-      -- },
-
       {
         'location',
         padding = { left = 0, right = 0 },
