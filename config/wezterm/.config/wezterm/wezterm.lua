@@ -16,10 +16,10 @@ config.default_cursor_style = 'SteadyBar'
 -----------------------------
 config.adjust_window_size_when_changing_font_size = false
 config.window_padding = {
-  left = '0px',
-  right = '0px',
-  top = '0px',
-  bottom = '0px',
+  left = '5px',
+  right = '5px',
+  top = '5px',
+  bottom = '5px',
 }
 config.window_decorations = "RESIZE"
 
@@ -34,7 +34,7 @@ config.keys = {
 -----------------------------
 -- background
 -----------------------------
-config.window_background_opacity = 0.0
+config.window_background_opacity = 0.2
 config.macos_window_background_blur = 0
 
 -----------------------------

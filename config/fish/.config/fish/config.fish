@@ -120,15 +120,29 @@ function dockerun
 end
 
 function dockerm
-    set -l name $argv[1]
-    docker container stop $name > /dev/null 2>&1
-    docker container rm $name > /dev/null 2>&1
+  set -l name $argv[1]
+  docker container stop $name > /dev/null 2>&1
+  docker container rm $name > /dev/null 2>&1
 end
 
 function awsmc
-    open "https://console.aws.amazon.com/console/home?region=us-east-1"
-    oathtool --totp --base32 CX2FURPJNXZN3QUISRSFMHSWHVAWTMDIWLKI3BFRWXKPUR3VDMI4GBNNFZKXI3ZX | pbcopy
+  open "https://console.aws.amazon.com/console/home?region=us-east-1"
+  oathtool --totp --base32 CX2FURPJNXZN3QUISRSFMHSWHVAWTMDIWLKI3BFRWXKPUR3VDMI4GBNNFZKXI3ZX | pbcopy
 end
+
+
+# ===========================
+# Shortcuts
+# ---------------------------
+
+function up_directory
+  cd ..
+  commandline -f repaint
+end
+
+# Alt + u
+bind \eu up_directory
+
 
 
 # ===========================
@@ -188,3 +202,4 @@ end
 function fish_user_key_bindings
   bind \cg ghq_peco_repo
 end
+

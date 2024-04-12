@@ -90,6 +90,14 @@ map(mode.normal, '<C-l>', '<C-w>l', opts)
 
 
 ------------------------------
+-- Memo
+
+map(mode.normal, '<Leader>mn', ':MemoNew<CR>', opts)
+map(mode.normal, '<Leader>ml', ':Telescope memo list<CR>', opts)
+map(mode.normal, '<Leader>mg', ':Telescope memo live_grep<CR>', opts)
+
+
+------------------------------
 -- Cursor
 
 -- Jump to the beginning of the line

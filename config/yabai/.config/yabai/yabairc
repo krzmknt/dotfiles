@@ -24,7 +24,7 @@ done
 # Mouse
 yabai -m config mouse_modifier               ctrl
 yabai -m config mouse_follows_focus          on
-yabai -m config focus_follows_mouse          autoraise
+yabai -m config focus_follows_mouse          off # | autoraise
 
 
 # Debug

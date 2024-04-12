@@ -205,7 +205,12 @@ return packer.startup(function(use)
       'nvim-tree/nvim-web-devicons', -- (optional)
       -- fd (optional)
       -- git (optional)
-    }
+      'delphinus/telescope-memo.nvim',
+      -- https://github.com/mattn/memo
+    },
+    config = function()
+      require 'telescope'.load_extension 'memo'
+    end,
   })
 
 
@@ -298,60 +303,66 @@ return packer.startup(function(use)
   -- Git
   --
 
-  -- git
   use({
-    'dinhhuy258/git.nvim',
+    'tpope/vim-fugitive',
     config = function()
-      require("git").setup({
-        -- NOTE: `quit_blame` and `blame_commit` are still merged to the keymaps even if `default_mappings = false`
-        default_mappings = true,
-
-        keymaps = {
-          -- Open blame window
-          blame = "<Leader>ao",
-
-          -- Close blame window
-          quit_blame = "q",
-
-          -- Open blame commit
-          blame_commit = "<CR>",
-
-          -- Open file/folder in git repository
-          browse = "<Leader>af",
-
-          -- Open pull request of the current branch
-          open_pull_request = "<Leader>ap",
-
-          -- Create a pull request with the target branch is set in the `target_branch` option
-          create_pull_request = "<Leader>an",
-
-          -- Opens a new diff that compares against the current index
-          diff = "<Leader>ad",
-
-          -- Close git diff
-          diff_close = "<Leader>ac",
-
-          -- Revert to the specific commit
-          revert = "<Leader>gr",
-
-          -- Revert the current file to the specific commit
-          revert_file = "<Leader>gR",
-        },
-
-        -- Default target branch when create a pull request
-        target_branch = "main",
-      })
+      vim.cmd([[
+        nnoremap <leader>gs :Git status<CR>
+        nnoremap <leader>gd :Gdiff<CR>
+        nnoremap <leader>gb :Git blame<CR>
+        nnoremap <leader>gl :Git log --graph<CR>
+      ]])
     end
   })
 
-  -- Git signs
   use({
     'lewis6991/gitsigns.nvim',
     config = function()
-      require('gitsigns').setup()
+      require('gitsigns').setup {
+        signs                        = {
+          add          = { text = '│' },
+          change       = { text = '│' },
+          delete       = { text = '_' },
+          topdelete    = { text = '‾' },
+          changedelete = { text = '~' },
+          untracked    = { text = '┆' },
+        },
+        signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
+        numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
+        linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
+        word_diff                    = true,  -- Toggle with `:Gitsigns toggle_word_diff`
+        watch_gitdir                 = {
+          follow_files = true
+        },
+        auto_attach                  = true,
+        attach_to_untracked          = true,
+        current_line_blame           = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+        current_line_blame_opts      = {
+          virt_text = true,
+          virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+          delay = 00,
+          ignore_whitespace = false,
+          virt_text_priority = 100,
+        },
+        current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+        sign_priority                = 6,
+        update_debounce              = 100,
+        status_formatter             = nil,   -- Use default
+        max_file_length              = 40000, -- Disable if file is longer than this (in lines)
+        preview_config               = {
+          -- Options passed to nvim_open_win
+          border = 'single',
+          style = 'minimal',
+          relative = 'cursor',
+          row = 0,
+          col = 1
+        },
+        yadm                         = {
+          enable = false
+        },
+      }
     end
   })
-
 
 
   -----------------------------
@@ -439,6 +450,15 @@ return packer.startup(function(use)
     tag = "*",
     requires = 'nvim-tree/nvim-web-devicons'
   })
+
+
+  -----------------------------
+  -- Memo
+  --
+  -- https://zenn.dev/koga1020/articles/009766e1bec42c
+  --
+  use 'glidenote/memolist.vim'
+
 
 
   -- Automatically set up your configuration after cloning packer.nvim
