@@ -7,18 +7,23 @@
 -- This is necessary to load the procon-tools module.
 local function configureOptions()
   local options = {
+
+    -----------------------------
+    -- Mode
+    --
+    showmode      = false, -- Use true colors in the terminal.
+
     -----------------------------
     -- Color
     --
     termguicolors = true, -- Use true colors in the terminal.
 
-
     -----------------------------
     -- Pop-up menu / Floating window
     --
-    pumblend  = 20, -- Popup menu transparency.
-    pumheight = 20, -- Popup menu height.
-    winblend  = 0,  -- Floating window transparency.
+    pumblend      = 20, -- Popup menu transparency.
+    pumheight     = 20, -- Popup menu height.
+    winblend      = 0,  -- Floating window transparency.
 
 
     -----------------------------
@@ -218,6 +223,19 @@ end
 configureOptions()
 
 -----------------------------
+-- Autocommands
+
+-- Markdown 記号の conceal 設定
+vim.cmd [[
+  autocmd FileType markdown syntax match markdownListMarker /^\s*[-*]\s/ conceal cchar=✦
+  autocmd FileType markdown setlocal conceallevel=2
+]]
+
+-----------------------------
+-- Global Variables
+
+
+-----------------------------
 -- Colorscheme
 --
 
@@ -285,13 +303,17 @@ vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = colors.green })
 vim.api.nvim_set_hl(0, "GitSignsChange", { fg = colors.blue })
 vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = colors.red })
 
+vim.cmd([[highlight! link GitSignsAddNr GitSignsAddNr]])
+vim.cmd([[highlight! link GitSignsChangeNr GitSignsChangeNr]])
+vim.cmd([[highlight! link GitSignsDeleteNr GitSignsDeleteNr]])
+
 vim.api.nvim_set_hl(0, "GitSignsAddLn", { bg = colors.none })
 vim.api.nvim_set_hl(0, "GitSignsChangeLn", { bg = colors.none })
 vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { bg = colors.none })
 
-vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = colors.green })
-vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.blue })
-vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = colors.red })
+vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = colors.none, bg = colors.none })
+vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.none })
+vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = colors.none })
 
 -- Diffview
 
