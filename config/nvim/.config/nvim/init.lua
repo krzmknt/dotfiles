@@ -279,15 +279,24 @@ vim.api.nvim_set_hl(0, "MatchParen", {
   bg = colors.purple,
 })
 
+-- GitSigns
+
 vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = colors.green })
-vim.api.nvim_set_hl(0, "GitSignsAddLn", { fg = colors.green })
-vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = colors.green })
 vim.api.nvim_set_hl(0, "GitSignsChange", { fg = colors.blue })
-vim.api.nvim_set_hl(0, "GitSignsChangeLn", { fg = colors.blue })
-vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.blue })
 vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = colors.red })
-vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { fg = colors.red })
+
+vim.api.nvim_set_hl(0, "GitSignsAddLn", { bg = colors.none })
+vim.api.nvim_set_hl(0, "GitSignsChangeLn", { bg = colors.none })
+vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { bg = colors.none })
+
+vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = colors.green })
+vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.blue })
 vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = colors.red })
+
+-- Diffview
+
+vim.api.nvim_set_hl(0, "DiffAdd", { bg = colors.none })
+vim.api.nvim_set_hl(0, "DiffChange", { bg = colors.none })
 
 -- indent-blankline
 vim.api.nvim_set_hl(0, "IblScope", { fg = colors.purple }) -- Set your desired color

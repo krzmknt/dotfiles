@@ -119,10 +119,10 @@ return packer.startup(function(use)
   --
 
   -- Colorscheme
-  use {
-    'catppuccin/nvim',
-    as = 'catppuccin'
-  }
+  -- use {
+  --   'catppuccin/nvim',
+  --   as = 'catppuccin'
+  -- }
 
   -- Transparent
   -- use {
@@ -342,10 +342,10 @@ return packer.startup(function(use)
           untracked    = { text = '┆' },
         },
 
-        signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
-        numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
-        linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
-        word_diff                    = true,  -- Toggle with `:Gitsigns toggle_word_diff`
+        signcolumn                   = true, -- Toggle with `:Gitsigns toggle_signs`
+        numhl                        = true, -- Toggle with `:Gitsigns toggle_numhl`
+        linehl                       = true, -- Toggle with `:Gitsigns toggle_linehl`
+        word_diff                    = true, -- Toggle with `:Gitsigns toggle_word_diff`
         watch_gitdir                 = {
           follow_files = true
         },
@@ -373,18 +373,15 @@ return packer.startup(function(use)
           relative = 'cursor',
           row = 0,
           col = 1
-        },
+        }
 
-        yadm                         = {
-          enable = false
-        },
       }
       require("scrollbar.handlers.gitsigns").setup()
     end
   })
 
   -- diffview
-  use "sindrets/diffview.nvim"
+  use({ "sindrets/diffview.nvim" })
 
 
   -----------------------------
@@ -401,7 +398,7 @@ return packer.startup(function(use)
 
   use({ 'MunifTanjim/prettier.nvim' })
   use({ 'averms/black-nvim' })
-  use 'brentyi/isort.vim'
+  use({ 'brentyi/isort.vim' })
 
 
   -----------------------------
@@ -421,7 +418,7 @@ return packer.startup(function(use)
   --
 
   -- NerdCommenter
-  use 'scrooloose/nerdcommenter'
+  use({ 'scrooloose/nerdcommenter' })
 
 
   -----------------------------
@@ -442,10 +439,10 @@ return packer.startup(function(use)
   --
 
   -- barbecue
-  use {
+  use({
     "SmiteshP/nvim-navic",
     requires = "neovim/nvim-lspconfig"
-  }
+  })
 
   use({
     "utilyre/barbecue.nvim",
