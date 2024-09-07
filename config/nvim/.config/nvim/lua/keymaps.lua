@@ -197,3 +197,8 @@ map(mode.normal, '<C-T>',
 -- Procon
 map(mode.normal, '<Leader>at', '<cmd>ProconTest<CR>', opts)
 map(mode.normal, '<Leader>as', '<cmd>ProconSubmit<CR>', opts)
+
+-- Git
+map(mode.normal, 'gh', ':Gitsigns preview_hunk<CR>', opts)
+map(mode.normal, 'gj', ':Gitsigns next_hunk<CR>', opts)
+map(mode.normal, 'gk', ':Gitsigns prev_hunk<CR>', opts)

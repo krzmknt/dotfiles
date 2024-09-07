@@ -307,6 +307,7 @@ return packer.startup(function(use)
           --   "RainbowOrange", "RainbowGreen", "RainbowViolet", "RainbowCyan"
           -- },
         },
+        scope = { enabled = true, show_start = true, show_end = true },
       }
     end
   }

@@ -245,18 +245,18 @@ local colors = require('onedark.colors')
 -- colors.yellow d
 
 vim.api.nvim_set_hl(0, "TabLine", {
-  fg = "none",
-  bg = colors.black,
+  fg = colors.none,
+  bg = colors.none,
 })
 
 vim.api.nvim_set_hl(0, "TabLineSel", {
-  fg = colors.white,
-  bg = colors.grey,
+  fg = colors.black,
+  bg = colors.purple,
 })
 
 vim.api.nvim_set_hl(0, "TabLineFill", {
-  fg = "none",
-  bg = colors.black,
+  fg = colors.none,
+  bg = colors.none,
 })
 
 vim.api.nvim_set_hl(0, "CursorLine", {
@@ -269,17 +269,28 @@ vim.api.nvim_set_hl(0, "CursorColumn", {
   bg = colors.black,
 })
 
+vim.api.nvim_set_hl(0, "Cursor", {
+  fg = "none",
+  bg = colors.purple,
+})
+
+vim.api.nvim_set_hl(0, "MatchParen", {
+  fg = "none",
+  bg = colors.purple,
+})
+
 vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = colors.green })
 vim.api.nvim_set_hl(0, "GitSignsAddLn", { fg = colors.green })
 vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = colors.green })
 vim.api.nvim_set_hl(0, "GitSignsChange", { fg = colors.blue })
 vim.api.nvim_set_hl(0, "GitSignsChangeLn", { fg = colors.blue })
-vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.blus })
+vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.blue })
 vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = colors.red })
 vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { fg = colors.red })
 vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = colors.red })
 
-
+-- indent-blankline
+vim.api.nvim_set_hl(0, "IblScope", { fg = colors.purple }) -- Set your desired color
 
 -----------------------------
 -- Keymaps
@@ -299,7 +310,7 @@ require('keymaps')
 --- Configure auto commands.
 local function configureAutocommands()
   -- Create/get autocommand group
-  local augroup = vim.api.nvim_create_augroup
+  -- local augroup = vim.api.nvim_create_augroup
 
   -- Create autocommand
   local autocmd = vim.api.nvim_create_autocmd
