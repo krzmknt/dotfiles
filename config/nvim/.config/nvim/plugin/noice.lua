@@ -1,3 +1,7 @@
+require("notify").setup({
+  background_colour = "#1f2335", -- 背景色を指定 (ここでは少し暗い色を設定)
+})
+
 -- require("noice").setup({
 --   lsp = {
 --     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**

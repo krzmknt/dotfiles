@@ -5,6 +5,7 @@ fish_add_path /opt/homebrew/bin
 # ---------------------------
 set --global fish_prompt_pwd_dir_length 3
 
+set -Ux PATH $PATH /Users/krzmknt/.local/share/mise/installs/go/1.20.4/bin/efm-langserver
 
 # ===========================
 # Color
