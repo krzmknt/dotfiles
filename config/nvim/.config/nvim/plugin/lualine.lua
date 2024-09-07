@@ -11,15 +11,16 @@ local mode_icons = {
   ["COMMAND"] = "",
 }
 
+local onedark_colors = require('onedark.colors')
 local colors = {
   transparent = 'none',
   white       = '#cdcdcd',
   black       = '#000000',
-  grey        = '#2c323c',
-  light_grey  = '#555555',
-  blue        = '#255D83',
-  yellow      = '#E0C050',
-  framingo    = '#ff687e',
+  grey        = onedark_colors.grey,
+  light_grey  = onedark_colors.light_grey,
+  blue        = onedark_colors.dark_cyan,
+  yellow      = onedark_colors.yellow,
+  red         = onedark_colors.red,
 }
 
 local theme = {
@@ -30,8 +31,8 @@ local theme = {
   },
 
   insert = { a = { fg = colors.black, bg = colors.yellow } },
-  visual = { a = { fg = colors.white, bg = colors.framingo } },
-  replace = { a = { fg = colors.white, bg = colors.framingo } },
+  visual = { a = { fg = colors.white, bg = colors.red } },
+  replace = { a = { fg = colors.white, bg = colors.red } },
 
   inactive = {
     a = { fg = colors.white, bg = colors.transparent },
