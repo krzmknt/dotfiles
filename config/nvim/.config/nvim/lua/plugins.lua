@@ -54,6 +54,7 @@ vim.cmd([[
 --
 
 return packer.startup(function(use)
+  use({ 'kepano/flexoki-neovim', as = 'flexoki' })
   use({ 'wbthomason/packer.nvim' }) -- package management
   use({ 'nvim-lua/plenary.nvim' })  -- Common utilities
   use({ 'nvim-lua/popup.nvim' })    -- Popup library
@@ -124,27 +125,29 @@ return packer.startup(function(use)
   }
 
   -- Transparent
-  use {
-    'xiyaowong/transparent.nvim',
-    config = function()
-      require("transparent").setup({
-        -- table: default groups
-        groups = {
-          'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
-          'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
-          'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
-          'SignColumn', 'CursorLineNr', 'EndOfBuffer',
-        },
+  -- use {
+  --   'xiyaowong/transparent.nvim',
+  --   config = function()
+  --     require("transparent").setup({
+  --       -- table: default groups
+  --       groups = {
+  --         'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+  --         'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+  --         'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
+  --         'SignColumn', 'CursorLineNr', 'EndOfBuffer',
+  --       },
 
-        -- table: additional groups that should be cleared
-        extra_groups = {},
+  --       -- table: additional groups that should be cleared
+  --       extra_groups = {},
 
-        -- table: groups you don't want to clear
-        exclude_groups = {},
-      })
-    end
-  }
+  --       -- table: groups you don't want to clear
+  --       exclude_groups = {},
+  --     })
+  --   end
+  -- }
 
+  -- https://github.com/navarasu/onedark.nvim
+  use 'navarasu/onedark.nvim'
 
   -----------------------------
   -- Colorizer
@@ -267,34 +270,44 @@ return packer.startup(function(use)
   use {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      local hooks = require("ibl.hooks")
-      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-        vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-        vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-        vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-        vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-        vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-        vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-        vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-      end)
+      -- local hooks = require("ibl.hooks")
+      -- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+      --   vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75", blend = 30 })
+      --   vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B", blend = 30 })
+      --   vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF", blend = 30 })
+      --   vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66", blend = 30 })
+      --   vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379", blend = 30 })
+      --   vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD", blend = 30 })
+      --   vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2", blend = 30 })
+      -- end)
 
-      local highlight = {
-        "RainbowRed",
-        "RainbowYellow",
-        "RainbowBlue",
-        "RainbowOrange",
-        "RainbowGreen",
-        "RainbowViolet",
-        "RainbowCyan",
+      -- local highlight = {
+      --   "RainbowRed",
+      --   "RainbowYellow",
+      --   "RainbowBlue",
+      --   "RainbowOrange",
+      --   "RainbowGreen",
+      --   "RainbowViolet",
+      --   "RainbowCyan",
+      -- }
+
+      -- require("ibl").setup(
+      -- --   {
+      -- --     indent = {
+      -- --       highlight,
+      -- --     },
+      -- --   }
+      -- )
+
+      require("ibl").setup {
+        indent = {
+          char = "│", -- Center alighned solid (see. :h ibl.config.indent)
+          -- highlight = {
+          --   "RainbowRed", "RainbowYellow", "RainbowBlue",
+          --   "RainbowOrange", "RainbowGreen", "RainbowViolet", "RainbowCyan"
+          -- },
+        },
       }
-
-      require("ibl").setup(
-      --   {
-      --     indent = {
-      --       highlight = highlight
-      --     },
-      --   }
-      )
     end
   }
 
@@ -327,6 +340,7 @@ return packer.startup(function(use)
           changedelete = { text = '~' },
           untracked    = { text = '┆' },
         },
+
         signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
         numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
         linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
@@ -334,6 +348,7 @@ return packer.startup(function(use)
         watch_gitdir                 = {
           follow_files = true
         },
+
         auto_attach                  = true,
         attach_to_untracked          = true,
         current_line_blame           = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
@@ -344,8 +359,9 @@ return packer.startup(function(use)
           ignore_whitespace = false,
           virt_text_priority = 100,
         },
+
         current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-        sign_priority                = 6,
+        sign_priority                = 100,
         update_debounce              = 100,
         status_formatter             = nil,   -- Use default
         max_file_length              = 40000, -- Disable if file is longer than this (in lines)
@@ -357,6 +373,7 @@ return packer.startup(function(use)
           row = 0,
           col = 1
         },
+
         yadm                         = {
           enable = false
         },
@@ -389,7 +406,7 @@ return packer.startup(function(use)
   use({
     "petertriho/nvim-scrollbar",
     config = function()
-      require("scrollbar").setup()
+      require("scrollbar").setup({})
     end
   })
 
@@ -458,6 +475,18 @@ return packer.startup(function(use)
   -- https://zenn.dev/koga1020/articles/009766e1bec42c
   --
   use 'glidenote/memolist.vim'
+
+
+  -----------------------------
+  -- Mardown preview
+  --
+  -- https://github.com/iamcco/markdown-preview.nvim
+  --
+  -- install without yarn or npm
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
 
 
 

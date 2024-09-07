@@ -20,6 +20,7 @@ function fish_prompt
 
     # Prompt body
     _prompt_directory
+    _prompt_aws_profile
     _prompt_username
     _prompt_git
 
@@ -127,3 +128,13 @@ function _prompt_git_body
     echo -n $git_branch
 end
 
+# ===============================================
+# aws profile
+
+function _prompt_aws_profile
+    _segment _prompt_aws_profile_body $color_lightdark $color_light 'internal'
+end
+
+function _prompt_aws_profile_body
+    echo $AWS_PROFILE
+end

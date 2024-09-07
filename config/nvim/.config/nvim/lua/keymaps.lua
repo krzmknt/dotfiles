@@ -1,6 +1,7 @@
 -- luacheck: globals vim
 
-local map = vim.api.nvim_set_keymap
+-- local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 local mode = {
@@ -101,16 +102,80 @@ map(mode.normal, '<Leader>mg', ':Telescope memo live_grep<CR>', opts)
 -- Cursor
 
 -- Jump to the beginning of the line
-map(mode.normal_visual, '<S-h>', '^', opts)
+map(mode.normal_visual, '<Left>', '^', opts)
 
 -- Jump to the end of the line
-map(mode.normal_visual, '<S-l>', '$', opts)
+map(mode.normal_visual, '<Right>', '$', opts)
 
--- Jump cursor to the end of the paragraph
+-- Jump to the next page
+map(mode.normal_visual, '<Down>', '<C-e>', opts)
+
+-- Jump to the end of the line
+map(mode.normal_visual, '<Up>', '<C-y>', opts)
+
+-- Jump cursor to the begginning of the next paragraph
 map(mode.normal_visual, '<S-j>', '}', opts)
 
--- Jump cursor to the beginning of the paragraph
+-- Jump cursor to the end of the previous paragraph
 map(mode.normal_visual, '<S-k>', '{', opts)
+
+
+local function move_to_word_end_or_next()
+  -- 現在のカーソル位置を取得
+  local current_pos = vim.api.nvim_win_get_cursor(0)
+  local line_num = current_pos[1]
+  local column_num = current_pos[2]
+
+  -- 現在の行を取得
+  local line = vim.api.nvim_get_current_line()
+
+  -- 現在の単語の末尾の位置を取得
+  local current_word_end_pos = vim.fn.matchend(line, '\\k\\+', column_num)
+
+  -- 次の単語の先頭の位置を取得
+  local next_word_start_pos = vim.fn.match(line, '\\k', column_num + 1)
+
+  -- 次の単語の先頭の位置が取得できない場合（次の単語が存在しない場合）、行末に移動
+  if next_word_start_pos == -1 then
+    vim.api.nvim_win_set_cursor(0, { line_num, #line })
+    return
+  end
+
+
+  -- 単語の末尾にいる場合
+  if current_word_end_pos - 1 == column_num then
+    -- 次の単語の先頭に移動
+    if next_word_start_pos ~= -1 then
+      vim.api.nvim_win_set_cursor(0, { line_num, next_word_start_pos })
+    end
+    return
+  end
+
+  -- 現在の単語の末尾に移動
+  vim.api.nvim_win_set_cursor(0, { line_num, current_word_end_pos - 1 })
+end
+
+-- Jump cursor to the beginning of the next word
+-- vim.keymap.set('n', '<S-l>', function()
+--   -- Check if the cursor is at the end of the line
+--   local function is_cursor_at_line_end()
+--     local cursor_pos = vim.api.nvim_win_get_cursor(0)
+--     local line = vim.api.nvim_get_current_line()
+--     local column = cursor_pos[2]
+--     return column == #line - 1
+--   end
+--
+--   if is_cursor_at_line_end() then
+--     vim.cmd('normal! j0')
+--   else
+--     move_to_word_end_or_next()
+--   end
+-- end, opts)
+map('n', '<S-l>', 'w', opts)
+
+-- Jump cursor to the beginning of the previous word
+map('n', '<S-h>', 'b', opts)
+
 
 -----------------------------
 -- Launcher
@@ -118,6 +183,7 @@ map(mode.normal_visual, '<S-k>', '{', opts)
 -- DAP
 map(mode.normal, '<leader>d', ':lua require("dapui").toggle()<CR>', {})
 map(mode.normal, '<leader>b', ':DapToggleBreakpoint<CR>', opts)
+
 
 -- Telescope
 map(mode.normal, '<Leader>f', '<cmd>Telescope find_files<cr>', opts)

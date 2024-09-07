@@ -27,11 +27,11 @@ set --local pink                         c600c0 #c600c0
 set --local light_pink                   f8bbf6 #f8bbf6
 set --local night_blue                   255D83 #255D83
 
-set --local framingo                     ff687e #ff687e
-
+set --global framingo                    ff687e #ff687e
 set --global white                       ffffff #ffffff
 set --global black                       000000 #000000
 set --global color_dark                  303030 #303030
+set --global color_lightdark             404040 #404040
 set --global color_light                 dddddd #dddddd
 set --global color_discreet              757575 #757575
 
@@ -203,3 +203,16 @@ function fish_user_key_bindings
   bind \cg ghq_peco_repo
 end
 
+
+# ===========================
+# AWS Profile selector
+# ---------------------------
+
+# Ctrl + T キーで aws_profile_selector 関数を実行
+function bind_aws_profile_selector
+    aws_profile_selector
+    commandline -f repaint
+end
+
+# キーバインディングの設定
+bind \ct bind_aws_profile_selector

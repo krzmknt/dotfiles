@@ -34,7 +34,7 @@ config.keys = {
 -----------------------------
 -- background
 -----------------------------
-config.window_background_opacity = 0.2
+config.window_background_opacity = 0.6
 config.macos_window_background_blur = 0
 
 -----------------------------
