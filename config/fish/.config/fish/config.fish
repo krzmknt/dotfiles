@@ -11,53 +11,66 @@ set --global fish_prompt_pwd_dir_length 3
 # ---------------------------
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-set --local dark_blue                    4a5e60 #4a5e60
-set --local blue                         006cc6 #006cc6
+# one dark
+set --global COLOR_BG0 "#1f2329"
+set --global COLOR_BG1 "#282c34"
+set --global COLOR_BG2 "#30363f"
+set --global COLOR_BG3 "#323641"
+set --global COLOR_BG_BLUE "#61afef"
+set --global COLOR_BG_D "#181b20"
+set --global COLOR_BG_YELLOW "#e8c88c"
+set --global COLOR_BLACK "#0e1013"
+set --global COLOR_BLUE "#4fa6ed"
+set --global COLOR_CYAN "#48b0bd"
+set --global COLOR_DARK_CYAN "#266269"
+set --global COLOR_DARK_PURPLE "#7e3992"
+set --global COLOR_DARK_RED "#8b3434"
+set --global COLOR_DARK_YELLOW "#835d1a"
+set --global COLOR_DIFF_ADD "#272e23"
+set --global COLOR_DIFF_CHANGE "#172a3a"
+set --global COLOR_DIFF_DELETE "#2d2223"
+set --global COLOR_DIFF_TEXT "#274964"
+set --global COLOR_FG "#a0a8b7"
+set --global COLOR_GREEN "#8ebd6b"
+set --global COLOR_GREY "#535965"
+set --global COLOR_LIGHT_GREY "#7a818e"
+set --global COLOR_NONE "none"
+set --global COLOR_ORANGE "#cc9057"
+set --global COLOR_PURPLE "#bf68d9"
+set --global COLOR_RED "#e55561"
+set --global COLOR_YELLOW "#e2b86b"
 
-set --local red                          f00050 #f00050
-set --local orange                       E17A47 #E17A47
-set --local yellow                       e0c050 #E0C050
-set --local green                        00a050 #00a050
-set --local dark_green                   344E5C #344E5C
+set --global color_dark                  $COLOR_BG0
+set --global color_lightdark             $COLOR_BG1
+set --global color_light                 "#ffffff"
+set --global color_discreet              $COLOR_LIGHT_GREY
+set --global color_main                  $COLOR_DARK_CYAN
+set --global color_main_light            $COLOR_BG_BLUE
+set --global color_warning               $COLOR_RED
+set --global color_git_main              $COLOR_BG_BLUE
+set --global color_git_dirty             $COLOR_YELLOW
 
-set --local purple                       ae81ff #ae81f
-set --local water                        006cc6 #006cc6
-set --local duck_blue                    006cc6 #006cc6
-set --local pink                         c600c0 #c600c0
-set --local light_pink                   f8bbf6 #f8bbf6
-set --local night_blue                   255D83 #255D83
+set --global fish_color_normal           "#ffffff"
+set --global fish_color_autosuggestion   $COLOR_LIGHT_GREY
+set --global fish_color_cancel           --background=$COLOR_DARK_CYAN
+set --global fish_color_command          $COLOR_BG_BLUE
+set --global fish_color_comment          $COLOR_LIGHT_GREY
+set --global fish_color_end              $COLOR_BG_BLUE
+set --global fish_color_error            $COLOR_RED
+set --global fish_color_escape           $COLOR_LIGHT_GREY
+set --global fish_color_match            --background=$COLOR_BG_BLUE
 
-set --global framingo                    ff687e #ff687e
-set --global white                       ffffff #ffffff
-set --global black                       000000 #000000
-set --global color_dark                  303030 #303030
-set --global color_lightdark             404040 #404040
-set --global color_light                 dddddd #dddddd
-set --global color_discreet              757575 #757575
-
-set --global color_main                  $night_blue
-set --global color_main_light            $blue
-set --global color_warning               $framingo
-set --global color_git_main              $green
-set --global color_git_dirty             $yellow
-set --global fish_color_normal           $white
-set --global fish_color_autosuggestion   $color_discreet
-set --global fish_color_cancel           --background=$color_main
-set --global fish_color_command          $color_main_light
-set --global fish_color_comment          $color_discreet
-set --global fish_color_end              $color_main_light
-set --global fish_color_error            $red
-set --global fish_color_escape           $color_discreet
-set --global fish_color_match            --background=$color_main_light
 set --global fish_color_operator         $light_pink
 set --global fish_color_param            $light_pink
+
 set --global fish_color_search_match     --background=$color_main
 set --global fish_color_selection        --background=$dark_green
 set --global fish_color_quote            $light_pink
 set --global fish_pager_color_progress   $color_main_light
-set --global fish_pager_color_completion $white
+set --global fish_pager_color_completion "#ffffff"
 set --global fish_pager_color_prefix     $color_main_light
 
+set -x EXA_COLORS "su=38;5;243:da=38;5;243:di=38;5;75:fi=38;5;250:ln=38;5;117:*.md=38;5;176:*.js=38;5;215:*.py=38;5;114:*.rb=38;5;204"
 
 # ===========================
 # Aliases

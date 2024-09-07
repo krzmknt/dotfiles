@@ -112,15 +112,15 @@ local function configureOptions()
     -----------------------------
     -- Sign Column
     --
-    signcolumn = 'yes', -- Always show the sign column.
+    signcolumn = 'no', -- Always show the sign column.
 
 
     -----------------------------
     -- Number column
     --
-    number         = true,  -- Show line numbers.
-    numberwidth    = 4,     -- Line number column width.
-    relativenumber = false, -- Show relative line numbers.
+    number         = true, -- Show line numbers.
+    numberwidth    = 4,    -- Line number column width.
+    relativenumber = true, -- Show relative line numbers.
 
 
     -----------------------------
@@ -292,6 +292,7 @@ vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = colors.red })
 -- indent-blankline
 vim.api.nvim_set_hl(0, "IblScope", { fg = colors.purple }) -- Set your desired color
 
+
 -----------------------------
 -- Keymaps
 --
@@ -299,6 +300,14 @@ vim.api.nvim_set_hl(0, "IblScope", { fg = colors.purple }) -- Set your desired c
 --
 
 require('keymaps')
+
+
+-----------------------------
+-- Aliases
+--
+
+vim.api.nvim_create_user_command('Do', 'DiffviewOpen <args>', { nargs = '*' })
+vim.api.nvim_create_user_command('Dc', 'DiffviewClose <args>', { nargs = '*' })
 
 
 -----------------------------

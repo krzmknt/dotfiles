@@ -379,8 +379,12 @@ return packer.startup(function(use)
           enable = false
         },
       }
+      require("scrollbar.handlers.gitsigns").setup()
     end
   })
+
+  -- diffview
+  use "sindrets/diffview.nvim"
 
 
   -----------------------------
