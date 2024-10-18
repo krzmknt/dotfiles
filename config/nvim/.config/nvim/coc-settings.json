@@ -1,5 +1,6 @@
 {
   "coc.preferences.willSaveHandlerTimeout": 5000,
+  "coc.preferences.floatBorder": true,
   "coc.preferences.formatOnSaveTimeout": 5000,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
@@ -50,12 +51,12 @@
 
   "python.jediEnabled": false,
   "pyright.enable": true,
-  "python.pythonPath": "~/.venv",
-  "python.venvPath": "./.venv",
+  "python.pythonPath": "~/.local/share/mise/installs/python/3.12.2/bin/python",
+  "python.venvPath": "~/.local/share/mise/installs/python/3.12.2/bin/python",
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "./.venv/bin/black",
+  "python.formatting.blackPath": "~/.local/share/mise/installs/python/3.12.2/bin/black",
   "python.formatting.blackArgs": [],
-  "python.sortImports.path": "./.venv/bin/isort",
+  "python.sortImports.path": "~/.local/share/mise/installs/python/3.12.2/bin/isort",
   "python.sortImports.args": ["--profile", "black"],
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,

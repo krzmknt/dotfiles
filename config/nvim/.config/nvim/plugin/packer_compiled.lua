@@ -118,7 +118,7 @@ _G.packer_plugins = {
     url = "https://github.com/kepano/flexoki-neovim"
   },
   ["gitsigns.nvim"] = {
-    config = { "\27LJ\2\nÚ\6\0\0\5\0\25\0 6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\16\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\0035\4\f\0=\4\r\0035\4\14\0=\4\15\3=\3\17\0025\3\18\0=\3\19\0025\3\20\0=\3\21\0025\3\22\0=\3\23\2B\0\2\0016\0\0\0'\2\24\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0 scrollbar.handlers.gitsigns\19preview_config\1\0\5\nstyle\fminimal\vborder\vsingle\brow\3\0\bcol\3\1\rrelative\vcursor\28current_line_blame_opts\1\0\5\ndelay\3\0\18virt_text_pos\beol\14virt_text\2\23virt_text_priority\3d\22ignore_whitespace\1\17watch_gitdir\1\0\1\17follow_files\2\nsigns\1\0\16\16auto_attach\2\17watch_gitdir\0\18sign_priority\3d\20update_debounce\3d\28current_line_blame_opts\0\23current_line_blame\2\24attach_to_untracked\2\nsigns\0\20max_file_length\3¿∏\2\15signcolumn\2\14word_diff\2\vlinehl\2\nnumhl\2!current_line_blame_formatter1<author>, <author_time:%Y-%m-%d> - <summary>\21status_formatter\0\19preview_config\0\14untracked\1\0\1\ttext\b‚îÜ\17changedelete\1\0\1\ttext\6~\14topdelete\1\0\1\ttext\b‚Äæ\vdelete\1\0\1\ttext\6_\vchange\1\0\1\ttext\b‚îÇ\badd\1\0\6\17changedelete\0\14untracked\0\14topdelete\0\vdelete\0\vchange\0\badd\0\1\0\1\ttext\b‚îÇ\nsetup\rgitsigns\frequire\0" },
+    config = { "\27LJ\2\nÚ\6\0\0\5\0\25\0 6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\16\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\0035\4\f\0=\4\r\0035\4\14\0=\4\15\3=\3\17\0025\3\18\0=\3\19\0025\3\20\0=\3\21\0025\3\22\0=\3\23\2B\0\2\0016\0\0\0'\2\24\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0 scrollbar.handlers.gitsigns\19preview_config\1\0\5\vborder\vsingle\bcol\3\1\brow\3\0\rrelative\vcursor\nstyle\fminimal\28current_line_blame_opts\1\0\5\ndelay\3\0\18virt_text_pos\beol\14virt_text\2\23virt_text_priority\3d\22ignore_whitespace\1\17watch_gitdir\1\0\1\17follow_files\2\nsigns\1\0\16\20max_file_length\3¿∏\2\17watch_gitdir\0\14word_diff\2\vlinehl\2\nnumhl\2!current_line_blame_formatter1<author>, <author_time:%Y-%m-%d> - <summary>\23current_line_blame\2\21status_formatter\0\20update_debounce\3d\18sign_priority\3d\16auto_attach\2\19preview_config\0\28current_line_blame_opts\0\15signcolumn\1\24attach_to_untracked\2\nsigns\0\14untracked\1\0\1\ttext\b‚îÜ\17changedelete\1\0\1\ttext\6~\14topdelete\1\0\1\ttext\b‚Äæ\vdelete\1\0\1\ttext\6_\vchange\1\0\1\ttext\b‚îÇ\badd\1\0\6\17changedelete\0\14untracked\0\14topdelete\0\vdelete\0\vchange\0\badd\0\1\0\1\ttext\b‚îÇ\nsetup\rgitsigns\frequire\0" },
     loaded = true,
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
@@ -154,12 +154,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/memolist.vim",
     url = "https://github.com/glidenote/memolist.vim"
-  },
-  ["mini.nvim"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/opt/mini.nvim",
-    url = "https://github.com/echasnovski/mini.nvim"
   },
   nerdcommenter = {
     loaded = true,
@@ -224,16 +218,14 @@ _G.packer_plugins = {
     url = "https://github.com/petertriho/nvim-scrollbar"
   },
   ["nvim-treesitter"] = {
-    after = { "render-markdown.nvim" },
-    config = { "\27LJ\2\nˇ\2\0\0\6\0\15\0\0226\0\0\0'\2\1\0B\0\2\2+\1\2\0=\1\2\0006\0\0\0'\2\3\0B\0\2\0029\1\4\0005\3\6\0005\4\5\0=\4\a\0035\4\b\0004\5\0\0=\5\t\4=\4\n\0035\4\v\0=\4\f\0035\4\r\0=\4\14\3B\1\2\1K\0\1\0\fautotag\1\0\1\venable\2\vindent\1\0\1\venable\2\14highlight\fdisable\1\0\2\fdisable\0\venable\2\21ensure_installed\1\0\4\vindent\0\21ensure_installed\0\14highlight\0\fautotag\0\1\r\0\0\bcss\tfish\thtml\tjava\15javascript\tjson\blua\vpython\btsx\15typescript\bvim\tyaml\nsetup\28nvim-treesitter.configs\15prefer_git\28nvim-treesitter.install\frequire\0" },
+    config = { "\27LJ\2\nˇ\2\0\0\6\0\15\0\0226\0\0\0'\2\1\0B\0\2\2+\1\2\0=\1\2\0006\0\0\0'\2\3\0B\0\2\0029\1\4\0005\3\6\0005\4\5\0=\4\a\0035\4\b\0004\5\0\0=\5\t\4=\4\n\0035\4\v\0=\4\f\0035\4\r\0=\4\14\3B\1\2\1K\0\1\0\fautotag\1\0\1\venable\2\vindent\1\0\1\venable\2\14highlight\fdisable\1\0\2\fdisable\0\venable\2\21ensure_installed\1\0\4\14highlight\0\21ensure_installed\0\vindent\0\fautotag\0\1\r\0\0\bcss\tfish\thtml\tjava\15javascript\tjson\blua\vpython\btsx\15typescript\bvim\tyaml\nsetup\28nvim-treesitter.configs\15prefer_git\28nvim-treesitter.install\frequire\0" },
     loaded = true,
-    only_config = true,
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     after = { "barbecue.nvim" },
-    config = { "\27LJ\2\nØ\3\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\0025\3\t\0005\4\b\0=\4\n\3=\3\v\0025\3\r\0005\4\f\0=\4\14\3=\3\15\2B\0\2\1K\0\1\0\26override_by_extension\blog\1\0\1\blog\0\1\0\3\ncolor\f#81e043\tname\bLog\ticon\bÔêé\25override_by_filename\15.gitignore\1\0\1\15.gitignore\0\1\0\3\ncolor\f#f1502f\tname\14Gitignore\ticon\bÓúÇ\roverride\1\0\6\roverride\0\26override_by_extension\0\25override_by_filename\0\16color_icons\2\fdefault\2\vstrict\2\bzsh\1\0\1\bzsh\0\1\0\4\ncolor\f#428850\tname\bZsh\ticon\bÓûï\16cterm_color\a65\nsetup\22nvim-web-devicons\frequire\0" },
+    config = { "\27LJ\2\nØ\3\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\0025\3\t\0005\4\b\0=\4\n\3=\3\v\0025\3\r\0005\4\f\0=\4\14\3=\3\15\2B\0\2\1K\0\1\0\26override_by_extension\blog\1\0\1\blog\0\1\0\3\tname\bLog\ncolor\f#81e043\ticon\bÔêé\25override_by_filename\15.gitignore\1\0\1\15.gitignore\0\1\0\3\tname\14Gitignore\ncolor\f#f1502f\ticon\bÓúÇ\roverride\1\0\6\16color_icons\2\roverride\0\25override_by_filename\0\26override_by_extension\0\fdefault\2\vstrict\2\bzsh\1\0\1\bzsh\0\1\0\4\tname\bZsh\ncolor\f#428850\16cterm_color\a65\ticon\bÓûï\nsetup\22nvim-web-devicons\frequire\0" },
     loaded = true,
     only_config = true,
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -263,14 +255,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/start/prettier.nvim",
     url = "https://github.com/MunifTanjim/prettier.nvim"
-  },
-  ["render-markdown.nvim"] = {
-    config = { "\27LJ\2\nA\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\20render-markdown\frequire\0" },
-    load_after = {},
-    loaded = true,
-    needs_bufread = false,
-    path = "/Users/krzmknt/.local/share/nvim/site/pack/packer/opt/render-markdown.nvim",
-    url = "https://github.com/MeanderingProgrammer/render-markdown.nvim"
   },
   ["telescope-file-browser.nvim"] = {
     config = { "\27LJ\2\nI\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\tmemo\19load_extension\14telescope\frequire\0" },
@@ -302,53 +286,48 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: hlargs.nvim
-time([[Config for hlargs.nvim]], true)
-try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vhlargs\frequire\0", "config", "hlargs.nvim")
-time([[Config for hlargs.nvim]], false)
--- Config for: vim-fugitive
-time([[Config for vim-fugitive]], true)
-try_loadstring("\27LJ\2\n⁄\1\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0∫\1        nnoremap <leader>gs :Git status<CR>\n        nnoremap <leader>gd :Gdiff<CR>\n        nnoremap <leader>gb :Git blame<CR>\n        nnoremap <leader>gl :Git log --graph<CR>\n      \bcmd\bvim\0", "config", "vim-fugitive")
-time([[Config for vim-fugitive]], false)
--- Config for: indent-blankline.nvim
-time([[Config for indent-blankline.nvim]], true)
-try_loadstring("\27LJ\2\ní\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\nscope\1\0\3\15show_start\2\fenabled\2\rshow_end\2\vindent\1\0\2\vindent\0\nscope\0\1\0\1\tchar\b‚îÇ\nsetup\bibl\frequire\0", "config", "indent-blankline.nvim")
-time([[Config for indent-blankline.nvim]], false)
--- Config for: telescope-file-browser.nvim
-time([[Config for telescope-file-browser.nvim]], true)
-try_loadstring("\27LJ\2\nI\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\tmemo\19load_extension\14telescope\frequire\0", "config", "telescope-file-browser.nvim")
-time([[Config for telescope-file-browser.nvim]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\1\2\0B\1\1\1K\0\1\0\nsetup\14colorizer\frequire\0", "config", "nvim-colorizer.lua")
-time([[Config for nvim-colorizer.lua]], false)
 -- Config for: nvim-scrollbar
 time([[Config for nvim-scrollbar]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14scrollbar\frequire\0", "config", "nvim-scrollbar")
 time([[Config for nvim-scrollbar]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\nÚ\6\0\0\5\0\25\0 6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\16\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\0035\4\f\0=\4\r\0035\4\14\0=\4\15\3=\3\17\0025\3\18\0=\3\19\0025\3\20\0=\3\21\0025\3\22\0=\3\23\2B\0\2\0016\0\0\0'\2\24\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0 scrollbar.handlers.gitsigns\19preview_config\1\0\5\nstyle\fminimal\vborder\vsingle\brow\3\0\bcol\3\1\rrelative\vcursor\28current_line_blame_opts\1\0\5\ndelay\3\0\18virt_text_pos\beol\14virt_text\2\23virt_text_priority\3d\22ignore_whitespace\1\17watch_gitdir\1\0\1\17follow_files\2\nsigns\1\0\16\16auto_attach\2\17watch_gitdir\0\18sign_priority\3d\20update_debounce\3d\28current_line_blame_opts\0\23current_line_blame\2\24attach_to_untracked\2\nsigns\0\20max_file_length\3¿∏\2\15signcolumn\2\14word_diff\2\vlinehl\2\nnumhl\2!current_line_blame_formatter1<author>, <author_time:%Y-%m-%d> - <summary>\21status_formatter\0\19preview_config\0\14untracked\1\0\1\ttext\b‚îÜ\17changedelete\1\0\1\ttext\6~\14topdelete\1\0\1\ttext\b‚Äæ\vdelete\1\0\1\ttext\6_\vchange\1\0\1\ttext\b‚îÇ\badd\1\0\6\17changedelete\0\14untracked\0\14topdelete\0\vdelete\0\vchange\0\badd\0\1\0\1\ttext\b‚îÇ\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
--- Config for: nvim-web-devicons
-time([[Config for nvim-web-devicons]], true)
-try_loadstring("\27LJ\2\nØ\3\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\0025\3\t\0005\4\b\0=\4\n\3=\3\v\0025\3\r\0005\4\f\0=\4\14\3=\3\15\2B\0\2\1K\0\1\0\26override_by_extension\blog\1\0\1\blog\0\1\0\3\ncolor\f#81e043\tname\bLog\ticon\bÔêé\25override_by_filename\15.gitignore\1\0\1\15.gitignore\0\1\0\3\ncolor\f#f1502f\tname\14Gitignore\ticon\bÓúÇ\roverride\1\0\6\roverride\0\26override_by_extension\0\25override_by_filename\0\16color_icons\2\fdefault\2\vstrict\2\bzsh\1\0\1\bzsh\0\1\0\4\ncolor\f#428850\tname\bZsh\ticon\bÓûï\16cterm_color\a65\nsetup\22nvim-web-devicons\frequire\0", "config", "nvim-web-devicons")
-time([[Config for nvim-web-devicons]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\ní\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\nscope\1\0\3\15show_start\2\fenabled\2\rshow_end\2\vindent\1\0\2\vindent\0\nscope\0\1\0\1\tchar\b‚îÇ\nsetup\bibl\frequire\0", "config", "indent-blankline.nvim")
+time([[Config for indent-blankline.nvim]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\nˇ\2\0\0\6\0\15\0\0226\0\0\0'\2\1\0B\0\2\2+\1\2\0=\1\2\0006\0\0\0'\2\3\0B\0\2\0029\1\4\0005\3\6\0005\4\5\0=\4\a\0035\4\b\0004\5\0\0=\5\t\4=\4\n\0035\4\v\0=\4\f\0035\4\r\0=\4\14\3B\1\2\1K\0\1\0\fautotag\1\0\1\venable\2\vindent\1\0\1\venable\2\14highlight\fdisable\1\0\2\fdisable\0\venable\2\21ensure_installed\1\0\4\vindent\0\21ensure_installed\0\14highlight\0\fautotag\0\1\r\0\0\bcss\tfish\thtml\tjava\15javascript\tjson\blua\vpython\btsx\15typescript\bvim\tyaml\nsetup\28nvim-treesitter.configs\15prefer_git\28nvim-treesitter.install\frequire\0", "config", "nvim-treesitter")
+try_loadstring("\27LJ\2\nˇ\2\0\0\6\0\15\0\0226\0\0\0'\2\1\0B\0\2\2+\1\2\0=\1\2\0006\0\0\0'\2\3\0B\0\2\0029\1\4\0005\3\6\0005\4\5\0=\4\a\0035\4\b\0004\5\0\0=\5\t\4=\4\n\0035\4\v\0=\4\f\0035\4\r\0=\4\14\3B\1\2\1K\0\1\0\fautotag\1\0\1\venable\2\vindent\1\0\1\venable\2\14highlight\fdisable\1\0\2\fdisable\0\venable\2\21ensure_installed\1\0\4\14highlight\0\21ensure_installed\0\vindent\0\fautotag\0\1\r\0\0\bcss\tfish\thtml\tjava\15javascript\tjson\blua\vpython\btsx\15typescript\bvim\tyaml\nsetup\28nvim-treesitter.configs\15prefer_git\28nvim-treesitter.install\frequire\0", "config", "nvim-treesitter")
 time([[Config for nvim-treesitter]], false)
+-- Config for: vim-fugitive
+time([[Config for vim-fugitive]], true)
+try_loadstring("\27LJ\2\n⁄\1\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0∫\1        nnoremap <leader>gs :Git status<CR>\n        nnoremap <leader>gd :Gdiff<CR>\n        nnoremap <leader>gb :Git blame<CR>\n        nnoremap <leader>gl :Git log --graph<CR>\n      \bcmd\bvim\0", "config", "vim-fugitive")
+time([[Config for vim-fugitive]], false)
+-- Config for: telescope-file-browser.nvim
+time([[Config for telescope-file-browser.nvim]], true)
+try_loadstring("\27LJ\2\nI\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\tmemo\19load_extension\14telescope\frequire\0", "config", "telescope-file-browser.nvim")
+time([[Config for telescope-file-browser.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\nÚ\6\0\0\5\0\25\0 6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\16\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\0035\4\f\0=\4\r\0035\4\14\0=\4\15\3=\3\17\0025\3\18\0=\3\19\0025\3\20\0=\3\21\0025\3\22\0=\3\23\2B\0\2\0016\0\0\0'\2\24\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0 scrollbar.handlers.gitsigns\19preview_config\1\0\5\vborder\vsingle\bcol\3\1\brow\3\0\rrelative\vcursor\nstyle\fminimal\28current_line_blame_opts\1\0\5\ndelay\3\0\18virt_text_pos\beol\14virt_text\2\23virt_text_priority\3d\22ignore_whitespace\1\17watch_gitdir\1\0\1\17follow_files\2\nsigns\1\0\16\20max_file_length\3¿∏\2\17watch_gitdir\0\14word_diff\2\vlinehl\2\nnumhl\2!current_line_blame_formatter1<author>, <author_time:%Y-%m-%d> - <summary>\23current_line_blame\2\21status_formatter\0\20update_debounce\3d\18sign_priority\3d\16auto_attach\2\19preview_config\0\28current_line_blame_opts\0\15signcolumn\1\24attach_to_untracked\2\nsigns\0\14untracked\1\0\1\ttext\b‚îÜ\17changedelete\1\0\1\ttext\6~\14topdelete\1\0\1\ttext\b‚Äæ\vdelete\1\0\1\ttext\6_\vchange\1\0\1\ttext\b‚îÇ\badd\1\0\6\17changedelete\0\14untracked\0\14topdelete\0\vdelete\0\vchange\0\badd\0\1\0\1\ttext\b‚îÇ\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\1\2\0B\1\1\1K\0\1\0\nsetup\14colorizer\frequire\0", "config", "nvim-colorizer.lua")
+time([[Config for nvim-colorizer.lua]], false)
+-- Config for: nvim-web-devicons
+time([[Config for nvim-web-devicons]], true)
+try_loadstring("\27LJ\2\nØ\3\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\0025\3\t\0005\4\b\0=\4\n\3=\3\v\0025\3\r\0005\4\f\0=\4\14\3=\3\15\2B\0\2\1K\0\1\0\26override_by_extension\blog\1\0\1\blog\0\1\0\3\tname\bLog\ncolor\f#81e043\ticon\bÔêé\25override_by_filename\15.gitignore\1\0\1\15.gitignore\0\1\0\3\tname\14Gitignore\ncolor\f#f1502f\ticon\bÓúÇ\roverride\1\0\6\16color_icons\2\roverride\0\25override_by_filename\0\26override_by_extension\0\fdefault\2\vstrict\2\bzsh\1\0\1\bzsh\0\1\0\4\tname\bZsh\ncolor\f#428850\16cterm_color\a65\ticon\bÓûï\nsetup\22nvim-web-devicons\frequire\0", "config", "nvim-web-devicons")
+time([[Config for nvim-web-devicons]], false)
+-- Config for: hlargs.nvim
+time([[Config for hlargs.nvim]], true)
+try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vhlargs\frequire\0", "config", "hlargs.nvim")
+time([[Config for hlargs.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd barbecue.nvim ]]
 
 -- Config for: barbecue.nvim
 try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rbarbecue\frequire\0", "config", "barbecue.nvim")
-
-vim.cmd [[ packadd render-markdown.nvim ]]
-
--- Config for: render-markdown.nvim
-try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\20render-markdown\frequire\0", "config", "render-markdown.nvim")
 
 time([[Sequenced loading]], false)
 

@@ -86,6 +86,9 @@ alias diff  "colordiff"
 alias dl    "docker ps -a"
 alias ghw   "gh repo view --web"
 alias g     "git"
+alias gs     "git status"
+alias gd     "git diff"
+alias gl     "git log"
 alias la    "exa -abBhHilS --git --icons"
 alias poa   "poetry add"
 alias por   "poetry run"
@@ -93,6 +96,30 @@ alias pos   "poetry show"
 alias v     "nvim"
 alias vi    "nvim"
 alias vim   "nvim"
+
+function check_git_dir
+    if test -d .git
+        return 0
+    else
+        echo ".git directory not found" >&2
+        exit 1
+    end
+end
+
+function ga
+  check_git_dir
+  git add .
+end
+
+function gc
+  check_git_dir
+  git commit $argv
+end
+
+function gp
+  check_git_dir
+  git push
+end
 
 function config
   set plugin $argv[1]

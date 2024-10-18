@@ -117,7 +117,7 @@ local function configureOptions()
     -----------------------------
     -- Sign Column
     --
-    signcolumn = 'no', -- Always show the sign column.
+    signcolumn = 'auto', -- Always show the sign column.
 
 
     -----------------------------
@@ -311,9 +311,9 @@ vim.api.nvim_set_hl(0, "GitSignsAddLn", { bg = colors.none })
 vim.api.nvim_set_hl(0, "GitSignsChangeLn", { bg = colors.none })
 vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { bg = colors.none })
 
-vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = colors.none, bg = colors.none })
-vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.none })
-vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = colors.none })
+vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = colors.green })
+vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.blue })
+vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = colors.red })
 
 -- Diffview
 
@@ -323,6 +323,20 @@ vim.api.nvim_set_hl(0, "DiffChange", { bg = colors.none })
 -- indent-blankline
 vim.api.nvim_set_hl(0, "IblScope", { fg = colors.purple }) -- Set your desired color
 
+
+-- coc
+
+-- エラーに波線を適用
+vim.api.nvim_set_hl(0, 'CocErrorHighlight', { bg = colors.red, fg = 'Yellow' })
+
+-- -- 警告に波線を適用
+-- vim.api.nvim_set_hl(0, 'CocWarningHighlight', { cterm = 'undercurl', gui = 'undercurl', sp = 'Yellow' })
+--
+-- -- 情報に波線を適用
+-- vim.api.nvim_set_hl(0, 'CocInfoHighlight', { cterm = 'undercurl', gui = 'undercurl', sp = 'Blue' })
+--
+-- -- ヒントに波線を適用
+-- vim.api.nvim_set_hl(0, 'CocHintHighlight', { cterm = 'undercurl', gui = 'undercurl', sp = 'Cyan' })
 
 -----------------------------
 -- Keymaps

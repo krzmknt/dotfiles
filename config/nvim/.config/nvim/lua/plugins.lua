@@ -342,10 +342,10 @@ return packer.startup(function(use)
           untracked    = { text = '┆' },
         },
 
-        signcolumn                   = true, -- Toggle with `:Gitsigns toggle_signs`
-        numhl                        = true, -- Toggle with `:Gitsigns toggle_numhl`
-        linehl                       = true, -- Toggle with `:Gitsigns toggle_linehl`
-        word_diff                    = true, -- Toggle with `:Gitsigns toggle_word_diff`
+        signcolumn                   = false, -- Toggle with `:Gitsigns toggle_signs`
+        numhl                        = true,  -- Toggle with `:Gitsigns toggle_numhl`
+        linehl                       = true,  -- Toggle with `:Gitsigns toggle_linehl`
+        word_diff                    = true,  -- Toggle with `:Gitsigns toggle_word_diff`
         watch_gitdir                 = {
           follow_files = true
         },
@@ -490,16 +490,16 @@ return packer.startup(function(use)
     run = function() vim.fn["mkdp#util#install"]() end,
   })
 
-  use({
-    'MeanderingProgrammer/render-markdown.nvim',
-    after = { 'nvim-treesitter' },
-    requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
-    -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
-    -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
-    config = function()
-      require('render-markdown').setup({})
-    end,
-  })
+  -- use({
+  --   'MeanderingProgrammer/render-markdown.nvim',
+  --   after = { 'nvim-treesitter' },
+  --   requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+  --   -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+  --   -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+  --   config = function()
+  --     require('render-markdown').setup({})
+  --   end,
+  -- })
 
   -----------------------------
   -- Noice

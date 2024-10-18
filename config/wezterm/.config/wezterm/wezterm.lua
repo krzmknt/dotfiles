@@ -34,8 +34,11 @@ config.keys = {
 -----------------------------
 -- background
 -----------------------------
-config.window_background_opacity = 0.5
-config.macos_window_background_blur = 0
+-- https://wezfurlong.org/wezterm/colorschemes/b/index.html#blazer-gogh
+config.color_scheme = 'Ollie'
+config.text_background_opacity = 1
+config.window_background_opacity = 0.4
+config.macos_window_background_blur = 20
 
 -----------------------------
 -- tab bar
@@ -54,7 +57,7 @@ config.font_size = 12
 -- config.font = wezterm.font 'MesloLGS NF'
 config.font = wezterm.font 'Maple Mono'
 config.cell_width = 1.0
-config.line_height = 1.3
+config.line_height = 1.2
 
 -----------------------------
 -- color
