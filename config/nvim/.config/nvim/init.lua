@@ -279,12 +279,12 @@ vim.api.nvim_set_hl(0, "TabLineFill", {
 
 vim.api.nvim_set_hl(0, "CursorLine", {
   fg = "none",
-  bg = colors.black,
+  bg = "#333333"
 })
 
 vim.api.nvim_set_hl(0, "CursorColumn", {
   fg = "none",
-  bg = colors.black,
+  bg = "#333333"
 })
 
 vim.api.nvim_set_hl(0, "Cursor", {

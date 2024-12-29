@@ -13,6 +13,7 @@
     "lua",
     "markdown",
     "python",
+    "rust",
     "scss",
     "sh",
     "sql",
@@ -62,5 +63,9 @@
   "python.linting.pylintEnabled": true,
   "python.linting.mypyEnabled": true,
 
-  "Lua.diagnostics.globals": ["vim"]
+  "Lua.diagnostics.globals": ["vim"],
+
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+  "rust-analyzer.procMacro.enable": true
 }

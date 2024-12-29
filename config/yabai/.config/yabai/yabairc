@@ -46,5 +46,6 @@ yabai -m rule --add app="^Windows 11$"         manage=off
 yabai -m rule --add app="^Stickies$"           manage=off
 yabai -m rule --add app="^zoom.us$"            manage=off
 yabai -m rule --add app="^Kindle$"             manage=off
+yabai -m rule --add app="^KiCad$"              manage=off
 
 echo "yabai configuration loaded..."
