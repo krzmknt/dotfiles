@@ -84,15 +84,13 @@ alias dcl   "dc logs"
 alias dcu   "dc up --build -d"
 alias diff  "colordiff"
 alias dl    "docker ps -a"
-alias ghw   "gh repo view --web"
 alias g     "git"
-alias gs     "git status"
 alias gd     "git diff"
+alias ghw   "gh repo view --web"
 alias gl     "git log"
+alias gs     "git status"
 alias la    "exa -abBhHilS --git --icons"
-alias poa   "poetry add"
-alias por   "poetry run"
-alias pos   "poetry show"
+alias t     "todo.sh"
 alias v     "nvim"
 alias vi    "nvim"
 alias vim   "nvim"
@@ -166,11 +164,6 @@ function dockerm
   docker container rm $name > /dev/null 2>&1
 end
 
-function awsmc
-  open "https://console.aws.amazon.com/console/home?region=us-east-1"
-  oathtool --totp --base32 CX2FURPJNXZN3QUISRSFMHSWHVAWTMDIWLKI3BFRWXKPUR3VDMI4GBNNFZKXI3ZX | pbcopy
-end
-
 
 # ===========================
 # Shortcuts
@@ -183,35 +176,6 @@ end
 
 # Alt + u
 bind \eu up_directory
-
-
-
-# ===========================
-# AtCoder
-# ---------------------------
-function t
-    set -l task $argv[1]
-    oj test -c "poetry run python ./$task/main.py" -S -d ./$task/tests/
-end
-
-
-function s
-    # Not available for the contest before ABC020 (URL rule does not compatible)
-    set -l task $argv[1]
-
-    # If some test case failed, cancel the submit
-    t $task
-    if test $status = 1
-        echo "[ERROR] test failed"
-        return 1
-    end
-
-    set -l interpreter "pypy"
-    set -l contest (basename (pwd))
-    set -l contest_type (echo $contest | sed "s/.\{3\}\$//")
-    set -l confirmation_phrase $contest_type$task
-    echo $confirmation_phrase | acc submit --task $contest"_"$task $task/main.py -- --guess-python-interpreter $interpreter
-end
 
 
 # ===========================
