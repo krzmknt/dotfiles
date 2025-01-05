@@ -195,9 +195,9 @@ bind \eu up_directory
 # ghq + peco
 # ---------------------------
 function ghq_peco_repo
-  set selected_repository (ghq list -p | peco --prompt="repositories > " --query "$LBUFFER")
+  set selected_repository (ghq list -p | sed "s|$(ghq root)/||" | peco --prompt="repositories > " --query "$LBUFFER")
   if [ -n "$selected_repository" ]
-    cd $selected_repository
+    cd $(ghq root)/$selected_repository
     echo "$selected_repository"
     commandline -f repaint
   end
