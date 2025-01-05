@@ -54,10 +54,14 @@ config.hide_mouse_cursor_when_typing = true
 -- font
 -----------------------------
 config.font_size = 12
--- config.font = wezterm.font 'MesloLGS NF'
-config.font = wezterm.font 'Maple Mono'
+config.font = wezterm.font_with_fallback({
+  "Maple Mono",
+  "Noto Sans CJK JP", -- FallBack fonts
+  "Noto Serif CJK JP",
+})
 config.cell_width = 1.0
 config.line_height = 1.2
+
 
 -----------------------------
 -- color
