@@ -7,7 +7,7 @@ set -e
 # ---------------------------
 # If this repo is not installed at your home, clone it
 if [ ! -d ~/dotfiles ]; then
-  git clone https://github.com/krzmknt/dotfiles
+  git clone https://github.com/krzmknt/dotfiles ~/dotfiles
 fi
 
 

@@ -413,14 +413,6 @@ require('plugins')
 
 
 -----------------------------
--- Procon Tools
---
-local home = os.getenv('HOME') or os.getenv('USERPROFILE')
-package.path = package.path .. ";" .. home .. "/Workspace/procon/.config/nvim/procon-tools/lua/?.lua"
-require('procon-tools')
-
-
------------------------------
 -- memo
 vim.g.memolist_path = vim.fn.expand("~/.memolist/memo")
 vim.g.memolist_memo_suffix = "md"
