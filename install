@@ -3,29 +3,6 @@
 set -e
 
 # ===========================
-# Check OS
-# ---------------------------
-os="Unsupported OS"
-case $(uname) in
-  "Darwin")
-    os="Mac"
-    ;;
-  "Linux")
-    os="Unsupported OS"
-    ;;
-  *)
-    ;;
-esac
-
-# If the OS is not supported, exit
-if [ $os = "Unsupported OS" ]; then
-  uname
-  echo "ERROR: Unsupported OS. Exiting..."
-  exit 1
-fi
-
-
-# ===========================
 # Clone this repo
 # ---------------------------
 # If this repo is not installed at your home, clone it
@@ -35,36 +12,13 @@ fi
 
 
 # ===========================
-# Homebrew
-# ---------------------------
-# Install Homebrew, if not installed
-case $os in
-  "Mac")
-    if [ ! -f /opt/homebrew/bin/brew ]; then
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
-    brew bundle --file=~/dotfiles/Brewfile
-    ;;
-
-  "Linux")
-    if [ ! -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
-      sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-    fi
-    brew bundle --file=~/dotfiles/Brewfile
-    ;;
-
-  *)
-    ;;
-esac
-
-
-# ===========================
 # Stow
 # ---------------------------
-stow -v -d ~/dotfiles/config -t ~ asdf # TODO
 stow -v -d ~/dotfiles/config -t ~ fish
 stow -v -d ~/dotfiles/config -t ~ karabiner
+stow -v -d ~/dotfiles/config -t ~ mise
 stow -v -d ~/dotfiles/config -t ~ nvim
+stow -v -d ~/dotfiles/config -t ~ peco
 stow -v -d ~/dotfiles/config -t ~ skhd
 stow -v -d ~/dotfiles/config -t ~ tmux
 stow -v -d ~/dotfiles/config -t ~ wezterm
@@ -79,18 +33,6 @@ if [ ! $SHELL = `which fish` ]; then
   which fish | sudo tee -a /etc/shells
   chsh -s `which fish`
 fi
-
-
-# ===========================
-# asdf # TODO
-# ---------------------------
-for plugin in `awk '{print $1}' ~/dotfiles/config/asdf/.tool-versions`; do
-  if [ ! -d ~/.asdf/plugins/$plugin ]; then
-    asdf plugin add $plugin
-  fi
-  asdf install $plugin
-  asdf global $plugin `awk -v plugin=$plugin '$1 == plugin {print $2}' ~/dotfiles/config/asdf/.tool-versions`
-done
 
 
 # Install oh-my-fish

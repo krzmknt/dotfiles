@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Dependencies:
-#   asdf
-#
-
-echo 'export PATH=$HOME/.asdf/installs/rust/1.72.1/bin/:$PATH' >> ~/.zshrc
