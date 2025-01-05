@@ -5,6 +5,7 @@ lspconfig.efm.setup({
     documentFormatting = true,
     documentRangeFormatting = true,
   },
+
   settings = {
     rootMarkers = { ".git/" },
     languages = {
@@ -118,3 +119,8 @@ vim.diagnostic.config({
     source = "always", -- Or "if_many"
   },
 })
+
+
+
+
+

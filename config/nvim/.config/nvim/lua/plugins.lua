@@ -186,6 +186,10 @@ return packer.startup(function(use)
   -- LSP
   --
   use({ 'neovim/nvim-lspconfig' }) -- config preset for each language server
+  --  use({ "williamboman/mason.nvim" })
+  --  use({ "williamboman/mason-lspconfig.nvim" })
+  --  use({ 'nvimtools/none-ls.nvim' })
+  --  use({ 'jay-babu/mason-null-ls.nvim' })
 
 
   -----------------------------

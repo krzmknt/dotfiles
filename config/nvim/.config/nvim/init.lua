@@ -415,12 +415,6 @@ require('plugins')
 -----------------------------
 -- Procon Tools
 --
--- Load the procon-tools module.
--- This setting depends on the external module which is not included in this repository.
--- If you want to use this setting, you need to install the procon-tools module.
--- Otherwise, you can comment out these lines.
---
-
 local home = os.getenv('HOME') or os.getenv('USERPROFILE')
 package.path = package.path .. ";" .. home .. "/Workspace/procon/.config/nvim/procon-tools/lua/?.lua"
 require('procon-tools')

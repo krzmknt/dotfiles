@@ -1,0 +1,23 @@
+require("mason").setup()
+require("mason-null-ls").setup({
+  ensure_installed = { "ruff" },
+  automatic_installation = true,
+})
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+  sources = {
+    -- リンターとして ruff を使う
+    null_ls.builtins.diagnostics.ruff,
+
+    -- フォーマッターとして ruff を使う (オートフィックス機能)
+    -- ※ ruff がバージョンによって対応する・しないがあるので要注意
+    null_ls.builtins.formatting.ruff,
+
+    -- 他に使いたいツールがあれば追加
+    -- null_ls.builtins.formatting.black,
+    -- null_ls.builtins.diagnostics.mypy,
+  },
+})
+

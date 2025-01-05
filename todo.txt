@@ -1,0 +1,3 @@
+Switch from CoC to built in Nvim-LSP @nvim
+Update Brewfile @homebrew
+Switch from asdf to mise @mise

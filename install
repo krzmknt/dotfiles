@@ -61,7 +61,7 @@ esac
 # ===========================
 # Stow
 # ---------------------------
-stow -v -d ~/dotfiles/config -t ~ asdf
+stow -v -d ~/dotfiles/config -t ~ asdf # TODO
 stow -v -d ~/dotfiles/config -t ~ fish
 stow -v -d ~/dotfiles/config -t ~ karabiner
 stow -v -d ~/dotfiles/config -t ~ nvim
@@ -82,7 +82,7 @@ fi
 
 
 # ===========================
-# asdf
+# asdf # TODO
 # ---------------------------
 for plugin in `awk '{print $1}' ~/dotfiles/config/asdf/.tool-versions`; do
   if [ ! -d ~/.asdf/plugins/$plugin ]; then

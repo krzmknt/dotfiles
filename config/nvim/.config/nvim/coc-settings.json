@@ -51,7 +51,7 @@
   "java.format.settings.profile": "GoogleStyle",
 
   "python.jediEnabled": false,
-  "pyright.enable": true,
+  "pyright.enable": false,
   "python.pythonPath": "~/.local/share/mise/installs/python/3.12.2/bin/python",
   "python.venvPath": "~/.local/share/mise/installs/python/3.12.2/bin/python",
   "python.formatting.provider": "black",
