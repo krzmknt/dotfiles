@@ -194,10 +194,6 @@ map(mode.normal, '<Leader>g', '<cmd>Telescope live_grep<cr>', opts)
 map(mode.normal, '<C-T>',
   '<cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center<CR>', opts)
 
--- Procon
-map(mode.normal, '<Leader>at', '<cmd>ProconTest<CR>', opts)
-map(mode.normal, '<Leader>as', '<cmd>ProconSubmit<CR>', opts)
-
 -- Git
 map(mode.normal, 'gh', ':Gitsigns preview_hunk<CR>', opts)
 map(mode.normal, 'gj', ':Gitsigns next_hunk<CR>', opts)
