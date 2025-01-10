@@ -92,7 +92,7 @@ local function configureOptions()
     -----------------------------
     -- Fold
     --
-    foldenable   = true,     -- Whether folding is enabled.
+    foldenable   = false,    -- Whether folding is enabled.
     foldmethod   = 'syntax', -- Folding method.
     foldcolumn   = 'auto',   -- When and how to draw the foldcolumn.
     foldlevel    = 0,        -- Folds with a higher level will be closed.

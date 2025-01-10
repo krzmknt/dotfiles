@@ -526,6 +526,10 @@ return packer.startup(function(use)
   })
 
 
+  -----------------------------
+  -- Procon
+  --
+  use({ "krzmknt/procon-utils" })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
