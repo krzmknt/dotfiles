@@ -10,7 +10,7 @@ set -e
 remote_repository_path=github.com/krzmknt/dotfiles
 local_repository_path=~/ghq/$remote_repository_path
 if [ ! -d $local_repository_path ]; then
-  git clone https://${repository_path}.git $local_repository_path
+  git clone https://$remote_repository_path $local_repository_path
 fi
 
 # ===========================
