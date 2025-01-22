@@ -132,7 +132,7 @@ function config
     case skhd
       set refresh_cmd "skhd --reload"
     case yabai
-      set refresh_cmd "brew services restart yabai"
+      set refresh_cmd "yabai --restart-service"
   end
   echo $refresh_cmd
   eval $refresh_cmd
@@ -208,6 +208,20 @@ end
 function fish_user_key_bindings
   bind \cg ghq_peco_repo
 end
+
+
+# ===========================
+# workspace + peco
+# ---------------------------
+function workspace_peco_repo
+  set selected_repository (workspace list | sort --reverse | peco --prompt="workspaces > " --query "$LBUFFER")
+  if [ -n "$selected_repository" ]
+    cd $selected_repository
+    echo "$selected_repository"
+    commandline -f repaint
+  end
+end
+bind \cw workspace_peco_repo
 
 
 # ===========================

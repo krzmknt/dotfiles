@@ -1,70 +1,32 @@
-# application
-# alt - return : open /Applications/WezTerm.app
-# alt - n : open -n /Applications/Brave\ Browser.app
-# alt - m : open /Applications/Kindle.app
+# Focus window
+alt - k : yabai -m window --focus stack.north || yabai -m window --focus north
+alt - j : yabai -m window --focus stack.south || yabai -m window --focus south
+alt - h : yabai -m window --focus stack.west  || yabai -m window --focus west
+alt - l : yabai -m window --focus stack.east  || yabai -m window --focus east
 
-
-# insert mode
-# shift + lctrl + alt - h : yabai -m window --insert west
-# shift + lctrl + alt - j : yabai -m window --insert south
-# shift + lctrl + alt - k : yabai -m window --insert north
-# shift + lctrl + alt - l : yabai -m window --insert east
-
-
-# close
-alt - c : yabai -m window --close
-
-
-# focus window
-alt - k : yabai -m window --focus stack.north \
-    || yabai -m window --focus north
-alt - j : yabai -m window --focus stack.south \
-    || yabai -m window --focus south
-alt - h : yabai -m window --focus stack.west \
-    || yabai -m window --focus west
-alt - l : yabai -m window --focus stack.east \
-    || yabai -m window --focus east
-
-
-# focus display
-# lctrl + alt - k : yabai -m display --focus stack.north \
-#     || yabai -m display --focus north
-# lctrl + alt - j : yabai -m display --focus stack.south \
-#     || yabai -m display --focus south
-# lctrl + alt - h : yabai -m display --focus stack.west \
-#     || yabai -m display --focus
-# lctrl + alt - l : yabai -m display --focus stack.east \
-#     || yabai -m display --focus east
-
+# Focus display
 lctrl + alt - h : yabai -m display --focus next
 lctrl + alt - l : yabai -m display --focus prev
 
+# Resize
+alt + shift - h : yabai -m window --resize left:-40:0  || yabai -m window --resize right:-40:0
+alt + shift - j : yabai -m window --resize bottom:0:40 || yabai -m window --resize top:0:40
+alt + shift - k : yabai -m window --resize top:0:-40   || yabai -m window --resize bottom:0:-40
+alt + shift - l : yabai -m window --resize right:40:0  || yabai -m window --resize left:40:0
 
-# full screen
-alt - space : yabai -m window --toggle zoom-fullscreen
-
-
-# resize
-alt + shift - h : yabai -m window --resize left:-40:0 \
-    || yabai -m window --resize right:-40:0
-alt + shift - j : yabai -m window --resize bottom:0:40 \
-    || yabai -m window --resize top:0:40
-alt + shift - k : yabai -m window --resize top:0:-40 \
-    || yabai -m window --resize bottom:0:-40
-alt + shift - l : yabai -m window --resize right:40:0 \
-    || yabai -m window --resize left:40:0
-
-
-# reset split balance
+# Reset split balance
 shift + alt - e : yabai -m space --balance
 
-
-# warp
+# Warp
 shift + alt + lctrl - j : yabai -m window --warp south
 shift + alt + lctrl - k : yabai -m window --warp north
 shift + alt + lctrl - h : yabai -m window --warp west
 shift + alt + lctrl - l : yabai -m window --warp east
 
-
-# toggle mission control
-shift + alt - m : yabai -m space --toggle mission-control
+# Toggl
+alt - a: yabai -m window --toggle float && yabai -m window --grid 6:6:1:1:4:4
+alt - s : yabai -m space --toggle mission-control
+alt - d: yabai -m space --toggle show-desktop
+alt - f : yabai -m window --toggle zoom-fullscreen
+shift + alt - f : yabai -m window --toggle native-fullscreen
+alt - p : yabai -m space --toggle padding && yabai -m space --toggle gap
