@@ -25,8 +25,13 @@ shift + alt + lctrl - l : yabai -m window --warp east
 
 # Toggl
 alt - a: yabai -m window --toggle float && yabai -m window --grid 6:6:1:1:4:4
-alt - s : yabai -m space --toggle mission-control
 alt - d: yabai -m space --toggle show-desktop
 alt - f : yabai -m window --toggle zoom-fullscreen
 shift + alt - f : yabai -m window --toggle native-fullscreen
 alt - p : yabai -m space --toggle padding && yabai -m space --toggle gap
+alt - m : yabai -m space --toggle mission-control
+
+alt -s : yabai -m window --stack east
+
+alt + ctrl - j : yabai -m window --focus stack.next
+alt + ctrl - k : yabai -m window --focus stack.prev

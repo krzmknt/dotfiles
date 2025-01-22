@@ -4,30 +4,70 @@ set -e
 
 # ===========================
 # Clone this repo
-# ---------------------------
+
 # If this repo is not installed at your home, clone it
-if [ ! -d ~/dotfiles ]; then
-  git clone https://github.com/krzmknt/dotfiles ~/dotfiles
+
+remote_repository_path=github.com/krzmknt/dotfiles
+local_repository_path=~/ghq/$remote_repository_path
+if [ ! -d $local_repository_path ]; then
+  git clone https://$repository_path $local_repository_path
 fi
 
+# ===========================
+# Homebrew
+
+# Check if Homebrew is installed
+if ! command -v brew &>/dev/null; then
+  echo "Homebrew is not installed. Installing now..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # Configure environment variables (considering M1/M2 Macs)
+  if [[ $(uname -m) == "arm64" ]]; then
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+    eval "$($(brew --prefix)/bin/brew shellenv)"
+  else
+    echo 'eval "$(/usr/local/bin/brew shellenv)"' >> ~/.bash_profile
+    eval "$($(brew --prefix)/bin/brew shellenv)"
+  fi
+
+  echo "Homebrew has been installed."
+else
+  echo "Homebrew is already installed."
+fi
+
+# Check for the existence of the Brewfile
+BREWFILE="./Brewfile"
+if [[ ! -f "$BREWFILE" ]]; then
+  echo "Brewfile not found. Exiting script."
+  exit 1
+fi
+
+# Update Homebrew
+echo "Updating Homebrew..."
+brew update
+
+# Install packages based on the Brewfile
+echo "Installing packages from Brewfile..."
+brew bundle --file="$BREWFILE"
 
 # ===========================
 # Stow
-# ---------------------------
+
 stow -v -d ~/dotfiles/config -t ~ fish
+stow -v -d ~/dotfiles/config -t ~ hammerspoon
 stow -v -d ~/dotfiles/config -t ~ karabiner
 stow -v -d ~/dotfiles/config -t ~ mise
 stow -v -d ~/dotfiles/config -t ~ nvim
 stow -v -d ~/dotfiles/config -t ~ peco
 stow -v -d ~/dotfiles/config -t ~ skhd
+stow -v -d ~/dotfiles/config -t ~ stackline
 stow -v -d ~/dotfiles/config -t ~ tmux
 stow -v -d ~/dotfiles/config -t ~ wezterm
 stow -v -d ~/dotfiles/config -t ~ yabai
 
-
 # ===========================
 # Fish
-# ---------------------------
+
 # If fish is not the default shell, change it
 if [ ! $SHELL = `which fish` ]; then
   which fish | sudo tee -a /etc/shells
