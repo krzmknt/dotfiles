@@ -12,6 +12,7 @@ local_repository_path=~/ghq/$remote_repository_path
 if [ ! -d $local_repository_path ]; then
   git clone https://$remote_repository_path $local_repository_path
 fi
+cd $local_repository_path
 
 # ===========================
 # Homebrew
@@ -50,33 +51,26 @@ brew update
 echo "Installing packages from Brewfile..."
 brew bundle --file="$BREWFILE"
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "Installing packages from Brewfile.mac..."
+    brew bundle --file=Brewfile.mac
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    echo "Installing packages from Brewfile.linux..."
+    brew bundle --file=Brewfile.linux
+fi
+
 # ===========================
 # Stow
 
-stow -v -d ~/dotfiles/config -t ~ fish
-stow -v -d ~/dotfiles/config -t ~ hammerspoon
-stow -v -d ~/dotfiles/config -t ~ karabiner
-stow -v -d ~/dotfiles/config -t ~ mise
-stow -v -d ~/dotfiles/config -t ~ nvim
-stow -v -d ~/dotfiles/config -t ~ peco
-stow -v -d ~/dotfiles/config -t ~ skhd
-stow -v -d ~/dotfiles/config -t ~ stackline
-stow -v -d ~/dotfiles/config -t ~ tmux
-stow -v -d ~/dotfiles/config -t ~ wezterm
-stow -v -d ~/dotfiles/config -t ~ yabai
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ fish
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ hammerspoon
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ karabiner
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ mise
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ nvim
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ peco
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ skhd
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ stackline
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ tmux
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ wezterm
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ yabai
 
-# ===========================
-# Fish
-
-# If fish is not the default shell, change it
-if [ ! $SHELL = `which fish` ]; then
-  which fish | sudo tee -a /etc/shells
-  chsh -s `which fish`
-fi
-
-
-# Install oh-my-fish
-if [ ! -d ~/.local/share/omf ]; then
-  curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
-  omf install peco
-fi

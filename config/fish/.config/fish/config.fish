@@ -90,7 +90,7 @@ alias gd     "git diff"
 alias ghw   "gh repo view --web"
 alias gl     "git log"
 alias gs     "git status"
-alias la    "exa -abBhHilS --git --icons"
+alias la    "eza -abBhHilS --git --icons"
 alias t     "todo.sh"
 alias v     "nvim"
 alias vi    "nvim"
@@ -122,11 +122,11 @@ end
 
 function config
   set plugin $argv[1]
-  vim ~/dotfiles/config/$plugin
+  vim ~/ghq/github.com/krzmknt/dotfiles/config/$plugin
 
   switch $plugin
     case fish
-      set refresh_cmd "source ~/dotfiles/config/fish/.config/fish/config.fish"
+      set refresh_cmd "source ~/ghq/github.com/krzmknt/dotfiles/config/fish/.config/fish/config.fish"
     case tmux
       set refresh_cmd "tmux source-file ~/.tmux.conf"
     case skhd
