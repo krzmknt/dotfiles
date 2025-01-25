@@ -1,6 +1,6 @@
 function aws_profile_selector
     # Rustプログラムを実行して環境変数設定スクリプトを生成
-    ~/awsprofile/target/release/awsprofile
+    ~/ghq/github.com/krzmknt/awsprofile-switcher/target/release/awsprofile
 
     # 環境変数を設定するスクリプトをソース
     source /tmp/awsprofile/set_aws_profile.sh
