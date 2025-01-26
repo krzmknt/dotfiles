@@ -37,8 +37,8 @@ config.keys = {
 -- https://wezfurlong.org/wezterm/colorschemes/b/index.html#blazer-gogh
 config.color_scheme = 'Ollie'
 config.text_background_opacity = 1
-config.window_background_opacity = 0.4
-config.macos_window_background_blur = 20
+config.window_background_opacity = 0.7
+config.macos_window_background_blur = 0
 
 -----------------------------
 -- tab bar

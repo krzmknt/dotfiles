@@ -392,6 +392,22 @@ return packer.startup(function(use)
   -- Floating window
   --
 
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons'
+    },
+    config = function()
+      require("nvim-tree").setup()
+    end
+  }
+
+
+
+  -----------------------------
+  -- Floating window
+  --
+
   -- Floatterm
   use({ 'voldikss/vim-floaterm' })
 
@@ -494,36 +510,36 @@ return packer.startup(function(use)
     run = function() vim.fn["mkdp#util#install"]() end,
   })
 
-  -- use({
-  --   'MeanderingProgrammer/render-markdown.nvim',
-  --   after = { 'nvim-treesitter' },
-  --   requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
-  --   -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
-  --   -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
-  --   config = function()
-  --     require('render-markdown').setup({})
-  --   end,
-  -- })
+  use({
+    'MeanderingProgrammer/render-markdown.nvim',
+    after = { 'nvim-treesitter' },
+    requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+    -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+    -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+    config = function()
+      require('render-markdown').setup({})
+    end,
+  })
 
   -----------------------------
   -- Noice
   --
-  use({ "MunifTanjim/nui.nvim" })
-  use({ "rcarriga/nvim-notify" })
-  use({
-    "folke/noice.nvim",
-    opts = {
-      -- add any options here
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-    }
-  })
+  -- use({ "MunifTanjim/nui.nvim" })
+  -- use({ "rcarriga/nvim-notify" })
+  -- use({
+  --   "folke/noice.nvim",
+  --   opts = {
+  --     -- add any options here
+  --   },
+  --   dependencies = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     "MunifTanjim/nui.nvim",
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     "rcarriga/nvim-notify",
+  --   }
+  -- })
 
 
   -----------------------------

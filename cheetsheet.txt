@@ -1,0 +1,75 @@
+# Keybindis
+
+## Neovim
+
+### Nvim tree
+
+#### Move
+
+K        : First Sibling
+<        : Previous Sibling
+>        : Next Sibling
+J        : Last Sibling
+
+P        : Parent Directory
+-        : Up
+<BS>     : Close directory
+
+E        : Expand All
+
+#### Filter
+
+f        : Filter
+F        : Clear Filter
+B        : Toggle No Buffer
+H        : Toggle Hidden Files
+I        : Toggle Ignored Files
+C        : Toggle Git Clean
+
+R        : Refresh
+S        : Search
+
+#### Open
+
+<CR>     : Open
+ctrl + t : Open in New Tab
+ctrl + v : Open in Vertical Split
+ctrl + x : Open in Horizontal Split
+
+#### File Operations
+
+a        : Add Child Node
+D        : Trash
+r        : Rename
+x        : Cut
+
+c        : Copy
+p        : Paste
+
+#### Copy
+
+y        : Copy Name
+Y        : Copy Relative Path
+gy       : Copy Absolute Path
+
+
+
+
+### skhd
+
+alt + h                : Move to the left window
+alt + j                : Move to the bottom window
+alt + k                : Move to the top window
+alt + l                : Move to the right window
+
+alt + ctrl + h         : -
+alt + ctrl + j         : Move to the next stack
+alt + ctrl + k         : Move to the previous stack
+alt + ctrl + l         : -
+
+alt + ctrl + shilt + h : Warp to the left window
+alt + ctrl + shilt + j : Warp to the top window
+alt + ctrl + shilt + k : Warp to the bottom window
+alt + ctrl + shilt + l : Warp to the right window
+
+alt + a

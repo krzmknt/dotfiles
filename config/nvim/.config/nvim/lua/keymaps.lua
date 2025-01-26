@@ -69,6 +69,11 @@ map(mode.normal, 'fh', ':tabprevious<Return>', opts)
 -- Go definition
 map(mode.normal, 'gd', ":call CocAction('jumpDefinition', 'tab drop')<Return>", opts)
 
+-- nvim-tree
+map(mode.normal, 'ff', ':NvimTreeToggle<CR>', opts)
+map(mode.normal, '<C-j>w', ':NvimTreeFindFile<CR>', opts)
+
+
 
 ------------------------------
 -- Window
