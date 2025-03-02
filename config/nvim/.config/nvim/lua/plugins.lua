@@ -148,6 +148,8 @@ return packer.startup(function(use)
 
   -- https://github.com/navarasu/onedark.nvim
   use 'navarasu/onedark.nvim'
+  use 'mhartington/oceanic-next'
+
 
   -----------------------------
   -- Colorizer
@@ -180,6 +182,54 @@ return packer.startup(function(use)
 
   -- Copilot
   use({ 'github/copilot.vim' })
+
+  use({ 'nvim-lua/plenary.nvim' })
+  use({
+    'CopilotC-Nvim/CopilotChat.nvim',
+    config = function()
+      require("CopilotChat").setup {
+        -- See Configuration section for options
+        model = 'o3-mini',
+        agent = 'copilot',
+        window = {
+          width = 0.8,
+          height = 0.8,
+          border = "rounded",
+          highlight = "Normal",
+          layout = "float",
+        }
+      }
+    end
+  })
+
+  -----------------------------
+  -- Avante
+  --
+  -- Required plugins
+  use 'nvim-treesitter/nvim-treesitter'
+  use 'stevearc/dressing.nvim'
+  use 'nvim-lua/plenary.nvim'
+  use 'MunifTanjim/nui.nvim'
+  use 'MeanderingProgrammer/render-markdown.nvim'
+
+  -- Optional dependencies
+  use 'hrsh7th/nvim-cmp'
+  use 'nvim-tree/nvim-web-devicons' -- or use 'echasnovski/mini.icons'
+  use 'HakonHarnes/img-clip.nvim'
+  use 'zbirenbaum/copilot.lua'
+
+  -- Avante.nvim with build process
+  use {
+    'yetone/avante.nvim',
+    branch = 'main',
+    run = 'make',
+    config = function()
+      require('avante').setup({
+      })
+    end
+  }
+
+
 
 
   -----------------------------
@@ -510,16 +560,16 @@ return packer.startup(function(use)
     run = function() vim.fn["mkdp#util#install"]() end,
   })
 
-  use({
-    'MeanderingProgrammer/render-markdown.nvim',
-    after = { 'nvim-treesitter' },
-    requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
-    -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
-    -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
-    config = function()
-      require('render-markdown').setup({})
-    end,
-  })
+  -- use({
+  --   'MeanderingProgrammer/render-markdown.nvim',
+  --   after = { 'nvim-treesitter' },
+  --   requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+  --   -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+  --   -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+  --   config = function()
+  --     require('render-markdown').setup({})
+  --   end,
+  -- })
 
   -----------------------------
   -- Noice

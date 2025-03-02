@@ -35,10 +35,18 @@ config.keys = {
 -- background
 -----------------------------
 -- https://wezfurlong.org/wezterm/colorschemes/b/index.html#blazer-gogh
-config.color_scheme = 'Ollie'
+-- config.color_scheme = 'Ollie'
+config.color_scheme = 'Argonaut'
+
+config.colors = {
+  cursor_bg = "#ccaa00",     -- カーソルの背景色（変更したい色）
+  cursor_fg = "#000000",     -- カーソルの前景色（テキストの色）
+  cursor_border = "#ccaa00", -- カーソルの境界線色
+}
+
 config.text_background_opacity = 1
-config.window_background_opacity = 0.7
-config.macos_window_background_blur = 0
+config.window_background_opacity = 0.5
+config.macos_window_background_blur = 1
 
 -----------------------------
 -- tab bar
