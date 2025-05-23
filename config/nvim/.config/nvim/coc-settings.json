@@ -43,8 +43,8 @@
   "http.proxyStrictSSL": false,
 
   "java.jdt.ls.vmargs": "-javaagent:/Users/krzmknt/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar",
-  "java.jdt.ls.java.home": "~/.local/share/mise/installs/java/corretto-21.0.1.12.1/bin",
-  "java.checkstyle.": "./checkstyle.xml",
+  "java.jdt.ls.java.home": "~/.local/share/mise/installs/java/corretto-21.0.1.12.1",
+  "java.checkstyle.config.location": "./checkstyle.xml",
   "java.checkstyle.enabled": true,
   "java.format.onType.enabled": true,
   "java.format.settings.url": "./eclipse-java-google-style.xml",

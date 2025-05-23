@@ -123,9 +123,9 @@ local function configureOptions()
     -----------------------------
     -- Number column
     --
-    number         = true, -- Show line numbers.
-    numberwidth    = 4,    -- Line number column width.
-    relativenumber = true, -- Show relative line numbers.
+    number         = true,  -- Show line numbers.
+    numberwidth    = 4,     -- Line number column width.
+    relativenumber = false, -- Show relative line numbers.
 
 
     -----------------------------
@@ -233,11 +233,6 @@ vim.cmd [[
 
 
 -----------------------------
--- Color
---
-require('color')
-
------------------------------
 -- Keymaps
 --
 -- Define custom key mappings.
@@ -277,6 +272,7 @@ local function configureAutocommands()
     command = ':%s/\\s\\+$//e',
   })
 
+
   -- Don't auto commenting new lines
   autocmd('BufEnter', {
     pattern = { '*' },
@@ -308,12 +304,24 @@ configureAutocommands()
 -- Plugins
 --
 
-require('plugins')
+require("config.lazy")
+
+
+-----------------------------
+-- Color
+--
+require('color')
+
 
 
 -----------------------------
 -- memo
-vim.g.memolist_path = vim.fn.expand("~/.memolist/memo")
-vim.g.memolist_memo_suffix = "md"
-vim.g.memolist_fzf = 1
+vim.g.memolist_path              = vim.fn.expand("~/.memolist/memo")
+vim.g.memolist_memo_suffix       = "md"
+vim.g.memolist_fzf               = 1
 vim.g.memolist_template_dir_path = vim.fn.expand("~/.memolist/memotemplates")
+
+-----------------------------
+-- NERDCommenter
+vim.g.NERDSpaceDelims            = 1
+vim.g.NERDDefaultAlign           = "left"

@@ -1,33 +1,16 @@
-local status, lualine = pcall(require, "lualine")
-if (not status) then return end
+local icons = require("util.icons")
+local colors = require("util.color")
 
--- Icons for the vim modes
-local mode_icons = {
-  ["NORMAL"]  = "",
-  ["INSERT"]  = "",
-  ["VISUAL"]  = "󰍉",
-  ["V-LINE"]  = "󰍉",
-  ["V-BLOCK"] = "󰍉",
-  ["COMMAND"] = "",
-}
-
-local onedark_colors = require('onedark.colors')
-local colors = {
-  transparent = 'none',
-  white       = '#cdcdcd',
-  black       = '#000000',
-  grey        = onedark_colors.grey,
-  light_grey  = onedark_colors.light_grey,
-  blue        = onedark_colors.dark_cyan,
-  yellow      = onedark_colors.yellow,
-  red         = onedark_colors.red,
-}
+-- Load plugin
+local pluginLoader = require("util.pluginLoader")
+local lualine = pluginLoader.load({ pluginName = "lualine", enable = true })
+if lualine == nil then return end
 
 local theme = {
   normal = {
-    a = { fg = colors.white, bg = colors.blue },
+    a = { fg = colors.white, bg = colors.dark_cyan },
     b = { fg = colors.white, bg = colors.grey },
-    c = { fg = colors.light_grey, bg = colors.transparent },
+    c = { fg = colors.light_grey, bg = colors.none },
   },
 
   insert = { a = { fg = colors.black, bg = colors.yellow } },
@@ -35,19 +18,17 @@ local theme = {
   replace = { a = { fg = colors.white, bg = colors.red } },
 
   inactive = {
-    a = { fg = colors.white, bg = colors.transparent },
-    b = { fg = colors.white, bg = colors.transparent },
-    c = { fg = colors.black, bg = colors.transparent },
+    a = { fg = colors.white, bg = colors.none },
+    b = { fg = colors.white, bg = colors.none },
+    c = { fg = colors.black, bg = colors.none },
   },
 }
-
 
 lualine.setup {
   options = {
     icons_enabled = true,
     theme = theme,
     section_separators = { left = '', right = '' },
-    -- component_separators = { left = '', right = '' },
     component_separators = { left = '', right = '' },
     disabled_filetypes = {},
     draw_empty = false,
@@ -57,27 +38,34 @@ lualine.setup {
     lualine_a = {
       {
         'mode',
-        fmt = function(mode) return mode_icons[mode] end, -- Format function or string to format the component's value.
-        icons_enabled = true,                             -- Enables the display of icons alongside the component.
-        separator = { left = '', right = '' },
+        fmt = function(mode) return icons.mode[mode] end,
+        icons_enabled = true,
+        separator = {
+          left = icons.separator.rounded.left,
+          right = ' ',
+        },
         padding = { left = 0, right = 1 },
-      }
+      },
     },
 
     lualine_b = {
       {
         'branch',
-        draw_empty = false, -- Whether to draw component even if it's empty.
+        draw_empty = false,
         padding = { left = 1, right = 1 },
       },
 
       {
         'diff',
-        colored = true,    -- Displays a colored diff status if set to true
-        draw_empty = true, -- Whether to draw component even if it's empty.
-        separator = { left = '', right = '' },
+        colored = true,
+        draw_empty = true,
         padding = { left = 0, right = 1 },
-      }
+        separator = {
+          left = ' ',
+          right = ' '
+        },
+      },
+
     },
 
     lualine_c = {
@@ -94,14 +82,15 @@ lualine.setup {
         -- 4: Filename and parent dir, with tilde as the home directory
 
         shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-        -- for other components. (terrible name, any suggestions?)
+
         symbols = {
-          modified = '[+]',      -- Text to show when the file is modified.
-          readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
-          unnamed = '[No Name]', -- Text to show for unnamed buffers.
-          newfile = '[New]',     -- Text to show for newly created file before first write
+          modified = '[Unsaved]', -- Text to show when the file is modified.
+          readonly = '[RO]',      -- Text to show when the file is non-modifiable or readonly.
+          unnamed = '[No Name]',  -- Text to show for unnamed buffers.
+          newfile = '[New]',      -- Text to show for newly created file before first write
         }
       },
+      { 'g:coc_status', 'bo:filetype' }
     },
 
     lualine_x = {
@@ -110,39 +99,44 @@ lualine.setup {
         color = { bg = 'null' },
         sources = { 'coc' },
         symbols = {
-          error = ' ',
-          warn = ' ',
-          info = ' ',
-          hint = ' '
+          error = icons.diagnostic.error,
+          warn = icons.diagnostic.warn,
+          info = icons.diagnostic.info,
+          hint = icons.diagnostic.hint,
         },
-        always_visible = false,  -- Show diagnostics even if there are none.
-        update_in_insert = true, -- Update diagnostics in insert mode.
-        colored = true,          -- Displays diagnostics status in color if set to true.
+
+        always_visible = true,
+        update_in_insert = true,
+        colored = true,
       },
     },
 
     lualine_y = {
       {
         'filetype',
-        colored = true,            -- Displays filetype icon in color if set to true
-        icon_only = false,         -- Display only an icon for filetype
-        icon = { align = 'left' }, -- Display filetype icon on the right hand side
-        separator = { left = '', right = '' },
+        colored = true,
+        icon_only = false,
+        icon = { align = 'left' },
+        separator = {
+          left = icons.separator.rounded.left,
+          right = ''
+        },
         padding = { left = 1, right = 1 },
       },
 
       {
         'encoding',
+        show_bomb = true,
         padding = { left = 0, right = 1 },
       },
 
       {
         'fileformat',
-        padding = { left = 0, right = 1 },
+        padding = { left = 0, right = 2 },
         symbols = {
-          unix = ' ',
-          dos = ' ',
-          mac = ' '
+          unix = icons.platform.unix,
+          dos = icons.platform.windows,
+          mac = icons.platform.mac,
         },
       },
     },
@@ -151,9 +145,27 @@ lualine.setup {
       {
         'location',
         padding = { left = 0, right = 0 },
-        separator = { left = '', right = '' },
+        separator = {
+          left = icons.separator.rounded.left,
+          right = ''
+        },
+      },
+
+      {
+        'searchcount',
+        maxcount = 999,
+        timeout = 500,
+      },
+
+      {
+        'progress',
+        separator = {
+          left = ' ',
+          right = icons.separator.rounded.right,
+        },
       }
-    }
+
+    },
   },
 
   tabline = {},

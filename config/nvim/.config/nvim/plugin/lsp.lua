@@ -1,10 +1,16 @@
-require("mason").setup()
+local pluginLoader = require("util.pluginLoader")
+
+local mason = pluginLoader.load({ pluginName = "mason", enable = false })
+if mason == nil then return end
+
+local null_ls = pluginLoader.load({ pluginName = "null_ls", enable = false })
+if null_ls == nil then return end
+
+mason.setup()
 require("mason-null-ls").setup({
   ensure_installed = { "ruff" },
   automatic_installation = true,
 })
-
-local null_ls = require("null-ls")
 
 null_ls.setup({
   sources = {
@@ -20,4 +26,3 @@ null_ls.setup({
     -- null_ls.builtins.diagnostics.mypy,
   },
 })
-

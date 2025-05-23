@@ -94,6 +94,9 @@ map(mode.normal, '<C-j>', '<C-w>j', opts)
 map(mode.normal, '<C-k>', '<C-w>k', opts)
 map(mode.normal, '<C-l>', '<C-w>l', opts)
 
+------------------------------
+-- NerdCommenter
+map(mode.normal, '<Leader>/', '<Plug>NERDCommenterToggle', opts)
 
 ------------------------------
 -- Memo
@@ -105,6 +108,10 @@ map(mode.normal, '<Leader>mg', ':Telescope memo live_grep<CR>', opts)
 
 ------------------------------
 -- Cursor
+
+-- rainbowhxch/accelerated-jk.nvim' の設定
+-- map(mode.normal, 'j', '<Plug>(accelerated_jk_gj)', opts)
+-- map(mode.normal, 'k', '<Plug>(accelerated_jk_gk)', opts)
 
 -- Jump to the beginning of the line
 map(mode.normal_visual, '<Left>', '^', opts)

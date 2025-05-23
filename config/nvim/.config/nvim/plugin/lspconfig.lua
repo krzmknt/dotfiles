@@ -1,4 +1,10 @@
-local lspconfig = require("lspconfig")
+local pluginLoader = require("util.pluginLoader")
+local lspconfig = pluginLoader.load({ pluginName = "lspconfig", enable = false })
+if lspconfig == nil then return end
+
+---
+-- Lsp Config
+---
 
 lspconfig.efm.setup({
   init_options = {
@@ -119,8 +125,3 @@ vim.diagnostic.config({
     source = "always", -- Or "if_many"
   },
 })
-
-
-
-
-

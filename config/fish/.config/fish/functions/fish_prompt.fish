@@ -11,27 +11,40 @@ set right_half_circle ''
 # Prompt
 
 function fish_prompt
+    set_color $COLOR_YELLOW
+    printf '  '
+    set_color normal
+end
+
+function fish_right_prompt
+    set_color $COLOR_YELLOW
+    echo -n [$AWS_PROFILE]
+    set_color normal
+end
+
+function fish_prompt_old
     set last_status $status
 
     # Left top
     set_color $color_dark
-    printf '\n╭─'
+    # printf '\n╭─'
+    printf '\n '
     set_color normal
 
     # Prompt body
     _prompt_directory
-    _prompt_aws_profile
+    if [ $AWS_PROFILE ]
+        _prompt_aws_profile
+    end
     _prompt_username
     _prompt_git
 
     # Left_bottom
     set_color $color_dark
-    printf '\n╰─ '
+    # printf '\n╰─ '
+    set_color $COLOR_YELLOW
+    printf '\n  '
     set_color normal
-end
-
-function fish_right_prompt
-    ;
 end
 
 # ===============================================
@@ -76,7 +89,8 @@ end
 
 
 function _prompt_directory_body
-    prompt_pwd
+  # prompt_pwd
+  echo -n "🚀"
 end
 
 # ===============================================
@@ -100,7 +114,8 @@ end
 function _prompt_username_body
     # set --local host (hostname)
     # set --local host (command hostname 2> /dev/null | sed -e 's|\.local$||')
-    echo -n (whoami)@$(prompt_hostname)
+    echo -n  (whoami)@$(prompt_hostname)
+
 end
 
 # ===============================================
@@ -124,7 +139,7 @@ function _is_git_dirty
 end
 
 function _prompt_git_body
-    set --local git_branch (command git symbolic-ref HEAD 2> /dev/null | sed -e 's|^refs/heads/||')
+    set --local git_branch (command git symbolic-ref HEAD 2> /dev/null | sed -e 's|^refs/heads/||')
     echo -n $git_branch
 end
 
@@ -136,5 +151,5 @@ function _prompt_aws_profile
 end
 
 function _prompt_aws_profile_body
-    echo $AWS_PROFILE
+    echo "󰸏  $AWS_PROFILE"
 end

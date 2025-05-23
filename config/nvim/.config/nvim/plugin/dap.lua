@@ -1,4 +1,8 @@
-require("dap-vscode-js").setup({
+local pluginLoader = require("util.pluginLoader")
+local plugin = pluginLoader.load({ pluginName = "dap-vscode-js", enable = false })
+if plugin == nil then return end
+
+plugin.setup({
   -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
   -- debugger_path = "(runtimedir)/site/pack/packer/opt/vscode-js-debug", -- Path to vscode-js-debug installation.
   debugger_path = "/Users/krzmknt/ghq/github.com/microsoft/vscode-js-debug",                   -- Path to vscode-js-debug installation.

@@ -1,5 +1,8 @@
 fish_add_path /opt/homebrew/bin
 
+source ~/keys/openai
+source ~/keys/anthropic
+
 # ===========================
 # General
 # ---------------------------
@@ -80,21 +83,22 @@ alias cat   "bat"
 alias d     "docker"
 alias dc    "docker-compose"
 alias dcd   "dc down"
-alias nr   "npm run"
+alias nr    "npm run"
 alias dcl   "dc logs"
 alias dcu   "dc up --build -d"
 alias diff  "colordiff"
 alias dl    "docker ps -a"
 alias g     "git"
-alias gd     "git diff"
+alias gd    "git diff"
 alias ghw   "gh repo view --web"
-alias gl     "git log"
-alias gs     "git status"
+alias gl    "git log"
+alias gs    "git status"
 alias la    "eza -abBhHilS --git --icons"
 alias t     "todo.sh"
 alias v     "nvim"
 alias vi    "nvim"
 alias vim   "nvim"
+alias ws    "workspace"
 
 function check_git_dir
     if test -d .git
