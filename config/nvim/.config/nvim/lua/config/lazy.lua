@@ -472,15 +472,23 @@ require("lazy").setup({
             width = 50,
             side = "left",
             auto_resize = true,
-            -- mappings = {
-            --   list = {
-            --     { key = { "<C-e>", "<C-x>" }, action = "edit_in_place" },
-            --     { key = { "<C-t>" },          action = "tabnew" },
-            --     { key = { "<C-v>" },          action = "vsplit" },
-            --     { key = { "<C-s>" },          action = "split" },
-            --   }
-            -- }
-          }
+          },
+          on_attach = function(bufnr)
+            local api = require('nvim-tree.api')
+
+            local function opts(desc)
+              return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+            end
+
+            -- Default mappings
+            api.config.mappings.default_on_attach(bufnr)
+
+            -- Remove default 'f' mapping
+            vim.keymap.del('n', 'f', { buffer = bufnr })
+
+            -- Add Ctrl+f for filter
+            vim.keymap.set('n', '<C-f>', api.live_filter.start, opts('Start Live Filter'))
+          end
         })
       end
     },
