@@ -108,10 +108,10 @@ yabai -m config layout bsp
 # auto: The axis is determined based on width/height ratio.
 yabai -m config split_type
 
-padding=20
+padding=24
 
 # Padding added at the upper side of the selected space.
-yabai -m config top_padding $padding
+yabai -m config top_padding 0
 
 # Padding added at the lower side of the selected space.
 yabai -m config bottom_padding $padding
@@ -123,7 +123,7 @@ yabai -m config left_padding $padding
 yabai -m config right_padding $padding
 
 # Size of the gap that separates windows for the selected space.
-yabai -m config window_gap 20
+yabai -m config window_gap 24
 
 # Balance the window tree upon change, so that all windows occupy an equally sized area.
 yabai -m config auto_balance false
