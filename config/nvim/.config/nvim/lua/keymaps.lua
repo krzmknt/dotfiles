@@ -210,6 +210,18 @@ map(mode.normal, '<C-T>',
 map(mode.normal, 'gh', ':Gitsigns preview_hunk<CR>', opts)
 map(mode.normal, 'gj', ':Gitsigns next_hunk<CR>', opts)
 map(mode.normal, 'gk', ':Gitsigns prev_hunk<CR>', opts)
-map(mode.normal, '<Leader><Leader>', ':DiffviewOpen<CR>', opts)
+
+-- DiffView toggle function
+local function toggle_diffview()
+  local diffview_lib = require('diffview.lib')
+  local view = diffview_lib.get_current_view()
+  if view then
+    vim.cmd('DiffviewClose')
+  else
+    vim.cmd('DiffviewOpen')
+  end
+end
+
+map(mode.normal, '<Leader><Leader>', toggle_diffview, opts)
 map(mode.normal, '<Leader>c', ':DiffviewClose<CR>', opts)
 map(mode.normal, 'cc', ':CopilotChatToggle<CR>', opts)
