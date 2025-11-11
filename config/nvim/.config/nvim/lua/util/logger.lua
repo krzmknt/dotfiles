@@ -14,7 +14,7 @@ for level, _ in pairs(logger.levels) do
   max_level_length = math.max(max_level_length, #level)
 end
 
-logger.current_level = logger.levels.DEBUG
+logger.current_level = logger.levels.ERROR
 
 function logger.set_level(level)
   local lvl = logger.levels[level:upper()]

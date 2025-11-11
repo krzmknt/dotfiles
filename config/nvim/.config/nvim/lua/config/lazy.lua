@@ -390,6 +390,14 @@ require("lazy").setup({
       'lewis6991/gitsigns.nvim',
       dependencies = { 'nvim-lua/plenary.nvim' },
       config = function()
+        -- 優しくておしゃれな色設定
+        vim.api.nvim_set_hl(0, 'GitSignsAddInline', { bg = '#2d4a3e', fg = '#a8ddb5' })
+        vim.api.nvim_set_hl(0, 'GitSignsChangeInline', { bg = '#3d4057', fg = '#c8b8e8' })
+        vim.api.nvim_set_hl(0, 'GitSignsDeleteInline', { bg = '#4a2d3e', fg = '#e8b8c8' })
+        vim.api.nvim_set_hl(0, 'GitSignsAddLn', { bg = '#1a2e26' })
+        vim.api.nvim_set_hl(0, 'GitSignsChangeLn', { bg = '#1f1e33' })
+        vim.api.nvim_set_hl(0, 'GitSignsDeleteLn', { bg = '#2e1a26' })
+
         require('gitsigns').setup {
           signs                        = {
             add          = { text = '│' },
@@ -471,7 +479,6 @@ require("lazy").setup({
           view = {
             width = 50,
             side = "left",
-            auto_resize = true,
           },
           on_attach = function(bufnr)
             local api = require('nvim-tree.api')
@@ -488,6 +495,10 @@ require("lazy").setup({
 
             -- Add Ctrl+f for filter
             vim.keymap.set('n', '<C-f>', api.live_filter.start, opts('Start Live Filter'))
+
+            -- Add left/right arrow keys for collapse/expand
+            vim.keymap.set('n', '<Left>', api.node.navigate.parent_close, opts('Close Directory'))
+            vim.keymap.set('n', '<Right>', api.node.open.edit, opts('Open Directory'))
           end
         })
       end
@@ -652,5 +663,5 @@ require("lazy").setup({
   },
 
   install = { colorscheme = { "habamax" } },
-  checker = { enabled = true },
+  checker = { enabled = false },
 })

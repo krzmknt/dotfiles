@@ -62,6 +62,7 @@ fi
 # ===========================
 # Stow
 
+stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ claude
 stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ fish
 stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ hammerspoon
 stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ karabiner

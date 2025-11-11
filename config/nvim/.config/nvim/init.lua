@@ -123,9 +123,9 @@ local function configureOptions()
     -----------------------------
     -- Number column
     --
-    number         = true,  -- Show line numbers.
-    numberwidth    = 4,     -- Line number column width.
-    relativenumber = false, -- Show relative line numbers.
+    number         = true, -- Show line numbers.
+    numberwidth    = 4,    -- Line number column width.
+    relativenumber = true, -- Show relative line numbers.
 
 
     -----------------------------

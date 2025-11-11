@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "alwaysThinkingEnabled": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754060363654
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'IMPORTANT USER PREFERENCE: The user is studying English and wants to improve their writing. For every message from the user, FIRST correct any grammar mistakes and suggest more natural expressions, THEN respond to their actual question or request. This helps them learn English while working.'"
+          }
+        ]
+      }
+    ]
+  }
+}

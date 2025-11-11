@@ -126,7 +126,18 @@ end
 
 function config
   set plugin $argv[1]
-  vim ~/ghq/github.com/krzmknt/dotfiles/config/$plugin
+  set config_path ~/ghq/github.com/krzmknt/dotfiles/config/$plugin
+
+  # ディレクトリ配下のファイルを再帰的に取得（隠しファイルも含む）
+  set files (find $config_path -type f 2>/dev/null)
+  set file_count (count $files)
+
+  # ファイルが1つだけなら直接開く、複数またはゼロならディレクトリを開く
+  if test $file_count -eq 1
+    vim $files[1]
+  else
+    vim $config_path
+  end
 
   switch $plugin
     case fish
