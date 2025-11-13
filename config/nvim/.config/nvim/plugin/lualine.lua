@@ -90,14 +90,14 @@ lualine.setup {
           newfile = '[New]',      -- Text to show for newly created file before first write
         }
       },
-      { 'g:coc_status', 'bo:filetype' }
+      { 'bo:filetype' }
     },
 
     lualine_x = {
       {
         'diagnostics',
         color = { bg = 'null' },
-        sources = { 'coc' },
+        sources = { 'nvim_lsp' },
         symbols = {
           error = icons.diagnostic.error,
           warn = icons.diagnostic.warn,

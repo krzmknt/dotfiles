@@ -160,7 +160,6 @@ return {
           source = "if_many",
           -- Format function to remove duplicate messages
           format = function(diagnostic)
-            -- Only show the message once, not from each source
             return diagnostic.message
           end,
         },
@@ -176,12 +175,24 @@ return {
         update_in_insert = false,
         severity_sort = true,
         float = {
-          source = "always",  -- Show which tool reported the error
+          source = "always",
           border = "rounded",
           header = "",
           prefix = "",
         },
       })
+
+      -- Set diagnostic highlight colors to be more visible
+      vim.cmd([[
+        highlight DiagnosticError guifg=#E06C75 gui=bold
+        highlight DiagnosticWarn guifg=#E5C07B gui=bold
+        highlight DiagnosticInfo guifg=#61AFEF gui=bold
+        highlight DiagnosticHint guifg=#56B6C2 gui=bold
+        highlight DiagnosticVirtualTextError guifg=#E06C75 gui=bold
+        highlight DiagnosticVirtualTextWarn guifg=#E5C07B gui=bold
+        highlight DiagnosticVirtualTextInfo guifg=#61AFEF gui=bold
+        highlight DiagnosticVirtualTextHint guifg=#56B6C2 gui=bold
+      ]])
 
       -- Global settings
       vim.opt.updatetime = 300
