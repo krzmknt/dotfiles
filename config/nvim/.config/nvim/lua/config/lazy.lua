@@ -58,11 +58,7 @@ require("lazy").setup({
       'luckasRanarison/tailwind-tools.nvim',
       dependencies = { 'nvim-treesitter/nvim-treesitter' },
       build = ':UpdateRemotePlugins',
-      opts = {
-        server = {
-          override = false, -- coc.nvimを使用しているので、LSP設定は上書きしない
-        },
-      }
+      opts = {}  -- Use default settings with native LSP
     },
 
     --- ステータスラインをカスタマイズ
