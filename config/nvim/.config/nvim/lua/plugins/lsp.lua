@@ -39,8 +39,9 @@ return {
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 
-        -- Show documentation
-        vim.keymap.set("n", "?", vim.lsp.buf.hover, opts)
+        -- Show documentation (use K instead of ? to avoid conflict with search)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)  -- Alternative: gh
 
         -- Diagnostics navigation
         vim.keymap.set("n", "g<", vim.diagnostic.goto_prev, opts)
@@ -174,7 +175,7 @@ return {
 
       -- Global settings
       vim.opt.updatetime = 300
-      vim.opt.signcolumn = "yes"
+      vim.opt.signcolumn = "yes"  -- Show sign column (diagnostic icons will appear left of line numbers)
 
       -- User commands
       vim.api.nvim_create_user_command("Format", function()
