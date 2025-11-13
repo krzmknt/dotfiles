@@ -58,6 +58,16 @@ return {
           vim.lsp.buf.format({ async = true })
         end, opts)
 
+        -- Auto-format on save for TypeScript/JavaScript files
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.buf.format({ bufnr = bufnr })
+            end,
+          })
+        end
+
         -- Highlight symbol under cursor
         if client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
