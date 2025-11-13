@@ -13,6 +13,7 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "neovim/nvim-lspconfig",
+      "hrsh7th/cmp-nvim-lsp",  -- Need this for capabilities
     },
     config = function()
       require("mason-lspconfig").setup({
@@ -30,7 +31,8 @@ return {
       })
 
       -- Get capabilities for nvim-cmp integration
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+      local capabilities = has_cmp and cmp_nvim_lsp.default_capabilities() or vim.lsp.protocol.make_client_capabilities()
 
       -- Common on_attach function for keybindings
       local on_attach = function(client, bufnr)
@@ -78,7 +80,11 @@ return {
       end
 
       -- Setup handlers for all servers
-      require("mason-lspconfig").setup_handlers({
+      local mason_lspconfig = require("mason-lspconfig")
+
+      -- Check if setup_handlers exists (for compatibility)
+      if mason_lspconfig.setup_handlers then
+        mason_lspconfig.setup_handlers({
         -- Default handler for all servers
         function(server_name)
           require("lspconfig")[server_name].setup({
@@ -140,6 +146,16 @@ return {
           })
         end,
       })
+      else
+        -- Fallback: Manually setup servers if setup_handlers doesn't exist
+        local lspconfig = require("lspconfig")
+        for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
+          lspconfig[server_name].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+          })
+        end
+      end
 
       -- Diagnostic configuration
       vim.diagnostic.config({
