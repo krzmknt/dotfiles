@@ -52,6 +52,17 @@ require("lazy").setup({
       end
     },
 
+    --- Tailwind CSS クラスに色を付ける
+    --- @see https://github.com/roobert/tailwindcss-colorizer-cmp.nvim
+    {
+      'roobert/tailwindcss-colorizer-cmp.nvim',
+      config = function()
+        require('tailwindcss-colorizer-cmp').setup({
+          color_square_width = 2,
+        })
+      end
+    },
+
     --- ステータスラインをカスタマイズ
     --- @see https://github.com/nvim-lualine/lualine.nvim
     {
