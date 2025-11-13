@@ -157,8 +157,13 @@ return {
         severity_sort = true,
       })
 
-      -- Diagnostic signs (matching coc style)
-      local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "»" }
+      -- Diagnostic signs with Nerd Font icons
+      local signs = {
+        Error = "", -- Nerd Font icon
+        Warn = "",  -- Nerd Font icon
+        Hint = "",  -- Nerd Font icon
+        Info = ""   -- Nerd Font icon
+      }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
