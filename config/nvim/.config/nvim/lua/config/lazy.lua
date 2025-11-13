@@ -53,13 +53,14 @@ require("lazy").setup({
     },
 
     --- Tailwind CSS クラスに色を付ける
+    --- Temporarily disabled due to Neovim 0.11 compatibility issues
     --- @see https://github.com/luckasRanarison/tailwind-tools.nvim
-    {
-      'luckasRanarison/tailwind-tools.nvim',
-      dependencies = { 'nvim-treesitter/nvim-treesitter' },
-      build = ':UpdateRemotePlugins',
-      opts = {}  -- Use default settings with native LSP
-    },
+    -- {
+    --   'luckasRanarison/tailwind-tools.nvim',
+    --   dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    --   build = ':UpdateRemotePlugins',
+    --   opts = {}
+    -- },
 
     --- ステータスラインをカスタマイズ
     --- @see https://github.com/nvim-lualine/lualine.nvim
