@@ -40,21 +40,30 @@ return {
 
         -- Go to definition with tab drop (like coc.nvim)
         vim.keymap.set("n", "gd", function()
+          -- Save current position to jump list
+          vim.cmd("normal! m'")
+
           local params = vim.lsp.util.make_position_params()
           vim.lsp.buf_request(0, 'textDocument/definition', params, function(err, result, ctx, config)
             if err then
-              vim.notify("Error: " .. err.message, vim.log.levels.ERROR)
+              vim.notify("LSP Error: " .. tostring(err), vim.log.levels.ERROR)
               return
             end
+
             if not result or vim.tbl_isempty(result) then
-              vim.notify("No definition found", vim.log.levels.INFO)
+              vim.notify("No definition found", vim.log.levels.WARN)
               return
             end
 
             -- Handle both single result and array of results
-            local location = result[1] or result
+            local location = vim.tbl_islist(result) and result[1] or result
             local uri = location.uri or location.targetUri
             local range = location.range or location.targetRange
+
+            if not uri or not range then
+              vim.notify("Invalid definition location", vim.log.levels.ERROR)
+              return
+            end
 
             -- Convert URI to file path
             local fname = vim.uri_to_fname(uri)
@@ -65,11 +74,14 @@ return {
             -- Jump to the position
             local pos = range.start
             vim.api.nvim_win_set_cursor(0, {pos.line + 1, pos.character})
+
+            -- Center the screen on the cursor
+            vim.cmd("normal! zz")
           end)
         end, opts)
 
-        -- Show documentation (use K instead of ? to avoid conflict with search)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        -- Show documentation (override Vim's default ? backward search)
+        vim.keymap.set("n", "?", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)  -- Alternative: gh
 
         -- Diagnostics navigation
