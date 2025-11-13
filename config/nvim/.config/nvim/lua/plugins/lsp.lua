@@ -36,7 +36,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
     },
     config = function()
-      local lspconfig = require("lspconfig")
+      -- Get default capabilities for nvim-cmp integration
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- Common on_attach function for keybindings
@@ -84,81 +84,68 @@ return {
         end
       end
 
-      -- Lua
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
+      -- Use mason-lspconfig to automatically setup servers
+      require("mason-lspconfig").setup_handlers({
+        -- Default handler for all servers
+        function(server_name)
+          require("lspconfig")[server_name].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+          })
+        end,
+
+        -- Custom handler for Lua
+        ["lua_ls"] = function()
+          require("lspconfig").lua_ls.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = {
+              Lua = {
+                diagnostics = {
+                  globals = { "vim" },
+                },
+              },
             },
-          },
-        },
-      })
+          })
+        end,
 
-      -- Go
-      lspconfig.gopls.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      -- Bash
-      lspconfig.bashls.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      -- Python (using pyright instead of jedi/pylsp)
-      lspconfig.pyright.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          python = {
-            analysis = {
-              typeCheckingMode = "basic",
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
+        -- Custom handler for Python
+        ["pyright"] = function()
+          require("lspconfig").pyright.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = {
+              python = {
+                analysis = {
+                  typeCheckingMode = "basic",
+                  autoSearchPaths = true,
+                  useLibraryCodeForTypes = true,
+                },
+              },
             },
-          },
-        },
-      })
+          })
+        end,
 
-      -- Java
-      lspconfig.jdtls.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      -- Rust
-      lspconfig.rust_analyzer.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          ["rust-analyzer"] = {
-            checkOnSave = {
-              command = "clippy",
+        -- Custom handler for Rust
+        ["rust_analyzer"] = function()
+          require("lspconfig").rust_analyzer.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = {
+              ["rust-analyzer"] = {
+                checkOnSave = {
+                  command = "clippy",
+                },
+                cargo = {
+                  loadOutDirsFromCheck = true,
+                },
+                procMacro = {
+                  enable = true,
+                },
+              },
             },
-            cargo = {
-              loadOutDirsFromCheck = true,
-            },
-            procMacro = {
-              enable = true,
-            },
-          },
-        },
-      })
-
-      -- Tailwind CSS
-      lspconfig.tailwindcss.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      -- TypeScript/JavaScript
-      lspconfig.ts_ls.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
+          })
+        end,
       })
 
       -- Diagnostic configuration (matching coc behavior)
