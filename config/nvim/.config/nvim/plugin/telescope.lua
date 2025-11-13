@@ -12,6 +12,18 @@ local fb_actions = require "telescope".extensions.file_browser.actions
 
 telescope.setup {
   defaults = {
+    -- Ripgrep arguments for live_grep
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '--hidden',           -- Search in hidden files/directories
+      '--glob=!.git/',      -- Exclude .git directory
+    },
     mappings = {
       n = {
         ["q"] = actions.close,
@@ -97,11 +109,7 @@ vim.keymap.set('n', ';e', function()
 end)
 
 vim.keymap.set('n', ';r', function()
-  builtin.live_grep({
-    additional_args = function()
-      return { "--hidden" }
-    end
-  })
+  builtin.live_grep()
 end)
 
 -- vim.keymap.set("n", "sf", function()
