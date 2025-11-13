@@ -20,7 +20,7 @@ config.window_padding = {
   left = '10px',
   right = '10px',
   top = '10px',
-  bottom = '10px',
+  bottom = '5px',
 }
 config.window_decorations = "RESIZE"
 
