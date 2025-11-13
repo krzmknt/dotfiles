@@ -20,22 +20,16 @@ return {
     lazy = false,
     priority = 50,
     config = function()
-      print("[LSP] mason-lspconfig config function called")
-
       -- Get capabilities for nvim-cmp integration
       local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local capabilities = has_cmp and cmp_nvim_lsp.default_capabilities() or vim.lsp.protocol.make_client_capabilities()
 
       -- Common on_attach function for keybindings
       local on_attach = function(client, bufnr)
-        -- Debug: Confirm on_attach is called
-        print(string.format("[LSP] on_attach called for %s (buffer %d)", client.name, bufnr))
-
         local opts = { buffer = bufnr, silent = true }
 
         -- GoTo code navigation
         vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
-        print("[LSP] Set keymap: gy")
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
@@ -80,13 +74,10 @@ return {
             vim.cmd("normal! zz")
           end)
         end, opts)
-        print("[LSP] Set keymap: gd")
 
         -- Show documentation (override Vim's default ? backward search)
         vim.keymap.set("n", "?", vim.lsp.buf.hover, opts)
-        print("[LSP] Set keymap: ?")
         vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)  -- Alternative: gh
-        print("[LSP] Set keymap: gh")
 
         -- Diagnostics navigation
         vim.keymap.set("n", "g<", vim.diagnostic.goto_prev, opts)
@@ -118,12 +109,9 @@ return {
             callback = vim.lsp.buf.clear_references,
           })
         end
-
-        print(string.format("[LSP] on_attach completed for %s", client.name))
       end
 
       -- Setup mason-lspconfig
-      print("[LSP] About to call mason-lspconfig.setup()")
       local mason_lspconfig = require("mason-lspconfig")
 
       local ok, err = pcall(function()
@@ -146,24 +134,19 @@ return {
         vim.notify("[LSP] Error in mason-lspconfig.setup: " .. tostring(err), vim.log.levels.ERROR)
         return
       end
-      print("[LSP] mason-lspconfig setup completed successfully")
 
       -- Setup handlers for all installed servers
-      print("[LSP] About to call setup_handlers()")
       mason_lspconfig.setup_handlers({
         -- Default handler for all servers
         function(server_name)
-          print(string.format("[LSP] Setting up server: %s", server_name))
           require("lspconfig")[server_name].setup({
             capabilities = capabilities,
             on_attach = on_attach,
           })
-          print(string.format("[LSP] Server setup completed: %s", server_name))
         end,
 
         -- Custom handler for Lua
         ["lua_ls"] = function()
-          print("[LSP] Setting up server: lua_ls (custom)")
           require("lspconfig").lua_ls.setup({
             capabilities = capabilities,
             on_attach = on_attach,
@@ -179,7 +162,6 @@ return {
 
         -- Custom handler for Python
         ["pyright"] = function()
-          print("[LSP] Setting up server: pyright (custom)")
           require("lspconfig").pyright.setup({
             capabilities = capabilities,
             on_attach = on_attach,
@@ -197,7 +179,6 @@ return {
 
         -- Custom handler for Rust
         ["rust_analyzer"] = function()
-          print("[LSP] Setting up server: rust_analyzer (custom)")
           require("lspconfig").rust_analyzer.setup({
             capabilities = capabilities,
             on_attach = on_attach,
@@ -217,7 +198,6 @@ return {
           })
         end,
       })
-      print("[LSP] setup_handlers completed")
 
       -- Diagnostic configuration
       vim.diagnostic.config({
