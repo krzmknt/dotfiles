@@ -58,16 +58,6 @@ return {
           vim.lsp.buf.format({ async = true })
         end, opts)
 
-        -- Auto-format on save for TypeScript/JavaScript files
-        if client.supports_method("textDocument/formatting") then
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            callback = function()
-              vim.lsp.buf.format({ bufnr = bufnr })
-            end,
-          })
-        end
-
         -- Highlight symbol under cursor
         if client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
@@ -289,5 +279,55 @@ return {
     "L3MON4D3/LuaSnip",
     version = "v2.*",
     build = "make install_jsregexp",
+  },
+
+  -- none-ls: Formatter and Linter integration (null-ls successor)
+  {
+    "nvimtools/none-ls.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      local null_ls = require("null-ls")
+
+      null_ls.setup({
+        sources = {
+          -- Prettier for formatting
+          null_ls.builtins.formatting.prettierd.with({
+            filetypes = {
+              "javascript",
+              "javascriptreact",
+              "typescript",
+              "typescriptreact",
+              "vue",
+              "css",
+              "scss",
+              "less",
+              "html",
+              "json",
+              "jsonc",
+              "yaml",
+              "markdown",
+              "graphql",
+              "handlebars",
+            },
+          }),
+        },
+        on_attach = function(client, bufnr)
+          if client.supports_method("textDocument/formatting") then
+            -- Auto-format on save
+            local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              group = augroup,
+              buffer = bufnr,
+              callback = function()
+                vim.lsp.buf.format({ bufnr = bufnr })
+              end,
+            })
+          end
+        end,
+      })
+    end,
   },
 }
