@@ -16,6 +16,15 @@ return {
       "hrsh7th/cmp-nvim-lsp",  -- Need this for capabilities
     },
     config = function()
+      -- Suppress lspconfig deprecation warning for Neovim 0.11
+      -- The plugin will be updated eventually
+      local notify = vim.notify
+      vim.notify = function(msg, ...)
+        if msg:match("lspconfig.*deprecated") then
+          return
+        end
+        notify(msg, ...)
+      end
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",           -- Lua
@@ -193,6 +202,9 @@ return {
           apply = true,
         })
       end, {})
+
+      -- Restore original vim.notify
+      vim.notify = notify
     end,
   },
 
