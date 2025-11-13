@@ -154,24 +154,34 @@ return {
 
       -- Diagnostic configuration
       vim.diagnostic.config({
-        virtual_text = true,
-        signs = true,
+        virtual_text = {
+          spacing = 4,
+          prefix = "●",
+          source = "if_many",
+          -- Format function to remove duplicate messages
+          format = function(diagnostic)
+            -- Only show the message once, not from each source
+            return diagnostic.message
+          end,
+        },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.HINT] = "",
+            [vim.diagnostic.severity.INFO] = "",
+          },
+        },
         underline = true,
         update_in_insert = false,
         severity_sort = true,
+        float = {
+          source = "always",  -- Show which tool reported the error
+          border = "rounded",
+          header = "",
+          prefix = "",
+        },
       })
-
-      -- Diagnostic signs with Nerd Font icons
-      local signs = {
-        Error = "", -- Nerd Font icon
-        Warn = "",  -- Nerd Font icon
-        Hint = "",  -- Nerd Font icon
-        Info = ""   -- Nerd Font icon
-      }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
 
       -- Global settings
       vim.opt.updatetime = 300
