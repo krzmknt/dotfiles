@@ -148,7 +148,8 @@ return {
             },
           })
         end,
-      })
+      },  -- Close handlers table
+    })    -- Close setup() call
 
       -- Diagnostic configuration
       vim.diagnostic.config({
