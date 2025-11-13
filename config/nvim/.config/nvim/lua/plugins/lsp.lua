@@ -22,15 +22,6 @@ return {
     config = function()
       print("[LSP] mason-lspconfig config function called")
 
-      -- Suppress lspconfig deprecation warning for Neovim 0.11
-      -- The plugin will be updated eventually
-      local notify = vim.notify
-      vim.notify = function(msg, ...)
-        if msg:match("lspconfig.*deprecated") then
-          return
-        end
-        notify(msg, ...)
-      end
       -- Get capabilities for nvim-cmp integration
       local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local capabilities = has_cmp and cmp_nvim_lsp.default_capabilities() or vim.lsp.protocol.make_client_capabilities()
@@ -132,7 +123,9 @@ return {
       end
 
       -- Setup mason-lspconfig with handlers passed directly to setup()
-      require("mason-lspconfig").setup({
+      print("[LSP] About to call mason-lspconfig.setup()")
+      local ok, err = pcall(function()
+        require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",           -- Lua
           "gopls",            -- Go
@@ -207,9 +200,15 @@ return {
             },
           })
         end,
-      },  -- Close handlers table
-    })    -- Close setup() call
-      print("[LSP] mason-lspconfig setup completed")
+        },  -- Close handlers table
+      })    -- Close setup() call
+      end)
+
+      if not ok then
+        vim.notify("[LSP] Error in mason-lspconfig.setup: " .. tostring(err), vim.log.levels.ERROR)
+      else
+        print("[LSP] mason-lspconfig setup completed successfully")
+      end
 
       -- Diagnostic configuration
       vim.diagnostic.config({
@@ -268,9 +267,6 @@ return {
           apply = true,
         })
       end, {})
-
-      -- Restore original vim.notify
-      vim.notify = notify
     end,
   },
 
