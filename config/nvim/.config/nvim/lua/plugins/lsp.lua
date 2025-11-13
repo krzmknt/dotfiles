@@ -89,11 +89,7 @@ return {
       end
 
       -- Setup handlers for all servers
-      local mason_lspconfig = require("mason-lspconfig")
-
-      -- Check if setup_handlers exists (for compatibility)
-      if mason_lspconfig.setup_handlers then
-        mason_lspconfig.setup_handlers({
+      require("mason-lspconfig").setup_handlers({
         -- Default handler for all servers
         function(server_name)
           require("lspconfig")[server_name].setup({
@@ -155,16 +151,6 @@ return {
           })
         end,
       })
-      else
-        -- Fallback: Manually setup servers if setup_handlers doesn't exist
-        local lspconfig = require("lspconfig")
-        for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
-          lspconfig[server_name].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-          })
-        end
-      end
 
       -- Diagnostic configuration
       vim.diagnostic.config({
