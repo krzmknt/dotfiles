@@ -53,14 +53,13 @@ require("lazy").setup({
     },
 
     --- Tailwind CSS クラスに色を付ける
-    --- @see https://github.com/roobert/tailwindcss-colorizer-cmp.nvim
+    --- @see https://github.com/luckasRanarison/tailwind-tools.nvim
     {
-      'roobert/tailwindcss-colorizer-cmp.nvim',
-      config = function()
-        require('tailwindcss-colorizer-cmp').setup({
-          color_square_width = 2,
-        })
-      end
+      'luckasRanarison/tailwind-tools.nvim',
+      dependencies = { 'nvim-treesitter/nvim-treesitter' },
+      opts = {
+        -- カスタム設定はここに追加できます
+      }
     },
 
     --- ステータスラインをカスタマイズ
