@@ -89,7 +89,17 @@ return {
       end
 
       -- Setup handlers for all servers
-      require("mason-lspconfig").setup_handlers({
+      local mason_lspconfig = require("mason-lspconfig")
+
+      -- Debug: Check what functions are available
+      if not mason_lspconfig.setup_handlers then
+        vim.notify("Error: mason-lspconfig.setup_handlers not found. Available functions: " ..
+                   vim.inspect(vim.tbl_keys(mason_lspconfig)), vim.log.levels.ERROR)
+        vim.notify("Skipping LSP server setup. Please update mason-lspconfig.nvim", vim.log.levels.ERROR)
+        return
+      end
+
+      mason_lspconfig.setup_handlers({
         -- Default handler for all servers
         function(server_name)
           require("lspconfig")[server_name].setup({
