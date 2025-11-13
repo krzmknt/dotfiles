@@ -122,10 +122,12 @@ return {
         print(string.format("[LSP] on_attach completed for %s", client.name))
       end
 
-      -- Setup mason-lspconfig with handlers passed directly to setup()
+      -- Setup mason-lspconfig
       print("[LSP] About to call mason-lspconfig.setup()")
+      local mason_lspconfig = require("mason-lspconfig")
+
       local ok, err = pcall(function()
-        require("mason-lspconfig").setup({
+        mason_lspconfig.setup({
         ensure_installed = {
           "lua_ls",           -- Lua
           "gopls",            -- Go
@@ -137,7 +139,18 @@ return {
           "ts_ls",            -- TypeScript/JavaScript
         },
         automatic_installation = true,
-        handlers = {
+      })    -- Close setup() call
+      end)
+
+      if not ok then
+        vim.notify("[LSP] Error in mason-lspconfig.setup: " .. tostring(err), vim.log.levels.ERROR)
+        return
+      end
+      print("[LSP] mason-lspconfig setup completed successfully")
+
+      -- Setup handlers for all installed servers
+      print("[LSP] About to call setup_handlers()")
+      mason_lspconfig.setup_handlers({
         -- Default handler for all servers
         function(server_name)
           print(string.format("[LSP] Setting up server: %s", server_name))
@@ -150,6 +163,7 @@ return {
 
         -- Custom handler for Lua
         ["lua_ls"] = function()
+          print("[LSP] Setting up server: lua_ls (custom)")
           require("lspconfig").lua_ls.setup({
             capabilities = capabilities,
             on_attach = on_attach,
@@ -165,6 +179,7 @@ return {
 
         -- Custom handler for Python
         ["pyright"] = function()
+          print("[LSP] Setting up server: pyright (custom)")
           require("lspconfig").pyright.setup({
             capabilities = capabilities,
             on_attach = on_attach,
@@ -182,6 +197,7 @@ return {
 
         -- Custom handler for Rust
         ["rust_analyzer"] = function()
+          print("[LSP] Setting up server: rust_analyzer (custom)")
           require("lspconfig").rust_analyzer.setup({
             capabilities = capabilities,
             on_attach = on_attach,
@@ -200,15 +216,8 @@ return {
             },
           })
         end,
-        },  -- Close handlers table
-      })    -- Close setup() call
-      end)
-
-      if not ok then
-        vim.notify("[LSP] Error in mason-lspconfig.setup: " .. tostring(err), vim.log.levels.ERROR)
-      else
-        print("[LSP] mason-lspconfig setup completed successfully")
-      end
+      })
+      print("[LSP] setup_handlers completed")
 
       -- Diagnostic configuration
       vim.diagnostic.config({
