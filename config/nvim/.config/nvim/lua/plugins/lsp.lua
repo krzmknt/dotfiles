@@ -37,7 +37,36 @@ return {
         vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+
+        -- Go to definition with tab drop (like coc.nvim)
+        vim.keymap.set("n", "gd", function()
+          local params = vim.lsp.util.make_position_params()
+          vim.lsp.buf_request(0, 'textDocument/definition', params, function(err, result, ctx, config)
+            if err then
+              vim.notify("Error: " .. err.message, vim.log.levels.ERROR)
+              return
+            end
+            if not result or vim.tbl_isempty(result) then
+              vim.notify("No definition found", vim.log.levels.INFO)
+              return
+            end
+
+            -- Handle both single result and array of results
+            local location = result[1] or result
+            local uri = location.uri or location.targetUri
+            local range = location.range or location.targetRange
+
+            -- Convert URI to file path
+            local fname = vim.uri_to_fname(uri)
+
+            -- Use tab drop to open in a tab (or switch to existing tab)
+            vim.cmd("tab drop " .. vim.fn.fnameescape(fname))
+
+            -- Jump to the position
+            local pos = range.start
+            vim.api.nvim_win_set_cursor(0, {pos.line + 1, pos.character})
+          end)
+        end, opts)
 
         -- Show documentation (use K instead of ? to avoid conflict with search)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
