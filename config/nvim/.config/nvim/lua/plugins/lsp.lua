@@ -2,6 +2,8 @@ return {
   -- Mason: LSP installer
   {
     "williamboman/mason.nvim",
+    lazy = false,
+    priority = 100,
     config = function()
       require("mason").setup()
     end,
@@ -15,7 +17,11 @@ return {
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",  -- Need this for capabilities
     },
+    lazy = false,
+    priority = 50,
     config = function()
+      print("[LSP] mason-lspconfig config function called")
+
       -- Suppress lspconfig deprecation warning for Neovim 0.11
       -- The plugin will be updated eventually
       local notify = vim.notify
@@ -31,10 +37,14 @@ return {
 
       -- Common on_attach function for keybindings
       local on_attach = function(client, bufnr)
+        -- Debug: Confirm on_attach is called
+        print(string.format("[LSP] on_attach called for %s (buffer %d)", client.name, bufnr))
+
         local opts = { buffer = bufnr, silent = true }
 
         -- GoTo code navigation
         vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
+        print("[LSP] Set keymap: gy")
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
@@ -79,10 +89,13 @@ return {
             vim.cmd("normal! zz")
           end)
         end, opts)
+        print("[LSP] Set keymap: gd")
 
         -- Show documentation (override Vim's default ? backward search)
         vim.keymap.set("n", "?", vim.lsp.buf.hover, opts)
+        print("[LSP] Set keymap: ?")
         vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)  -- Alternative: gh
+        print("[LSP] Set keymap: gh")
 
         -- Diagnostics navigation
         vim.keymap.set("n", "g<", vim.diagnostic.goto_prev, opts)
@@ -114,6 +127,8 @@ return {
             callback = vim.lsp.buf.clear_references,
           })
         end
+
+        print(string.format("[LSP] on_attach completed for %s", client.name))
       end
 
       -- Setup mason-lspconfig with handlers passed directly to setup()
@@ -132,10 +147,12 @@ return {
         handlers = {
         -- Default handler for all servers
         function(server_name)
+          print(string.format("[LSP] Setting up server: %s", server_name))
           require("lspconfig")[server_name].setup({
             capabilities = capabilities,
             on_attach = on_attach,
           })
+          print(string.format("[LSP] Server setup completed: %s", server_name))
         end,
 
         -- Custom handler for Lua
@@ -192,6 +209,7 @@ return {
         end,
       },  -- Close handlers table
     })    -- Close setup() call
+      print("[LSP] mason-lspconfig setup completed")
 
       -- Diagnostic configuration
       vim.diagnostic.config({
@@ -336,6 +354,7 @@ return {
   -- none-ls: Formatter and Linter integration (null-ls successor)
   {
     "nvimtools/none-ls.nvim",
+    lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
