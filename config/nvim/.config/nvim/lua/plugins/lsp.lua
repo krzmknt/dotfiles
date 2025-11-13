@@ -10,7 +10,10 @@ return {
   -- Mason-lspconfig: Bridge between mason and lspconfig
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
@@ -25,38 +28,28 @@ return {
         },
         automatic_installation = true,
       })
-    end,
-  },
 
-  -- LSP Config
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-    },
-    config = function()
-      -- Get default capabilities for nvim-cmp integration
+      -- Get capabilities for nvim-cmp integration
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- Common on_attach function for keybindings
       local on_attach = function(client, bufnr)
         local opts = { buffer = bufnr, silent = true }
 
-        -- GoTo code navigation (matching your coc config)
+        -- GoTo code navigation
         vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 
-        -- Show documentation (matching your '?' key)
+        -- Show documentation
         vim.keymap.set("n", "?", vim.lsp.buf.hover, opts)
 
-        -- Diagnostics navigation (matching your g< and g>)
+        -- Diagnostics navigation
         vim.keymap.set("n", "g<", vim.diagnostic.goto_prev, opts)
         vim.keymap.set("n", "g>", vim.diagnostic.goto_next, opts)
 
-        -- Rename (matching your <leader>rn)
+        -- Rename
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
         -- Code action
@@ -67,7 +60,7 @@ return {
           vim.lsp.buf.format({ async = true })
         end, opts)
 
-        -- Highlight symbol under cursor (matching your CursorHold behavior)
+        -- Highlight symbol under cursor
         if client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
           vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
@@ -84,7 +77,7 @@ return {
         end
       end
 
-      -- Use mason-lspconfig to automatically setup servers
+      -- Setup handlers for all servers
       require("mason-lspconfig").setup_handlers({
         -- Default handler for all servers
         function(server_name)
@@ -148,7 +141,7 @@ return {
         end,
       })
 
-      -- Diagnostic configuration (matching coc behavior)
+      -- Diagnostic configuration
       vim.diagnostic.config({
         virtual_text = true,
         signs = true,
@@ -169,11 +162,11 @@ return {
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
 
-      -- Global settings (matching your coc config)
+      -- Global settings
       vim.opt.updatetime = 300
       vim.opt.signcolumn = "yes"
 
-      -- User commands (matching your :Format, :OR commands)
+      -- User commands
       vim.api.nvim_create_user_command("Format", function()
         vim.lsp.buf.format({ async = true })
       end, {})
