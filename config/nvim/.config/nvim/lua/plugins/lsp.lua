@@ -28,6 +28,12 @@ return {
       local on_attach = function(client, bufnr)
         local opts = { buffer = bufnr, silent = true }
 
+        -- Define diagnostic signs with icons every time LSP attaches
+        vim.fn.sign_define("DiagnosticSignError", { texthl = "DiagnosticSignError", text = "", numhl = "" })
+        vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = "", numhl = "" })
+        vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "" })
+        vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "", numhl = "" })
+
         -- GoTo code navigation
         vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
@@ -226,25 +232,6 @@ return {
           prefix = "",
         },
       })
-
-      -- Define diagnostic signs with icons
-      -- Wrap in vim.schedule to ensure it runs after diagnostic system is initialized
-      vim.schedule(function()
-        local signs = {
-          { name = "DiagnosticSignError", text = "" },
-          { name = "DiagnosticSignWarn",  text = "" },
-          { name = "DiagnosticSignHint",  text = "" },
-          { name = "DiagnosticSignInfo",  text = "" },
-        }
-
-        for _, sign in ipairs(signs) do
-          vim.fn.sign_define(sign.name, {
-            texthl = sign.name,
-            text = sign.text,
-            numhl = ""
-          })
-        end
-      end)
 
       -- Set diagnostic highlight colors to be more visible
       vim.cmd([[
