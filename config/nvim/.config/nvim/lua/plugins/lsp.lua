@@ -228,20 +228,23 @@ return {
       })
 
       -- Define diagnostic signs with icons
-      local signs = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn",  text = "" },
-        { name = "DiagnosticSignHint",  text = "" },
-        { name = "DiagnosticSignInfo",  text = "" },
-      }
+      -- Wrap in vim.schedule to ensure it runs after diagnostic system is initialized
+      vim.schedule(function()
+        local signs = {
+          { name = "DiagnosticSignError", text = "" },
+          { name = "DiagnosticSignWarn",  text = "" },
+          { name = "DiagnosticSignHint",  text = "" },
+          { name = "DiagnosticSignInfo",  text = "" },
+        }
 
-      for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, {
-          texthl = sign.name,
-          text = sign.text,
-          numhl = ""
-        })
-      end
+        for _, sign in ipairs(signs) do
+          vim.fn.sign_define(sign.name, {
+            texthl = sign.name,
+            text = sign.text,
+            numhl = ""
+          })
+        end
+      end)
 
       -- Set diagnostic highlight colors to be more visible
       vim.cmd([[
