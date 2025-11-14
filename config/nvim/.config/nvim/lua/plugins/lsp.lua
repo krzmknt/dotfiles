@@ -262,13 +262,15 @@ return {
             source = "always",
             prefix = " ",
             scope = "cursor",
+            -- Make background transparent to show only the rounded border
+            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
           }
           vim.diagnostic.open_float(nil, opts)
         end
       })
 
       -- Global settings
-      vim.opt.updatetime = 300
+      vim.opt.updatetime = 100  -- Changed to 100ms for faster popup display
       vim.opt.signcolumn = "yes"  -- Show sign column (diagnostic icons will appear left of line numbers)
 
       -- User commands

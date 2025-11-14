@@ -200,7 +200,7 @@ local function configureOptions()
     conceallevel  = 0,    -- Don't hide any text.
     title         = true, -- Set the window title.
     timeoutlen    = 300,  -- Time to wait for a mapped sequence to complete.
-    updatetime    = 300,  -- Time to wait in milliseconds for writing swap file.
+    updatetime    = 100,  -- Time to wait in milliseconds for writing swap file.
 
     --- Shortmess options:
     -- t: Truncate long messages.
