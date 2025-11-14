@@ -262,6 +262,21 @@ return {
         highlight DiagnosticSignHint guifg=#56B6C2 gui=bold
       ]])
 
+      -- Show diagnostics in floating window on CursorHold
+      vim.api.nvim_create_autocmd("CursorHold", {
+        callback = function()
+          local opts = {
+            focusable = false,
+            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+            border = "rounded",
+            source = "always",
+            prefix = " ",
+            scope = "cursor",
+          }
+          vim.diagnostic.open_float(nil, opts)
+        end
+      })
+
       -- Global settings
       vim.opt.updatetime = 300
       vim.opt.signcolumn = "yes"  -- Show sign column (diagnostic icons will appear left of line numbers)
