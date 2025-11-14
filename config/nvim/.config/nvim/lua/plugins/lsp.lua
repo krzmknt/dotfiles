@@ -230,7 +230,7 @@ return {
         severity_sort = true,
         float = {
           source = "always",
-          border = "rounded",
+          border = "none",
           header = "",
           prefix = "",
         },
@@ -258,12 +258,10 @@ return {
           local opts = {
             focusable = false,
             close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-            border = "rounded",
+            border = "none",
             source = "always",
             prefix = " ",
             scope = "cursor",
-            -- Make background transparent to show only the rounded border
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
           }
           vim.diagnostic.open_float(nil, opts)
         end
@@ -340,8 +338,13 @@ return {
           { name = "path" },
         }),
         window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
+          completion = {
+            border = "none",
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+          },
+          documentation = {
+            border = "none",
+          },
         },
       })
 
