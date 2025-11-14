@@ -117,7 +117,7 @@ local function configureOptions()
     -----------------------------
     -- Sign Column
     --
-    signcolumn = 'auto', -- Always show the sign column.
+    signcolumn = 'yes', -- Always show the sign column.
 
 
     -----------------------------
