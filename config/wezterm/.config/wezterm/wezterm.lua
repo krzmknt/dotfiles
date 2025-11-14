@@ -17,10 +17,10 @@ config.default_cursor_style = 'SteadyBar'
 -----------------------------
 config.adjust_window_size_when_changing_font_size = false
 config.window_padding = {
-  left = '10px',
-  right = '10px',
-  top = '10px',
-  bottom = '5px',
+  left =5,
+  right = 5,
+  top = 5,
+  bottom = 5,sss
 }
 config.window_decorations = "RESIZE"
 

@@ -127,16 +127,7 @@ return {
           "ts_ls",            -- TypeScript/JavaScript
         },
         automatic_installation = true,
-      })    -- Close setup() call
-      end)
-
-      if not ok then
-        vim.notify("[LSP] Error in mason-lspconfig.setup: " .. tostring(err), vim.log.levels.ERROR)
-        return
-      end
-
-      -- Setup handlers for all installed servers
-      mason_lspconfig.setup_handlers({
+        handlers = {
         -- Default handler for all servers
         function(server_name)
           require("lspconfig")[server_name].setup({
@@ -197,7 +188,14 @@ return {
             },
           })
         end,
-      })
+        },  -- Close handlers
+      })    -- Close setup()
+      end)  -- Close pcall
+
+      if not ok then
+        vim.notify("[LSP] Error in mason-lspconfig.setup: " .. tostring(err), vim.log.levels.ERROR)
+        return
+      end
 
       -- Diagnostic configuration
       vim.diagnostic.config({
@@ -229,6 +227,22 @@ return {
         },
       })
 
+      -- Define diagnostic signs with icons
+      local signs = {
+        { name = "DiagnosticSignError", text = "" },
+        { name = "DiagnosticSignWarn",  text = "" },
+        { name = "DiagnosticSignHint",  text = "" },
+        { name = "DiagnosticSignInfo",  text = "" },
+      }
+
+      for _, sign in ipairs(signs) do
+        vim.fn.sign_define(sign.name, {
+          texthl = sign.name,
+          text = sign.text,
+          numhl = ""
+        })
+      end
+
       -- Set diagnostic highlight colors to be more visible
       vim.cmd([[
         highlight DiagnosticError guifg=#E06C75 gui=bold
@@ -239,6 +253,10 @@ return {
         highlight DiagnosticVirtualTextWarn guifg=#E5C07B gui=bold
         highlight DiagnosticVirtualTextInfo guifg=#61AFEF gui=bold
         highlight DiagnosticVirtualTextHint guifg=#56B6C2 gui=bold
+        highlight DiagnosticSignError guifg=#E06C75 gui=bold
+        highlight DiagnosticSignWarn guifg=#E5C07B gui=bold
+        highlight DiagnosticSignInfo guifg=#61AFEF gui=bold
+        highlight DiagnosticSignHint guifg=#56B6C2 gui=bold
       ]])
 
       -- Global settings
