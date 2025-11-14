@@ -126,6 +126,7 @@ local function configureOptions()
     number         = true, -- Show line numbers.
     numberwidth    = 4,    -- Line number column width.
     relativenumber = true, -- Show relative line numbers.
+    statuscolumn   = "%=%{v:relnum?v:relnum:v:lnum} %s", -- Right-align line numbers and show signs.
 
 
     -----------------------------
