@@ -208,15 +208,7 @@ return {
 
       -- Diagnostic configuration
       vim.diagnostic.config({
-        virtual_text = {
-          spacing = 4,
-          prefix = "●",
-          source = "if_many",
-          -- Format function to remove duplicate messages
-          format = function(diagnostic)
-            return diagnostic.message
-          end,
-        },
+        virtual_text = false,  -- Disable inline diagnostic messages
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = icons.diagnostic.error,
