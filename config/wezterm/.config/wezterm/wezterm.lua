@@ -68,7 +68,7 @@ config.hide_mouse_cursor_when_typing = true
 -----------------------------
 config.font_size = 12
 config.font = wezterm.font_with_fallback({
-  "JetBrainsMono Nerd Font",
+  "JetBrainsMonoNerdFont",
   "Noto Sans CJK JP", -- FallBack fonts
   "Noto Serif CJK JP",
 })
