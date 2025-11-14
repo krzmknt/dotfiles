@@ -71,7 +71,7 @@ lualine.setup {
     lualine_c = {
       {
         'filename',
-        color = { bg = 'null' },
+        color = { bg = colors.none },
         padding = { left = 1, right = 1 },
         file_status = true,     -- Displays file status (readonly status, modified status)
         newfile_status = false, -- Display new file status (new file means no write after created)
@@ -90,13 +90,16 @@ lualine.setup {
           newfile = '[New]',      -- Text to show for newly created file before first write
         }
       },
-      { 'bo:filetype' }
+      {
+        'bo:filetype',
+        color = { bg = colors.none }
+      }
     },
 
     lualine_x = {
       {
         'diagnostics',
-        color = { bg = 'null' },
+        color = { bg = colors.none },
         sources = { 'nvim_lsp' },
         symbols = {
           error = icons.diagnostic.error,
