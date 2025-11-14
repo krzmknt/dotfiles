@@ -78,6 +78,9 @@ vim.api.nvim_set_hl(0, "DiffChange", { bg = colors.none })
 vim.api.nvim_set_hl(0, "IblScope", { fg = colors.purple }) -- Set your desired color
 
 
+-- Comment color (ensure comments are not white)
+vim.api.nvim_set_hl(0, 'Comment', { fg = colors.light_grey, italic = true })
+
 -- coc
 
 -- エラーに波線を適用
