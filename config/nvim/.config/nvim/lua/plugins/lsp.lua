@@ -24,15 +24,18 @@ return {
       local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local capabilities = has_cmp and cmp_nvim_lsp.default_capabilities() or vim.lsp.protocol.make_client_capabilities()
 
+      -- Load icons from util.icons (same as lualine)
+      local icons = require("util.icons")
+
       -- Common on_attach function for keybindings
       local on_attach = function(client, bufnr)
         local opts = { buffer = bufnr, silent = true }
 
         -- Define diagnostic signs with icons every time LSP attaches
-        vim.fn.sign_define("DiagnosticSignError", { texthl = "DiagnosticSignError", text = "", numhl = "" })
-        vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = "", numhl = "" })
-        vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "" })
-        vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "", numhl = "" })
+        vim.fn.sign_define("DiagnosticSignError", { texthl = "DiagnosticSignError", text = icons.diagnostic.error, numhl = "" })
+        vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = icons.diagnostic.warn, numhl = "" })
+        vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = icons.diagnostic.hint, numhl = "" })
+        vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = icons.diagnostic.info, numhl = "" })
 
         -- GoTo code navigation
         vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
@@ -216,10 +219,10 @@ return {
         },
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = "",
-            [vim.diagnostic.severity.WARN] = "",
-            [vim.diagnostic.severity.HINT] = "",
-            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.ERROR] = icons.diagnostic.error,
+            [vim.diagnostic.severity.WARN] = icons.diagnostic.warn,
+            [vim.diagnostic.severity.HINT] = icons.diagnostic.hint,
+            [vim.diagnostic.severity.INFO] = icons.diagnostic.info,
           },
         },
         underline = true,
