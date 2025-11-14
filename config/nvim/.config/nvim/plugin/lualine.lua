@@ -9,7 +9,7 @@ if lualine == nil then return end
 local theme = {
   normal = {
     a = { fg = colors.white, bg = colors.dark_cyan },
-    b = { fg = colors.white, bg = colors.grey },
+    b = { fg = colors.white, bg = colors.none },
     c = { fg = colors.light_grey, bg = colors.none },
   },
 
