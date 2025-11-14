@@ -100,7 +100,13 @@ return {
 
         -- Format
         vim.keymap.set("n", "<leader>f", function()
-          vim.lsp.buf.format({ async = true })
+          vim.lsp.buf.format({
+            async = true,
+            filter = function(client)
+              -- Prefer null-ls for formatting
+              return client.name == "null-ls"
+            end,
+          })
         end, opts)
 
         -- Highlight symbol under cursor
@@ -265,7 +271,13 @@ return {
 
       -- User commands
       vim.api.nvim_create_user_command("Format", function()
-        vim.lsp.buf.format({ async = true })
+        vim.lsp.buf.format({
+          async = true,
+          filter = function(client)
+            -- Prefer null-ls for formatting
+            return client.name == "null-ls"
+          end,
+        })
       end, {})
 
       vim.api.nvim_create_user_command("OR", function()
@@ -394,14 +406,20 @@ return {
         },
         on_attach = function(client, bufnr)
           if client.supports_method("textDocument/formatting") then
-            -- Auto-format on save
+            -- Auto-format on save (only use null-ls/none-ls formatters)
             local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
             vim.api.nvim_create_autocmd("BufWritePre", {
               group = augroup,
               buffer = bufnr,
               callback = function()
-                vim.lsp.buf.format({ bufnr = bufnr })
+                vim.lsp.buf.format({
+                  bufnr = bufnr,
+                  filter = function(formatting_client)
+                    -- Only use null-ls for formatting
+                    return formatting_client.name == "null-ls"
+                  end,
+                })
               end,
             })
           end
