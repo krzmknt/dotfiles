@@ -1,8 +1,12 @@
 local wezterm = require 'wezterm'
 local config = {}
 
+
+
+
+
 if wezterm.config_builder then
-  config = wezterm.config_builder()
+          config = wezterm.config_builder()
 end
 
 -----------------------------
@@ -17,10 +21,10 @@ config.default_cursor_style = 'SteadyBar'
 -----------------------------
 config.adjust_window_size_when_changing_font_size = false
 config.window_padding = {
-  left =5,
+  left = 5,
   right = 5,
   top = 5,
-  bottom = 5,sss
+  bottom = 5,
 }
 config.window_decorations = "RESIZE"
 
