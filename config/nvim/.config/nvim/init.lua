@@ -124,7 +124,7 @@ local function configureOptions()
     -- Number column
     --
     number         = true, -- Show line numbers.
-    numberwidth    = 4,    -- Line number column width.
+    numberwidth    = 1,    -- Minimum width (auto-expands as needed).
     relativenumber = true, -- Show relative line numbers.
     statuscolumn   = "%s%=%{v:relnum?v:relnum:v:lnum} ", -- Show signs (left) and right-align line numbers.
 
@@ -302,6 +302,40 @@ configureAutocommands()
 
 
 -----------------------------
+-- Show column number at the end of current line
+--
+
+local col_ns = vim.api.nvim_create_namespace('column_display')
+
+local function show_column_number()
+  -- Clear previous virtual text
+  vim.api.nvim_buf_clear_namespace(0, col_ns, 0, -1)
+
+  -- Get current position
+  local line = vim.fn.line('.') - 1  -- 0-indexed
+  local col = vim.fn.col('.')
+
+  -- Get window width
+  local win_width = vim.api.nvim_win_get_width(0)
+
+  -- Calculate position (right edge, accounting for scrollbar)
+  local col_text = string.format('[%d]', col)
+  local pos = win_width - #col_text - 6  -- 6 chars padding to avoid scrollbar
+
+  -- Add virtual text at the right edge of window
+  vim.api.nvim_buf_set_extmark(0, col_ns, line, 0, {
+    virt_text = {{ col_text, 'LineNr' }},  -- Use LineNr highlight (not italic)
+    virt_text_win_col = pos,  -- Position at right edge
+  })
+end
+
+-- Update on cursor move
+vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+  callback = show_column_number,
+})
+
+
+-----------------------------
 -- Plugins
 --
 
@@ -329,43 +363,69 @@ vim.g.NERDDefaultAlign           = "left"
 
 -----------------------------
 -- Tab label configuration
--- Show 3 characters per directory level instead of 1
+-- Fancy tabline with icons, colors, and indicators
+
+function _G.get_file_icon(filename)
+  -- Get devicons if available
+  local has_devicons, devicons = pcall(require, 'nvim-web-devicons')
+  if has_devicons and filename ~= '' then
+    local icon, icon_color = devicons.get_icon(filename, vim.fn.fnamemodify(filename, ':e'), { default = true })
+    return icon or '', icon_color
+  end
+  return '', nil
+end
 
 function _G.custom_tablabel(n)
   local buflist = vim.fn.tabpagebuflist(n)
   local winnr = vim.fn.tabpagewinnr(n)
   local bufnr = buflist[winnr]
   local filepath = vim.fn.bufname(bufnr)
+  local is_modified = vim.fn.getbufvar(bufnr, "&modified") == 1
 
+  -- Get filename
+  local filename = ''
   if filepath == '' then
-    return '[No Name]'
-  end
+    filename = '[No Name]'
+  else
+    filename = vim.fn.fnamemodify(filepath, ':t')
 
-  -- Split path into parts
-  local parts = vim.split(filepath, '/')
-  local result = {}
+    -- Shorten path (3 chars per directory)
+    local parts = vim.split(filepath, '/')
+    local path_parts = {}
+    for i = 1, #parts - 1 do
+      local part = parts[i]
+      if #part > 3 then
+        table.insert(path_parts, string.sub(part, 1, 3))
+      else
+        table.insert(path_parts, part)
+      end
+    end
 
-  -- Process each part (except the last one which is the filename)
-  for i = 1, #parts - 1 do
-    local part = parts[i]
-    if #part > 3 then
-      table.insert(result, string.sub(part, 1, 3))
-    else
-      table.insert(result, part)
+    if #path_parts > 0 then
+      filename = table.concat(path_parts, '/') .. '/' .. filename
     end
   end
 
-  -- Add the full filename at the end
-  table.insert(result, parts[#parts])
+  -- Get file icon
+  local icon, _ = _G.get_file_icon(vim.fn.fnamemodify(filepath, ':t'))
 
-  return table.concat(result, '/')
+  -- Build label with icon, filename, and modified indicator
+  local label = string.format(' %s %s%s ',
+    icon ~= '' and icon or '',           -- File icon
+    filename,                             -- Filename with path
+    is_modified and ' ●' or ''           -- Modified indicator
+  )
+
+  return label
 end
 
 function _G.custom_tabline()
   local s = ''
+  local current_tab = vim.fn.tabpagenr()
+
   for i = 1, vim.fn.tabpagenr('$') do
     -- Select highlighting
-    if i == vim.fn.tabpagenr() then
+    if i == current_tab then
       s = s .. '%#TabLineSel#'
     else
       s = s .. '%#TabLine#'
@@ -375,7 +435,12 @@ function _G.custom_tabline()
     s = s .. '%' .. i .. 'T'
 
     -- Get the label
-    s = s .. ' ' .. _G.custom_tablabel(i) .. ' '
+    s = s .. _G.custom_tablabel(i)
+
+    -- Add separator between tabs
+    if i < vim.fn.tabpagenr('$') then
+      s = s .. '%#TabLine#│'
+    end
   end
 
   -- After the last tab fill with TabLineFill and reset tab page number

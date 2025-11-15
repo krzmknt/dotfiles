@@ -34,6 +34,9 @@ map(mode.normal, '<C-s>', ':w<Return>', opts)
 map(mode.insert, '<C-s>', '<ESC>:w<Return>', opts)
 map(mode.visual, '<C-s>', '<ESC>:w<Return>', opts)
 
+-- Quit
+map(mode.normal, '<C-w>', ':q<Return>', opts)
+
 -- Increment/Decrement
 map(mode.normal, '+', '<C-a>', opts)
 map(mode.normal, '-', '<C-x>', opts)

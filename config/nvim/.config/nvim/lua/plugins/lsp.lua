@@ -223,6 +223,11 @@ return {
             on_attach = on_attach,
           })
         end,
+
+        -- Disable deno-ls
+        ["denols"] = function()
+          -- Do nothing - prevent deno-ls from starting
+        end,
         },  -- Close handlers
       })    -- Close setup()
       end)  -- Close pcall
@@ -231,6 +236,50 @@ return {
         vim.notify("[LSP] Error in mason-lspconfig.setup: " .. tostring(err), vim.log.levels.ERROR)
         return
       end
+
+      -- Prevent deno-ls from attaching to buffers
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client and client.name == "denols" then
+            vim.lsp.stop_client(client.id)
+          end
+        end,
+      })
+
+      -- Filter out deno-lint diagnostics globally
+      local original_handler = vim.lsp.handlers["textDocument/publishDiagnostics"]
+      vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+        if result and result.diagnostics then
+          result.diagnostics = vim.tbl_filter(function(diagnostic)
+            return diagnostic.source ~= "deno-lint"
+          end, result.diagnostics)
+        end
+        original_handler(err, result, ctx, config)
+      end
+
+      -- Configure LSP floating windows with fancy borders
+      local border_chars = {
+        { "╭", "FloatBorder" },
+        { "─", "FloatBorder" },
+        { "╮", "FloatBorder" },
+        { "│", "FloatBorder" },
+        { "╯", "FloatBorder" },
+        { "─", "FloatBorder" },
+        { "╰", "FloatBorder" },
+        { "│", "FloatBorder" },
+      }
+
+      -- Override LSP handlers to use fancy borders
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = border_chars,
+        max_width = 80,
+        max_height = 20,
+      })
+
+      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        border = border_chars,
+      })
 
       -- Diagnostic configuration (Neovim 0.11+ compatible)
       vim.diagnostic.config({
@@ -248,9 +297,16 @@ return {
         severity_sort = true,
         float = {
           source = "always",
-          border = "none",
+          border = border_chars,  -- Use fancy rounded borders
           header = "",
           prefix = "",
+          -- Filter out deno-lint diagnostics
+          format = function(diagnostic)
+            if diagnostic.source == "deno-lint" then
+              return nil
+            end
+            return diagnostic.message
+          end,
         },
       })
 

@@ -17,7 +17,7 @@ plugin.setup(
     handle = {
         text = " ",
         blend = 30, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Reduced from 100 to make markers consistent.
-        color = "#5C6370", -- Brighter gray for better visibility and contrast
+        color = colors.black, -- Match lualine background
         color_nr = nil, -- cterm
         highlight = "CursorColumn",
         hide_if_all_visible = true, -- Hides handle if all lines are visible

@@ -8,19 +8,19 @@ if lualine == nil then return end
 
 local theme = {
   normal = {
-    a = { fg = colors.white, bg = colors.dark_cyan },
-    b = { fg = colors.white, bg = colors.none },
-    c = { fg = colors.light_grey, bg = colors.none },
+    a = { fg = colors.dark_cyan, bg = colors.black },  -- Dark bg, text color is the old bg color
+    b = { fg = colors.white, bg = colors.black },
+    c = { fg = colors.white, bg = colors.black },
   },
 
-  insert = { a = { fg = colors.black, bg = colors.yellow } },
-  visual = { a = { fg = colors.white, bg = colors.red } },
-  replace = { a = { fg = colors.white, bg = colors.red } },
+  insert = { a = { fg = colors.yellow, bg = colors.black } },  -- Dark bg, text color is the old bg color
+  visual = { a = { fg = colors.red, bg = colors.black } },     -- Dark bg, text color is the old bg color
+  replace = { a = { fg = colors.red, bg = colors.black } },    -- Dark bg, text color is the old bg color
 
   inactive = {
-    a = { fg = colors.white, bg = colors.none },
-    b = { fg = colors.white, bg = colors.none },
-    c = { fg = colors.black, bg = colors.none },
+    a = { fg = colors.white, bg = colors.black },
+    b = { fg = colors.white, bg = colors.black },
+    c = { fg = colors.white, bg = colors.black },
   },
 }
 
@@ -38,13 +38,13 @@ lualine.setup {
     lualine_a = {
       {
         'mode',
-        fmt = function(mode) return icons.mode[mode] end,
+        fmt = function(mode) return ' ' .. icons.mode[mode] .. ' ' end,  -- Add spaces for thickness
         icons_enabled = true,
         separator = {
-          left = "",
-          right = ""
+          left = "",  -- Rounded left border
+          right = ""  -- Rounded right border
         },
-        padding = { left = 0.2, right = 0.2 },
+        padding = { left = 1, right = 1 },  -- Increased padding for thicker appearance
       },
     },
 
@@ -69,37 +69,13 @@ lualine.setup {
     },
 
     lualine_c = {
-      {
-        'filename',
-        color = { bg = colors.none },
-        padding = { left = 1, right = 1 },
-        file_status = true,     -- Displays file status (readonly status, modified status)
-        newfile_status = false, -- Display new file status (new file means no write after created)
-        path = 1,               -- 0: Just the filename
-        -- 1: Relative path
-        -- 2: Absolute path
-        -- 3: Absolute path, with tilde as the home directory
-        -- 4: Filename and parent dir, with tilde as the home directory
-
-        shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-
-        symbols = {
-          modified = '[Unsaved]', -- Text to show when the file is modified.
-          readonly = '[RO]',      -- Text to show when the file is non-modifiable or readonly.
-          unnamed = '[No Name]',  -- Text to show for unnamed buffers.
-          newfile = '[New]',      -- Text to show for newly created file before first write
-        }
-      },
-      {
-        'bo:filetype',
-        color = { bg = colors.none }
-      }
+      -- Section C removed - not needed
     },
 
     lualine_x = {
       {
         'diagnostics',
-        color = { bg = colors.none },
+        colored = true,
         sources = { 'nvim_lsp' },
         symbols = {
           error = icons.diagnostic.error,
@@ -107,10 +83,8 @@ lualine.setup {
           info = icons.diagnostic.info,
           hint = icons.diagnostic.hint,
         },
-
         always_visible = true,
         update_in_insert = true,
-        colored = true,
       },
     },
 
@@ -121,7 +95,7 @@ lualine.setup {
         icon_only = false,
         icon = { align = 'left' },
         separator = {
-          left = icons.separator.rounded.left,
+          left = '',
           right = ''
         },
         padding = { left = 1, right = 1 },
@@ -137,22 +111,23 @@ lualine.setup {
         'fileformat',
         padding = { left = 0, right = 2 },
         symbols = {
-          unix = icons.platform.unix,
-          dos = icons.platform.windows,
-          mac = icons.platform.mac,
+          unix = 'LF',     -- Unix line ending
+          dos = 'CRLF',    -- Windows line ending
+          mac = 'CR',      -- Mac line ending
         },
       },
     },
 
     lualine_z = {
-      {
-        'location',
-        padding = { left = 0.2, right = 0.2 },
-        separator = {
-          left = '',
-          right = ''
-        },
-      },
+      -- Disabled location (line:col) since we show column number at window edge
+      -- {
+      --   'location',
+      --   padding = { left = 0.2, right = 0.2 },
+      --   separator = {
+      --     left = '',
+      --     right = ''
+      --   },
+      -- },
 
       -- {
       --   'searchcount',

@@ -33,12 +33,12 @@ vim.api.nvim_set_hl(0, "TabLineFill", {
 
 vim.api.nvim_set_hl(0, "CursorLine", {
   fg = colors.none,
-  bg = colors.deep_blue,
+  bg = colors.bg_d,  -- Darker background
 })
 
 vim.api.nvim_set_hl(0, "CursorColumn", {
   fg = colors.none,
-  bg = colors.deep_blue,
+  bg = colors.bg_d,  -- Darker background
 })
 
 vim.api.nvim_set_hl(0, "Cursor", {
@@ -80,6 +80,21 @@ vim.api.nvim_set_hl(0, "IblScope", { fg = colors.purple }) -- Set your desired c
 
 -- Comment color (ensure comments are not white)
 vim.api.nvim_set_hl(0, 'Comment', { fg = colors.light_grey, italic = true })
+
+-- LSP floating window borders (set AFTER onedark loads to prevent override)
+-- Using bright colors for maximum visibility
+vim.cmd([[
+  highlight FloatBorder guifg=#00FFFF guibg=NONE gui=bold
+  highlight NormalFloat guibg=NONE
+]])
+
+-- Force override after any colorscheme changes
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#00FFFF', bg = 'NONE', bold = true })
+    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
+  end,
+})
 
 -- coc
 

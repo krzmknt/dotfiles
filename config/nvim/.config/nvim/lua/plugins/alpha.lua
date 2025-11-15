@@ -21,7 +21,6 @@ return {
     -- Menu buttons
     dashboard.section.buttons.val = {
       dashboard.button("f", "  Find file", ":lua require('telescope.builtin').find_files({hidden=true, no_ignore=false, file_ignore_patterns={'^%.git/', '%.git/'}})<CR>"),
-      dashboard.button("n", "  New file", ":ene <BAR> startinsert<CR>"),
       dashboard.button("r", "  Recent files", ":Telescope oldfiles<CR>"),
       dashboard.button("g", "  Find text", ":Telescope live_grep<CR>"),
       dashboard.button("b", "  File browser", ":Telescope file_browser<CR>"),
