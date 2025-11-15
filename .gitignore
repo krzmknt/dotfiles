@@ -3,3 +3,4 @@ config/fish/.config/fish/fish_variables
 config/nvim/.config/nvim/plugin/packer_compiled.lua
 .mypy_cache/
 .serena
+config/claude/.claude/settings.json
