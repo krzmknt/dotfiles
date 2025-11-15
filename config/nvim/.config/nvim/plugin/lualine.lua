@@ -41,10 +41,10 @@ lualine.setup {
         fmt = function(mode) return icons.mode[mode] end,
         icons_enabled = true,
         separator = {
-          left = icons.separator.rounded.left,
-          right = ' ',
+          left = "",
+          right = ""
         },
-        padding = { left = 0, right = 1 },
+        padding = { left = 0.2, right = 0.2 },
       },
     },
 
@@ -147,26 +147,26 @@ lualine.setup {
     lualine_z = {
       {
         'location',
-        padding = { left = 0, right = 0 },
+        padding = { left = 0.2, right = 0.2 },
         separator = {
-          left = icons.separator.rounded.left,
+          left = '',
           right = ''
         },
       },
 
-      {
-        'searchcount',
-        maxcount = 999,
-        timeout = 500,
-      },
+      -- {
+      --   'searchcount',
+      --   maxcount = 999,
+      --   timeout = 500,
+      -- },
 
-      {
-        'progress',
-        separator = {
-          left = ' ',
-          right = icons.separator.rounded.right,
-        },
-      }
+      -- {
+      --   'progress',
+      --   separator = {
+      --     left = ' ',
+      --     right = icons.separator.rounded.right,
+      --   },
+      -- }
 
     },
   },

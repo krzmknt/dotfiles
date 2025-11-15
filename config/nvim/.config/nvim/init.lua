@@ -326,3 +326,62 @@ vim.g.memolist_template_dir_path = vim.fn.expand("~/.memolist/memotemplates")
 -- NERDCommenter
 vim.g.NERDSpaceDelims            = 1
 vim.g.NERDDefaultAlign           = "left"
+
+-----------------------------
+-- Tab label configuration
+-- Show 3 characters per directory level instead of 1
+
+function _G.custom_tablabel(n)
+  local buflist = vim.fn.tabpagebuflist(n)
+  local winnr = vim.fn.tabpagewinnr(n)
+  local bufnr = buflist[winnr]
+  local filepath = vim.fn.bufname(bufnr)
+
+  if filepath == '' then
+    return '[No Name]'
+  end
+
+  -- Split path into parts
+  local parts = vim.split(filepath, '/')
+  local result = {}
+
+  -- Process each part (except the last one which is the filename)
+  for i = 1, #parts - 1 do
+    local part = parts[i]
+    if #part > 3 then
+      table.insert(result, string.sub(part, 1, 3))
+    else
+      table.insert(result, part)
+    end
+  end
+
+  -- Add the full filename at the end
+  table.insert(result, parts[#parts])
+
+  return table.concat(result, '/')
+end
+
+function _G.custom_tabline()
+  local s = ''
+  for i = 1, vim.fn.tabpagenr('$') do
+    -- Select highlighting
+    if i == vim.fn.tabpagenr() then
+      s = s .. '%#TabLineSel#'
+    else
+      s = s .. '%#TabLine#'
+    end
+
+    -- Set the tab page number (for mouse clicks)
+    s = s .. '%' .. i .. 'T'
+
+    -- Get the label
+    s = s .. ' ' .. _G.custom_tablabel(i) .. ' '
+  end
+
+  -- After the last tab fill with TabLineFill and reset tab page number
+  s = s .. '%#TabLineFill#%T'
+
+  return s
+end
+
+vim.o.tabline = '%!v:lua.custom_tabline()'

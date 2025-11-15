@@ -9,6 +9,9 @@ return {
     end,
   },
 
+
+
+
   -- Mason-lspconfig: Bridge between mason and lspconfig
   {
     "williamboman/mason-lspconfig.nvim",
@@ -24,18 +27,13 @@ return {
       local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local capabilities = has_cmp and cmp_nvim_lsp.default_capabilities() or vim.lsp.protocol.make_client_capabilities()
 
-      -- Load icons from util.icons (same as lualine)
+      -- Load icons and colors from util modules
       local icons = require("util.icons")
+      local colors = require("util.color")
 
       -- Common on_attach function for keybindings
       local on_attach = function(client, bufnr)
         local opts = { buffer = bufnr, silent = true }
-
-        -- Define diagnostic signs with icons every time LSP attaches
-        vim.fn.sign_define("DiagnosticSignError", { texthl = "DiagnosticSignError", text = icons.diagnostic.error, numhl = "" })
-        vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = icons.diagnostic.warn, numhl = "" })
-        vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = icons.diagnostic.hint, numhl = "" })
-        vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = icons.diagnostic.info, numhl = "" })
 
         -- GoTo code navigation
         vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
@@ -133,13 +131,16 @@ return {
         mason_lspconfig.setup({
         ensure_installed = {
           "lua_ls",           -- Lua
-          "gopls",            -- Go
           "bashls",           -- Bash
           "pyright",          -- Python
           "jdtls",            -- Java
           "rust_analyzer",    -- Rust
           "tailwindcss",      -- Tailwind CSS
           "ts_ls",            -- TypeScript/JavaScript
+          "cssls",            -- CSS
+          "html",             -- HTML
+          "jsonls",           -- JSON
+          "eslint",           -- ESLint
         },
         automatic_installation = true,
         handlers = {
@@ -203,6 +204,25 @@ return {
             },
           })
         end,
+
+        -- Custom handler for TypeScript (disable if Deno is detected)
+        ["ts_ls"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.ts_ls.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            root_dir = lspconfig.util.root_pattern("package.json"),
+            single_file_support = false,
+          })
+        end,
+
+        -- Custom handler for ESLint
+        ["eslint"] = function()
+          require("lspconfig").eslint.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+          })
+        end,
         },  -- Close handlers
       })    -- Close setup()
       end)  -- Close pcall
@@ -212,7 +232,7 @@ return {
         return
       end
 
-      -- Diagnostic configuration
+      -- Diagnostic configuration (Neovim 0.11+ compatible)
       vim.diagnostic.config({
         virtual_text = false,  -- Disable inline diagnostic messages
         signs = {
@@ -235,20 +255,18 @@ return {
       })
 
       -- Set diagnostic highlight colors to be more visible
-      vim.cmd([[
-        highlight DiagnosticError guifg=#E06C75 gui=bold
-        highlight DiagnosticWarn guifg=#E5C07B gui=bold
-        highlight DiagnosticInfo guifg=#61AFEF gui=bold
-        highlight DiagnosticHint guifg=#56B6C2 gui=bold
-        highlight DiagnosticVirtualTextError guifg=#E06C75 gui=bold
-        highlight DiagnosticVirtualTextWarn guifg=#E5C07B gui=bold
-        highlight DiagnosticVirtualTextInfo guifg=#61AFEF gui=bold
-        highlight DiagnosticVirtualTextHint guifg=#56B6C2 gui=bold
-        highlight DiagnosticSignError guifg=#E06C75 gui=bold
-        highlight DiagnosticSignWarn guifg=#E5C07B gui=bold
-        highlight DiagnosticSignInfo guifg=#61AFEF gui=bold
-        highlight DiagnosticSignHint guifg=#56B6C2 gui=bold
-      ]])
+      vim.api.nvim_set_hl(0, "DiagnosticError", { fg = colors.diagnostic.error, bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = colors.diagnostic.warn, bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = colors.diagnostic.info, bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = colors.diagnostic.hint, bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = colors.diagnostic.error, bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = colors.diagnostic.warn, bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = colors.diagnostic.info, bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = colors.diagnostic.hint, bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = colors.diagnostic.error, bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = colors.diagnostic.warn, bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = colors.diagnostic.info, bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = colors.diagnostic.hint, bold = true })
 
       -- Show diagnostics in floating window on CursorHold
       vim.api.nvim_create_autocmd("CursorHold", {

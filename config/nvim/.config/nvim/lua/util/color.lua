@@ -35,4 +35,19 @@ return {
   b           = "#457B9D",
   c           = "#1D3557",
   deep_blue   = "#17263D",
+
+  -- Diagnostic colors
+  diagnostic = {
+    error = "#E06C75",
+    warn  = "#E5C07B",
+    info  = "#61AFEF",
+    hint  = "#56B6C2",
+  },
+
+  -- Git colors
+  git = {
+    add    = "#d8589f",  -- pink
+    change = "#4fa6ed",  -- blue
+    delete = "#1f2329",  -- grey
+  },
 }

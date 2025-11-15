@@ -53,9 +53,9 @@ vim.api.nvim_set_hl(0, "MatchParen", {
 
 -- GitSigns
 
-vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = colors.pink })
-vim.api.nvim_set_hl(0, "GitSignsChange", { fg = colors.blue })
-vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = colors.red })
+vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = colors.git.add })
+vim.api.nvim_set_hl(0, "GitSignsChange", { fg = colors.git.change })
+vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = colors.git.delete })
 
 vim.cmd([[highlight! link GitSignsAddNr GitSignsAddNr]])
 vim.cmd([[highlight! link GitSignsChangeNr GitSignsChangeNr]])
@@ -65,9 +65,9 @@ vim.api.nvim_set_hl(0, "GitSignsAddLn", { bg = colors.none })
 vim.api.nvim_set_hl(0, "GitSignsChangeLn", { bg = colors.none })
 vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { bg = colors.none })
 
-vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = colors.pink })
-vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.blue })
-vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = colors.red })
+vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = colors.git.add })
+vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.git.change })
+vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = colors.git.delete })
 
 -- Diffview
 
