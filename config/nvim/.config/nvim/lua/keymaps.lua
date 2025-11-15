@@ -96,11 +96,11 @@ map(mode.normal, '<C-l>', '<C-w>l', opts)
 map(mode.normal, '<Leader>/', '<Plug>NERDCommenterToggle', opts)
 
 ------------------------------
--- Memo
+-- Memo (disabled - telescope-memo not installed)
 
-map(mode.normal, '<Leader>mn', ':MemoNew<CR>', opts)
-map(mode.normal, '<Leader>ml', ':Telescope memo list<CR>', opts)
-map(mode.normal, '<Leader>mg', ':Telescope memo live_grep<CR>', opts)
+-- map(mode.normal, '<Leader>mn', ':MemoNew<CR>', opts)
+-- map(mode.normal, '<Leader>ml', ':Telescope memo list<CR>', opts)
+-- map(mode.normal, '<Leader>mg', ':Telescope memo live_grep<CR>', opts)
 
 
 ------------------------------
@@ -195,7 +195,13 @@ map(mode.normal, '<leader>b', ':DapToggleBreakpoint<CR>', opts)
 
 
 -- Telescope
-map(mode.normal, '<Leader>f', '<cmd>Telescope find_files<cr>', opts)
+map(mode.normal, '<Leader>f', function()
+  require('telescope.builtin').find_files({
+    hidden = true,
+    no_ignore = false,
+    file_ignore_patterns = { '^%.git/', '%.git/' }
+  })
+end, opts)
 map(mode.normal, '<Leader>v', '<cmd>Telescope file_browser<cr>', opts)
 map(mode.normal, '<Leader>g', '<cmd>Telescope live_grep<cr>', opts)
 

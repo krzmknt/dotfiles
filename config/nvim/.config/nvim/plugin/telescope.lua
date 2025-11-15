@@ -87,8 +87,12 @@ telescope.load_extension("file_browser")
 vim.keymap.set('n', ';f',
   function()
     builtin.find_files({
-      no_ignore = false,
-      hidden = true
+      no_ignore = false,        -- Respect .gitignore
+      hidden = true,            -- Show hidden files/directories
+      file_ignore_patterns = {  -- Exclude specific patterns
+        "^%.git/",              -- Exclude .git directory
+        "%.git/",               -- Exclude .git anywhere in path
+      }
     })
   end)
 

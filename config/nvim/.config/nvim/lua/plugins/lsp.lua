@@ -82,9 +82,9 @@ return {
           end)
         end, opts)
 
-        -- Show documentation (override Vim's default ? backward search)
-        vim.keymap.set("n", "?", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)  -- Alternative: gh
+        -- Show documentation
+        vim.keymap.set("n", "gK", vim.lsp.buf.hover, opts)  -- g + Shift+k for hover
+        vim.keymap.set("n", "gH", vim.lsp.buf.hover, opts)  -- Alternative: g + Shift+h
 
         -- Diagnostics navigation
         vim.keymap.set("n", "g<", vim.diagnostic.goto_prev, opts)
