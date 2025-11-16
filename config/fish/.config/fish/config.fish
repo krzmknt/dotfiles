@@ -7,6 +7,7 @@ source ~/keys/anthropic
 # General
 # ---------------------------
 set --global fish_prompt_pwd_dir_length 3
+set -U fish_greeting ""
 
 set -Ux PATH $PATH /Users/krzmknt/.local/share/mise/installs/go/1.20.4/bin/efm-langserver
 
@@ -264,5 +265,18 @@ function bind_awsps
 end
 bind \ct bind_awsps
 # <<< aws-profile-selector end <<<
+
+
+# ===========================
+# Clear screen and scrollback
+# ---------------------------
+function cls
+    clear
+    if set -q TMUX
+        tmux clear-history
+    end
+    # For iTerm2/Terminal.app, send the escape sequence to clear scrollback
+    printf '\e]50;ClearScrollback\a'
+end
 
 
