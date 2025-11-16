@@ -193,6 +193,14 @@ end
 # Alt + u
 bind \eu up_directory
 
+# Ctrl + f - Launch nvim
+function launch_nvim
+  commandline -r ""
+  nvim
+  commandline -f repaint
+end
+bind \cf launch_nvim
+
 
 # ===========================
 # asdf
