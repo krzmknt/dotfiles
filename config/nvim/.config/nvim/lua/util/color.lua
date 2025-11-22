@@ -25,7 +25,7 @@ return {
   dark_yellow = "#835d1a",
   fg          = "#a0a8b7",
   green       = "#8ebd6b",
-  light_grey  = "#7a818e",
+  light_grey  = "#5c6370",
   orange      = "#cc9057",
   purple      = "#bf68d9",
   red         = "#e55561",

@@ -8,7 +8,24 @@ if onedark == nil then return end
 
 require("onedark").setup {
   style = 'darker',
-  transparent = true
+  transparent = true,
+  highlights = {
+    Comment = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment.bash'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment.lua'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment.python'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment.javascript'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment.typescript'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment.tsx'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment.documentation'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment.error'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment.warning'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment.todo'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@comment.note'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@lsp.type.comment'] = { fg = '#5c6370', ctermfg = 242, italic = true },
+    ['@lsp.type.comment.bash'] = { fg = '#5c6370', ctermfg = 242, italic = true }
+  }
 }
 require('onedark').load()
 
@@ -79,7 +96,37 @@ vim.api.nvim_set_hl(0, "IblScope", { fg = colors.purple }) -- Set your desired c
 
 
 -- Comment color (ensure comments are not white)
-vim.api.nvim_set_hl(0, 'Comment', { fg = colors.light_grey, italic = true })
+-- Set both legacy Comment and Treesitter @comment groups
+-- Use both guifg (24-bit) and ctermfg (256-color) for compatibility
+local comment_color = { fg = '#5c6370', ctermfg = 242, italic = true, force = true }
+vim.api.nvim_set_hl(0, 'Comment', comment_color)
+vim.api.nvim_set_hl(0, '@comment', comment_color)
+vim.api.nvim_set_hl(0, '@comment.bash', comment_color)
+vim.api.nvim_set_hl(0, '@comment.lua', comment_color)
+vim.api.nvim_set_hl(0, '@comment.python', comment_color)
+vim.api.nvim_set_hl(0, '@comment.javascript', comment_color)
+vim.api.nvim_set_hl(0, '@comment.typescript', comment_color)
+vim.api.nvim_set_hl(0, '@comment.documentation', comment_color)
+vim.api.nvim_set_hl(0, '@comment.error', comment_color)
+vim.api.nvim_set_hl(0, '@comment.warning', comment_color)
+vim.api.nvim_set_hl(0, '@comment.todo', comment_color)
+vim.api.nvim_set_hl(0, '@comment.note', comment_color)
+
+-- LSP Semantic Tokens for comments
+vim.api.nvim_set_hl(0, '@lsp.type.comment', comment_color)
+vim.api.nvim_set_hl(0, '@lsp.type.comment.bash', comment_color)
+
+-- Override @spell highlight to prevent it from overriding comment colors
+-- @spell is used for spell checking and was making comments white
+-- Set it to inherit from the underlying text (NONE)
+vim.api.nvim_set_hl(0, '@spell', { fg = 'NONE', bg = 'NONE', sp = 'NONE' })
+vim.api.nvim_set_hl(0, '@spell.bash', { link = '@spell' })
+vim.api.nvim_set_hl(0, '@spell.lua', { link = '@spell' })
+vim.api.nvim_set_hl(0, '@spell.python', { link = '@spell' })
+vim.api.nvim_set_hl(0, '@spell.javascript', { link = '@spell' })
+vim.api.nvim_set_hl(0, '@spell.typescript', { link = '@spell' })
+vim.api.nvim_set_hl(0, '@spell.tsx', { link = '@spell' })
+vim.api.nvim_set_hl(0, '@spell.jsx', { link = '@spell' })
 
 -- LSP floating window borders (set AFTER onedark loads to prevent override)
 -- Using bright colors for maximum visibility
@@ -91,8 +138,32 @@ vim.cmd([[
 -- Force override after any colorscheme changes
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
+    local comment_hl = { fg = '#5c6370', ctermfg = 242, italic = true, force = true }
     vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#00FFFF', bg = 'NONE', bold = true })
     vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'Comment', comment_hl)
+    vim.api.nvim_set_hl(0, '@comment', comment_hl)
+    vim.api.nvim_set_hl(0, '@comment.bash', comment_hl)
+    vim.api.nvim_set_hl(0, '@comment.lua', comment_hl)
+    vim.api.nvim_set_hl(0, '@comment.python', comment_hl)
+    vim.api.nvim_set_hl(0, '@comment.javascript', comment_hl)
+    vim.api.nvim_set_hl(0, '@comment.typescript', comment_hl)
+    vim.api.nvim_set_hl(0, '@comment.documentation', comment_hl)
+    vim.api.nvim_set_hl(0, '@comment.error', comment_hl)
+    vim.api.nvim_set_hl(0, '@comment.warning', comment_hl)
+    vim.api.nvim_set_hl(0, '@comment.todo', comment_hl)
+    vim.api.nvim_set_hl(0, '@comment.note', comment_hl)
+    vim.api.nvim_set_hl(0, '@lsp.type.comment', comment_hl)
+    vim.api.nvim_set_hl(0, '@lsp.type.comment.bash', comment_hl)
+    -- Override @spell to prevent overriding comment colors
+    vim.api.nvim_set_hl(0, '@spell', { fg = 'NONE', bg = 'NONE', sp = 'NONE' })
+    vim.api.nvim_set_hl(0, '@spell.bash', { link = '@spell' })
+    vim.api.nvim_set_hl(0, '@spell.lua', { link = '@spell' })
+    vim.api.nvim_set_hl(0, '@spell.python', { link = '@spell' })
+    vim.api.nvim_set_hl(0, '@spell.javascript', { link = '@spell' })
+    vim.api.nvim_set_hl(0, '@spell.typescript', { link = '@spell' })
+    vim.api.nvim_set_hl(0, '@spell.tsx', { link = '@spell' })
+    vim.api.nvim_set_hl(0, '@spell.jsx', { link = '@spell' })
   end,
 })
 
