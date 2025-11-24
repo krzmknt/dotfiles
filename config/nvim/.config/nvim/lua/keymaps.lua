@@ -237,3 +237,45 @@ map(mode.normal, 'cc', ':CopilotChatToggle<CR>', opts)
 
 -- Show documentation (TSDoc/JSDoc) in floating window with "?" key
 map(mode.normal, '?', vim.lsp.buf.hover, opts)
+
+-- Go to definition in a new tab with "gd" key
+map(mode.normal, 'gd', function()
+  -- Save current position to jump list
+  vim.cmd("normal! m'")
+
+  local params = vim.lsp.util.make_position_params()
+  vim.lsp.buf_request(0, 'textDocument/definition', params, function(err, result, ctx, config)
+    if err then
+      vim.notify("LSP Error: " .. tostring(err), vim.log.levels.ERROR)
+      return
+    end
+
+    if not result or vim.tbl_isempty(result) then
+      vim.notify("No definition found", vim.log.levels.WARN)
+      return
+    end
+
+    -- Handle both single result and array of results
+    local location = vim.tbl_islist(result) and result[1] or result
+    local uri = location.uri or location.targetUri
+    local range = location.range or location.targetRange
+
+    if not uri or not range then
+      vim.notify("Invalid definition location", vim.log.levels.ERROR)
+      return
+    end
+
+    -- Convert URI to file path
+    local fname = vim.uri_to_fname(uri)
+
+    -- Use tab drop to open in a tab (or switch to existing tab)
+    vim.cmd("tab drop " .. vim.fn.fnameescape(fname))
+
+    -- Jump to the position
+    local pos = range.start
+    vim.api.nvim_win_set_cursor(0, {pos.line + 1, pos.character})
+
+    -- Center the screen on the cursor
+    vim.cmd("normal! zz")
+  end)
+end, opts)
