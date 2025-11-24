@@ -130,17 +130,19 @@ vim.api.nvim_set_hl(0, '@spell.jsx', { link = '@spell' })
 
 -- LSP floating window borders (set AFTER onedark loads to prevent override)
 -- Using bright colors for maximum visibility
+-- FloatBorder: cyan border with pure black background
+-- NormalFloat: pure black background for floating windows (not transparent)
 vim.cmd([[
-  highlight FloatBorder guifg=#00FFFF guibg=NONE gui=bold
-  highlight NormalFloat guibg=NONE
+  highlight FloatBorder guifg=#00FFFF guibg=#000000 gui=bold
+  highlight NormalFloat guibg=#000000
 ]])
 
 -- Force override after any colorscheme changes
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     local comment_hl = { fg = '#5c6370', ctermfg = 242, italic = true, force = true }
-    vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#00FFFF', bg = 'NONE', bold = true })
-    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#00FFFF', bg = '#000000', bold = true })
+    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#000000' })
     vim.api.nvim_set_hl(0, 'Comment', comment_hl)
     vim.api.nvim_set_hl(0, '@comment', comment_hl)
     vim.api.nvim_set_hl(0, '@comment.bash', comment_hl)

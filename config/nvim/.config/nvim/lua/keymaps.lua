@@ -231,3 +231,9 @@ end
 map(mode.normal, '<Leader><Leader>', toggle_diffview, opts)
 map(mode.normal, '<Leader>c', ':DiffviewClose<CR>', opts)
 map(mode.normal, 'cc', ':CopilotChatToggle<CR>', opts)
+
+------------------------------
+-- LSP
+
+-- Show documentation (TSDoc/JSDoc) in floating window with "?" key
+map(mode.normal, '?', vim.lsp.buf.hover, opts)
