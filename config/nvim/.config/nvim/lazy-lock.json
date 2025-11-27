@@ -107,10 +107,6 @@
     "branch": "main",
     "commit": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800"
   },
-  "memolist.vim": {
-    "branch": "master",
-    "commit": "8090f7a973f266a600c2ea84ec6941346414300a"
-  },
   "namu.nvim": {
     "branch": "main",
     "commit": "7e03a8acd62a79d08829b7cdad34a398ed8f379e"
@@ -162,10 +158,6 @@
   "nvim-web-devicons": {
     "branch": "master",
     "commit": "8dcb311b0c92d460fac00eac706abd43d94d68af"
-  },
-  "onedark.nvim": {
-    "branch": "master",
-    "commit": "213c23ae45a04797572242568d5d51937181792d"
   },
   "plenary.nvim": {
     "branch": "master",
