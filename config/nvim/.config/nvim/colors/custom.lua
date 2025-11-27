@@ -263,6 +263,10 @@ hi("NvimTreeGitDeleted", { fg = colors.red, bg = "NONE" })
 hi("IblIndent", { fg = colors.gray })
 hi("IblScope", { fg = colors.purple })
 
+-- WinBar (dropbar.nvim)
+hi("WinBar", { fg = colors.fg, bg = "NONE" })
+hi("WinBarNC", { fg = colors.fg_dark, bg = "NONE" })
+
 -- Comment colors (ensure comments are gray, not white)
 hi("@comment", { fg = colors.light_grey, italic = true })
 hi("@comment.bash", { fg = colors.light_grey, italic = true })

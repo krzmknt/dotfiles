@@ -36,7 +36,30 @@ return {
 					},
 				},
 				lualine_c = {},
-				lualine_x = {
+				lualine_x = {},
+				lualine_y = {
+					{
+						"encoding",
+						show_bomb = true,
+						padding = { left = 1, right = 1 },
+						cond = function()
+							return vim.bo.fileencoding ~= "utf-8" and vim.bo.fileencoding ~= ""
+						end,
+					},
+					{
+						"fileformat",
+						padding = { left = 0, right = 2 },
+						symbols = {
+							unix = "LF",
+							dos = "CRLF",
+							mac = "CR",
+						},
+						cond = function()
+							return vim.bo.fileformat ~= "unix"
+						end,
+					},
+				},
+				lualine_z = {
 					{
 						"diagnostics",
 						colored = true,
@@ -49,33 +72,9 @@ return {
 						},
 						always_visible = true,
 						update_in_insert = true,
-						padding = { left = 1, right = 2 },
-					},
-				},
-				lualine_y = {
-					{
-						"filetype",
-						colored = true,
-						icon_only = false,
-						icon = { align = "left" },
 						padding = { left = 1, right = 1 },
 					},
-					{
-						"encoding",
-						show_bomb = true,
-						padding = { left = 0, right = 1 },
-					},
-					{
-						"fileformat",
-						padding = { left = 0, right = 2 },
-						symbols = {
-							unix = "LF",
-							dos = "CRLF",
-							mac = "CR",
-						},
-					},
 				},
-				lualine_z = {},
 			},
 			tabline = {},
 			extensions = {},
