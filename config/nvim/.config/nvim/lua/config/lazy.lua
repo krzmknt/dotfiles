@@ -6,6 +6,7 @@ local logger = require("util.logger")
 local lazypath = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy", "lazy.nvim")
 logger.debug("lazypath: " .. lazypath)
 
+---@diagnostic disable-next-line: undefined-field
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
@@ -64,19 +65,6 @@ require("lazy").setup({
 		--   opts = {}
 		-- },
 
-		--- ステータスラインをカスタマイズ
-		--- @see https://github.com/nvim-lualine/lualine.nvim
-		{
-			"nvim-lualine/lualine.nvim",
-			dependencies = {
-				"nvim-tree/nvim-web-devicons",
-			},
-		},
-
-		--- <Leader>c<space> で選択したコメントブロックをコメントトグル
-		--- @see https://github.com/preservim/nerdcommenter#default-mappings
-		{ "scrooloose/nerdcommenter" },
-
 		--- メッセージやコマンドラインの表示をリッチにする
 		--- @see https://github.com/folke/noice.nvim
 		-- {
@@ -134,27 +122,6 @@ require("lazy").setup({
 			end,
 		},
 
-		------------------------------------
-		-- Fazzy Finder
-
-		--- Fazzy Finder
-		--- @see https://github.com/nvim-telescope/telescope.nvim
-		{
-			"nvim-telescope/telescope.nvim",
-			dependencies = { "nvim-lua/plenary.nvim" },
-		},
-
-		--- Telescope のファイルブラウザ拡張機能
-		--- @see https://github.com/nvim-telescope/telescope-file-browser.nvim
-		{
-			"nvim-telescope/telescope-file-browser.nvim",
-			dependencies = {
-				"nvim-telescope/telescope.nvim",
-				"nvim-lua/plenary.nvim",
-				"nvim-tree/nvim-web-devicons",
-			},
-		},
-
 		-------------------------
 		-- Highlight
 
@@ -207,54 +174,6 @@ require("lazy").setup({
 				require("hlargs").setup()
 			end,
 		},
-
-		--- インデントハイライト
-		--- @see https://github.com/lukas-reineke/indent-blankline.nvim
-		--- 廃止 2025-03-16
-		-- {
-		--   "lukas-reineke/indent-blankline.nvim",
-		--   config = function()
-		--     -- local hooks = require("ibl.hooks")
-		--     -- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-		--     --   vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75", blend = 30 })
-		--     --   vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B", blend = 30 })
-		--     --   vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF", blend = 30 })
-		--     --   vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66", blend = 30 })
-		--     --   vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379", blend = 30 })
-		--     --   vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD", blend = 30 })
-		--     --   vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2", blend = 30 })
-		--     -- end)
-
-		--     -- local highlight = {
-		--     --   "RainbowRed",
-		--     --   "RainbowYellow",
-		--     --   "RainbowBlue",
-		--     --   "RainbowOrange",
-		--     --   "RainbowGreen",
-		--     --   "RainbowViolet",
-		--     --   "RainbowCyan",
-		--     -- }
-
-		--     -- require("ibl").setup(
-		--     -- --   {
-		--     -- --     indent = {
-		--     -- --       highlight,
-		--     -- --     },
-		--     -- --   }
-		--     -- )
-
-		--     require("ibl").setup {
-		--       indent = {
-		--         char = "│", -- Center alighned solid (see. :h ibl.config.indent)
-		--         -- highlight = {
-		--         --   "RainbowRed", "RainbowYellow", "RainbowBlue",
-		--         --   "RainbowOrange", "RainbowGreen", "RainbowViolet", "RainbowCyan"
-		--         -- },
-		--       },
-		--       scope = { enabled = true, show_start = true, show_end = true },
-		--     }
-		--   end
-		-- },
 
 		--- インデントハイライト
 		--- @see https://github.com/shellRaining/hlchunk.nvim
@@ -401,7 +320,6 @@ require("lazy").setup({
 			"lewis6991/gitsigns.nvim",
 			dependencies = { "nvim-lua/plenary.nvim" },
 			config = function()
-				-- 優しくておしゃれな色設定
 				vim.api.nvim_set_hl(0, "GitSignsAddInline", { bg = "#2d4a3e", fg = "#a8ddb5" })
 				vim.api.nvim_set_hl(0, "GitSignsChangeInline", { bg = "#3d4057", fg = "#c8b8e8" })
 				vim.api.nvim_set_hl(0, "GitSignsDeleteInline", { bg = "#4a2d3e", fg = "#e8b8c8" })
@@ -464,20 +382,6 @@ require("lazy").setup({
 		-- float term
 		{ "voldikss/vim-floaterm" },
 
-		-- dap
-		-- { 'mfussenegger/nvim-dap' },
-		-- { 'rcarriga/nvim-dap-ui' },
-		-- { 'https://github.com/mfussenegger/nvim-dap-python' },
-
-		--- Scroll bar
-		--- @see https://github.com/petertriho/nvim-scrollbar
-		{
-			"petertriho/nvim-scrollbar",
-			config = function()
-				require("scrollbar").setup({})
-			end,
-		},
-
 		{
 			"nvim-tree/nvim-tree.lua",
 			requires = {
@@ -525,9 +429,6 @@ require("lazy").setup({
 
 		{ "sindrets/diffview.nvim" },
 
-		-- Colorscheme
-		{ "navarasu/onedark.nvim" },
-
 		-- Command line
 		{
 			"VonHeikemen/fine-cmdline.nvim",
@@ -536,23 +437,6 @@ require("lazy").setup({
 			},
 		},
 
-		--- パンくずリスト
-		--- @see https://github.com/utilyre/barbecue.nvim
-		--- 廃止 2025-03-16
-		-- Navigation
-		-- {
-		--   "utilyre/barbecue.nvim",
-		--   name = "barbecue",
-		--   version = "*",
-		--   dependencies = {
-		--     "SmiteshP/nvim-navic",
-		--     "nvim-tree/nvim-web-devicons",
-		--   },
-		--   opts = {},
-		-- },
-
-		--- パンくずリスト
-		--- @see https://github.com/Bekaboo/dropbar.nvim
 		{
 			"Bekaboo/dropbar.nvim",
 			-- optional, but required for fuzzy finder support
@@ -585,42 +469,6 @@ require("lazy").setup({
 			end,
 			ft = { "markdown" },
 		},
-
-		-- {
-		--   "3rd/diagram.nvim",
-		--   dependencies = {
-		--     "3rd/image.nvim",
-		--   },
-		--   opts = { -- you can just pass {}, defaults below
-		--     renderer_options = {
-		--       mermaid = {
-		--         background = nil, -- nil | "transparent" | "white" | "#hex"
-		--         theme = nil,      -- nil | "default" | "dark" | "forest" | "neutral"
-		--         scale = 1,        -- nil | 1 (default) | 2  | 3 | ...
-		--         width = nil,      -- nil | 800 | 400 | ...
-		--         height = nil,     -- nil | 600 | 300 | ...
-		--       },
-		--       plantuml = {
-		--         charset = nil,
-		--       },
-		--       d2 = {
-		--         theme_id = nil,
-		--         dark_theme_id = nil,
-		--         scale = nil,
-		--         layout = nil,
-		--         sketch = nil,
-		--       },
-		--       gnuplot = {
-		--         size = nil,  -- nil | "800,600" | ...
-		--         font = nil,  -- nil | "Arial,12" | ...
-		--         theme = nil, -- nil | "light" | "dark" | custom theme string
-		--       },
-		--     }
-		--   },
-		-- },
-
-		-- Memo
-		{ "glidenote/memolist.vim" },
 
 		-- Toggle
 		{ "monaqa/dial.nvim" },

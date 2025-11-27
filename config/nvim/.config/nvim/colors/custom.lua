@@ -10,6 +10,7 @@ vim.o.termguicolors = true
 vim.g.colors_name = "custom"
 
 -- Color Palette - Vivid & Vibrant
+-- Store in global so plugins can access via _G.CustomColors
 local colors = {
 	-- Base colors
 	bg = "NONE", -- Transparent background
@@ -32,11 +33,48 @@ local colors = {
 	-- UI colors
 	gray = "#5a6270", -- Borders, inactive
 	gray_light = "#8a92a0", -- Line numbers (brighter)
+	light_grey = "#5c6370", -- Alternative gray
 	selection = "#3b82f6", -- Bright blue selection
 	search = "#ffff00", -- Bright yellow search
 	diff_add = "#00ff7f", -- Bright green
 	diff_delete = "#ff6b6b", -- Bright red
 	diff_change = "#ffa500", -- Bright orange
+
+	-- Additional colors for compatibility with util.color
+	none = "none",
+	white = "#cdcdcd",
+	diff_text = "#274964",
+	bg0 = "#1f2329",
+	bg1 = "#282c34",
+	bg2 = "#30363f",
+	bg3 = "#323641",
+	bg_blue = "#61afef",
+	bg_d = "#181b20",
+	bg_yellow = "#e8c88c",
+	black = "#0e1013",
+	dark_cyan = "#266269",
+	dark_purple = "#7e3992",
+	dark_red = "#8b3434",
+	dark_yellow = "#835d1a",
+	deep_blue = "#17263D",
+	a = "#A8DADC",
+	b = "#457B9D",
+	c = "#1D3557",
+
+	-- Diagnostic colors
+	diagnostic = {
+		error = "#E06C75",
+		warn = "#E5C07B",
+		info = "#61AFEF",
+		hint = "#56B6C2",
+	},
+
+	-- Git colors
+	git = {
+		add = "#d8589f", -- pink
+		change = "#4fa6ed", -- blue
+		delete = "#1f2329", -- grey
+	},
 }
 
 -- Helper function to set highlights
@@ -76,8 +114,9 @@ end
 hi("Normal", { fg = colors.fg, bg = "NONE" })
 hi("NormalFloat", { fg = colors.fg, bg = "#000000" })
 hi("FloatBorder", { fg = colors.cyan, bg = "#000000", bold = true })
-hi("CursorLine", { bg = colors.bg_light })
-hi("CursorColumn", { bg = colors.bg_light })
+hi("Cursor", { bg = colors.purple })
+hi("CursorLine", { bg = colors.bg_d })
+hi("CursorColumn", { bg = colors.bg_d })
 hi("LineNr", { fg = colors.gray_light, bg = "NONE" })
 hi("CursorLineNr", { fg = colors.purple, bg = "NONE", bold = true })
 hi("SignColumn", { bg = "NONE" })
@@ -85,8 +124,8 @@ hi("ColorColumn", { bg = colors.bg_light })
 hi("VertSplit", { fg = colors.gray, bg = "NONE" })
 hi("StatusLine", { fg = colors.fg, bg = colors.bg_light })
 hi("StatusLineNC", { fg = colors.fg_dark, bg = "NONE" })
-hi("TabLine", { fg = colors.fg_dark, bg = "NONE" })
-hi("TabLineSel", { fg = "NONE", bg = colors.purple, bold = true })
+hi("TabLine", { bg = "NONE" })
+hi("TabLineSel", { fg = colors.black, bg = colors.purple, bold = true })
 hi("TabLineFill", { bg = "NONE" })
 hi("Visual", { bg = colors.selection })
 hi("Search", { fg = colors.bg, bg = colors.search })
@@ -95,7 +134,7 @@ hi("Pmenu", { fg = colors.fg, bg = colors.bg_light })
 hi("PmenuSel", { fg = colors.bg, bg = colors.purple })
 hi("PmenuSbar", { bg = colors.gray })
 hi("PmenuThumb", { bg = colors.gray_light })
-hi("MatchParen", { fg = colors.orange, bold = true })
+hi("MatchParen", { bg = colors.purple })
 
 -- Syntax Highlighting
 hi("Comment", { fg = colors.fg_dark, italic = true })
@@ -182,13 +221,19 @@ hi("DiagnosticUnderlineInfo", { sp = colors.cyan, undercurl = true })
 hi("DiagnosticUnderlineHint", { sp = colors.gray_light, undercurl = true })
 
 -- Git
-hi("DiffAdd", { fg = colors.green, bg = "NONE" })
-hi("DiffChange", { fg = colors.yellow, bg = "NONE" })
+hi("DiffAdd", { bg = "NONE" })
+hi("DiffChange", { bg = "NONE" })
 hi("DiffDelete", { fg = colors.red, bg = "NONE" })
 hi("DiffText", { fg = colors.yellow, bg = colors.bg_light })
-hi("GitSignsAdd", { fg = colors.diff_add })
-hi("GitSignsChange", { fg = colors.diff_change })
-hi("GitSignsDelete", { fg = colors.diff_delete })
+hi("GitSignsAdd", { fg = colors.git.add })
+hi("GitSignsChange", { fg = colors.git.change })
+hi("GitSignsDelete", { fg = colors.git.delete })
+hi("GitSignsAddNr", { fg = colors.git.add })
+hi("GitSignsChangeNr", { fg = colors.git.change })
+hi("GitSignsDeleteNr", { fg = colors.git.delete })
+hi("GitSignsAddLn", { bg = "NONE" })
+hi("GitSignsChangeLn", { bg = "NONE" })
+hi("GitSignsDeleteLn", { bg = "NONE" })
 
 -- Telescope
 hi("TelescopeBorder", { fg = colors.cyan })
@@ -212,5 +257,22 @@ hi("NvimTreeGitDeleted", { fg = colors.red })
 -- Indent Blankline
 hi("IblIndent", { fg = colors.gray })
 hi("IblScope", { fg = colors.purple })
+
+-- Comment colors (ensure comments are gray, not white)
+hi("@comment", { fg = colors.light_grey, italic = true })
+hi("@comment.bash", { fg = colors.light_grey, italic = true })
+hi("@comment.lua", { fg = colors.light_grey, italic = true })
+hi("@comment.python", { fg = colors.light_grey, italic = true })
+hi("@comment.javascript", { fg = colors.light_grey, italic = true })
+hi("@comment.typescript", { fg = colors.light_grey, italic = true })
+hi("@comment.documentation", { fg = colors.light_grey, italic = true })
+hi("@lsp.type.comment", { fg = colors.light_grey, italic = true })
+
+-- Override @spell to prevent it from overriding comment colors
+-- Use nvim_set_hl because @spell may not exist yet at colorscheme load time
+vim.api.nvim_set_hl(0, "@spell", {})
+
+-- Store colors in global for plugins to access
+_G.CustomColors = colors
 
 return colors

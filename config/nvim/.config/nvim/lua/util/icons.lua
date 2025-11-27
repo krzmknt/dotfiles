@@ -10,8 +10,8 @@ icons.mode = {
 }
 
 icons.diagnostic = {
-	-- error = "",
-	error = " ",
+	error = "",
+	-- error = " ",
 	warn = " ",
 	info = " ",
 	hint = " ",

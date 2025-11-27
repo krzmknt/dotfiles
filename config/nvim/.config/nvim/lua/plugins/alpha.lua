@@ -5,7 +5,7 @@ return {
 	config = function()
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
-		local colors = require("util.color")
+		local colors = _G.CustomColors
 
 		-- Set pink color for header
 		vim.api.nvim_set_hl(0, "AlphaHeader", { fg = colors.pink, bold = true })

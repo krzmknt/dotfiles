@@ -6,7 +6,7 @@ local M = {}
 -- pcall(require,packageName) の結果の 1 つ目が false の場合はログ出力して nil を返します。
 -- したがって、次のように nil チェックをして読み込み失敗時のハンドリングを行ってください。
 --
--- ```
+-- ```lua
 -- local avante = plugin.load("avante")
 -- if avante == nil then return end
 -- ```
