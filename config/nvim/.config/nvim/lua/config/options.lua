@@ -159,6 +159,20 @@ local options = {
 	history = 1000, -- Maximum number of entries in the command-line history.
 
 	-----------------------------
+	-- Fill characters
+	-----------------------------
+	fillchars = {
+		eob = " ", -- Hide ~ at end of buffer
+		vert = "│", -- Thin vertical separator
+		horiz = "─", -- Thin horizontal separator
+		horizup = "┴",
+		horizdown = "┬",
+		vertleft = "┤",
+		vertright = "├",
+		verthoriz = "┼",
+	},
+
+	-----------------------------
 	-- Others
 	-----------------------------
 	conceallevel = 0, -- Don't hide any text.

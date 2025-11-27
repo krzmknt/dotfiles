@@ -65,17 +65,6 @@ require("lazy").setup({
 		--   opts = {}
 		-- },
 
-		--- メッセージやコマンドラインの表示をリッチにする
-		--- @see https://github.com/folke/noice.nvim
-		-- {
-		--   "folke/noice.nvim",
-		--   event = "VeryLazy",
-		--   dependencies = {
-		--     "MunifTanjim/nui.nvim",
-		--     { "rcarriga/nvim-notify", opts = { top_down = true, stages = "static" } },
-		--   },
-		-- },
-
 		------------------------------------
 		-- Completion
 

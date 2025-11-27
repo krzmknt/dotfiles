@@ -7,46 +7,21 @@ return {
 		local icons = require("util.icons")
 		local colors = _G.CustomColors
 
-		local theme = {
-			normal = {
-				a = { fg = colors.dark_cyan, bg = colors.black },
-				b = { fg = colors.white, bg = colors.black },
-				c = { fg = colors.white, bg = colors.black },
-			},
-			insert = { a = { fg = colors.yellow, bg = colors.black } },
-			visual = { a = { fg = colors.red, bg = colors.black } },
-			replace = { a = { fg = colors.red, bg = colors.black } },
-			inactive = {
-				a = { fg = colors.white, bg = colors.black },
-				b = { fg = colors.white, bg = colors.black },
-				c = { fg = colors.white, bg = colors.black },
-			},
-		}
-
+		-- Use auto theme and override with transparent highlights after setup
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = theme,
+				theme = "auto",
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "", right = "" },
-				disabled_filetypes = {},
+				disabled_filetypes = {
+					statusline = { "NvimTree" },
+				},
 				draw_empty = false,
+				globalstatus = true,
 			},
 			sections = {
-				lualine_a = {
-					{
-						"mode",
-						fmt = function(mode)
-							return " " .. icons.mode[mode] .. " "
-						end,
-						icons_enabled = true,
-						separator = {
-							left = "",
-							right = "",
-						},
-						padding = { left = 1, right = 1 },
-					},
-				},
+				lualine_a = {},
 				lualine_b = {
 					{
 						"branch",
@@ -58,10 +33,6 @@ return {
 						colored = true,
 						draw_empty = true,
 						padding = { left = 0, right = 1 },
-						separator = {
-							left = " ",
-							right = " ",
-						},
 					},
 				},
 				lualine_c = {},
@@ -71,13 +42,14 @@ return {
 						colored = true,
 						sources = { "nvim_lsp" },
 						symbols = {
-							error = icons.diagnostic.error,
+							error = icons.diagnostic.error .. " ",
 							warn = icons.diagnostic.warn,
 							info = icons.diagnostic.info,
 							hint = icons.diagnostic.hint,
 						},
 						always_visible = true,
 						update_in_insert = true,
+						padding = { left = 1, right = 2 },
 					},
 				},
 				lualine_y = {
@@ -86,10 +58,6 @@ return {
 						colored = true,
 						icon_only = false,
 						icon = { align = "left" },
-						separator = {
-							left = "",
-							right = "",
-						},
 						padding = { left = 1, right = 1 },
 					},
 					{
@@ -111,6 +79,36 @@ return {
 			},
 			tabline = {},
 			extensions = {},
+		})
+
+		-- Function to make all lualine highlights transparent
+		local function make_lualine_transparent()
+			vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+			vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+
+			-- Override ALL lualine highlight groups
+			for name, hl in pairs(vim.api.nvim_get_hl(0, {})) do
+				if name:match("^lualine") then
+					vim.api.nvim_set_hl(0, name, { fg = hl.fg, bg = "NONE", bold = hl.bold, italic = hl.italic })
+				end
+			end
+		end
+
+		-- Apply after lualine creates its highlights
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			callback = function()
+				vim.defer_fn(make_lualine_transparent, 100)
+			end,
+		})
+
+		-- Apply immediately after setup (with longer delay to ensure lualine is ready)
+		vim.defer_fn(make_lualine_transparent, 200)
+
+		-- Re-apply when entering buffer (lualine may recreate highlights)
+		vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
+			callback = function()
+				vim.schedule(make_lualine_transparent)
+			end,
 		})
 	end,
 }
