@@ -15,31 +15,31 @@ local M = {}
 -- @param enable boolean: 読み込みが有効がどうか。false の場合は読み込まない
 -- @return table: require の結果
 function M.load(props)
-  props = props or {}
-  props.pluginName = props.pluginName or nil
-  if props.enable == nil then
-    props.enable = true
-  end
+	props = props or {}
+	props.pluginName = props.pluginName or nil
+	if props.enable == nil then
+		props.enable = true
+	end
 
-  if props.pluginName == nil then
-    logger.error("The argument \"pluginName\" must be specified.")
-    return nil
-  end
+	if props.pluginName == nil then
+		logger.error('The argument "pluginName" must be specified.')
+		return nil
+	end
 
-  if not props.enable then
-    logger.info(string.format("Skip loading \"%s\".", props.pluginName))
-    return nil
-  end
+	if not props.enable then
+		logger.info(string.format('Skip loading "%s".', props.pluginName))
+		return nil
+	end
 
-  local ok, package = pcall(require, props.pluginName)
+	local ok, package = pcall(require, props.pluginName)
 
-  if ok then
-    logger.info(string.format("Loaded \"%s\".", props.pluginName))
-    return package
-  end
+	if ok then
+		logger.info(string.format('Loaded "%s".', props.pluginName))
+		return package
+	end
 
-  logger.error(package)
-  return nil
+	logger.error(package)
+	return nil
 end
 
 return M

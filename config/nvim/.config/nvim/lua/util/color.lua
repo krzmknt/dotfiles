@@ -1,53 +1,53 @@
 return {
-  none        = "none",
+	none = "none",
 
-  white       = '#cdcdcd',
-  diff_text   = "#274964",
-  bg2         = "#30363f",
-  bg3         = "#323641",
-  bg1         = "#282c34",
-  diff_delete = "#2d2223",
-  grey        = "#1f2329",
-  bg0         = "#1f2329",
-  diff_add    = "#272e23",
-  diff_change = "#172a3a",
-  black       = "#0e1013",
+	white = "#cdcdcd",
+	diff_text = "#274964",
+	bg2 = "#30363f",
+	bg3 = "#323641",
+	bg1 = "#282c34",
+	diff_delete = "#2d2223",
+	grey = "#1f2329",
+	bg0 = "#1f2329",
+	diff_add = "#272e23",
+	diff_change = "#172a3a",
+	black = "#0e1013",
 
-  bg_blue     = "#61afef",
-  bg_d        = "#181b20",
-  bg_yellow   = "#e8c88c",
+	bg_blue = "#61afef",
+	bg_d = "#181b20",
+	bg_yellow = "#e8c88c",
 
-  blue        = "#4fa6ed",
-  cyan        = "#48b0bd",
-  dark_cyan   = "#266269",
-  dark_purple = "#7e3992",
-  dark_red    = "#8b3434",
-  dark_yellow = "#835d1a",
-  fg          = "#a0a8b7",
-  green       = "#8ebd6b",
-  light_grey  = "#5c6370",
-  orange      = "#cc9057",
-  purple      = "#bf68d9",
-  red         = "#e55561",
-  pink        = "#d8589f",
-  yellow      = "#e2b86b",
-  a           = "#A8DADC",
-  b           = "#457B9D",
-  c           = "#1D3557",
-  deep_blue   = "#17263D",
+	blue = "#4fa6ed",
+	cyan = "#48b0bd",
+	dark_cyan = "#266269",
+	dark_purple = "#7e3992",
+	dark_red = "#8b3434",
+	dark_yellow = "#835d1a",
+	fg = "#a0a8b7",
+	green = "#8ebd6b",
+	light_grey = "#5c6370",
+	orange = "#cc9057",
+	purple = "#bf68d9",
+	red = "#e55561",
+	pink = "#d8589f",
+	yellow = "#e2b86b",
+	a = "#A8DADC",
+	b = "#457B9D",
+	c = "#1D3557",
+	deep_blue = "#17263D",
 
-  -- Diagnostic colors
-  diagnostic = {
-    error = "#E06C75",
-    warn  = "#E5C07B",
-    info  = "#61AFEF",
-    hint  = "#56B6C2",
-  },
+	-- Diagnostic colors
+	diagnostic = {
+		error = "#E06C75",
+		warn = "#E5C07B",
+		info = "#61AFEF",
+		hint = "#56B6C2",
+	},
 
-  -- Git colors
-  git = {
-    add    = "#d8589f",  -- pink
-    change = "#4fa6ed",  -- blue
-    delete = "#1f2329",  -- grey
-  },
+	-- Git colors
+	git = {
+		add = "#d8589f", -- pink
+		change = "#4fa6ed", -- blue
+		delete = "#1f2329", -- grey
+	},
 }

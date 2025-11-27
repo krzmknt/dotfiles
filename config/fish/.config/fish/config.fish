@@ -127,7 +127,22 @@ end
 
 function config
   set plugin $argv[1]
+
+  # Check if plugin argument is provided
+  if test -z "$plugin"
+    echo "Error: Please specify a config name (e.g., config nvim, config wezterm)" >&2
+    return 1
+  end
+
   set config_path ~/ghq/github.com/krzmknt/dotfiles/config/$plugin
+
+  # Check if config directory exists
+  if not test -d $config_path
+    echo "Error: Config '$plugin' not found in ~/ghq/github.com/krzmknt/dotfiles/config/" >&2
+    echo "Available configs:" >&2
+    ls ~/ghq/github.com/krzmknt/dotfiles/config/ >&2
+    return 1
+  end
 
   # ディレクトリ配下のファイルを再帰的に取得（隠しファイルも含む）
   set files (find $config_path -type f 2>/dev/null)

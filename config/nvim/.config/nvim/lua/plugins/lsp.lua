@@ -164,7 +164,8 @@ return {
                 },
                 diagnostics = {
                   globals = { "vim" },
-                  disable = { "undefined-global" },  -- Suppress undefined-global warnings
+                  -- Disable specific diagnostics
+                  disable = { "missing-fields", "incomplete-signature-doc" },
                 },
                 workspace = {
                   library = vim.api.nvim_get_runtime_file("", true),
@@ -172,6 +173,13 @@ return {
                 },
                 telemetry = {
                   enable = false,
+                },
+                format = {
+                  enable = true,
+                  defaultConfig = {
+                    indent_style = "space",
+                    indent_size = "2",
+                  }
                 },
               },
             },
@@ -488,6 +496,8 @@ return {
               "handlebars",
             },
           }),
+          -- Stylua for Lua formatting
+          null_ls.builtins.formatting.stylua,
         },
         on_attach = function(client, bufnr)
           if client.supports_method("textDocument/formatting") then
@@ -498,13 +508,16 @@ return {
               group = augroup,
               buffer = bufnr,
               callback = function()
-                vim.lsp.buf.format({
-                  bufnr = bufnr,
-                  filter = function(formatting_client)
-                    -- Only use null-ls for formatting
-                    return formatting_client.name == "null-ls"
-                  end,
-                })
+                -- Suppress the Neovim 0.11.3 LSP sync.lua error
+                pcall(function()
+                  vim.lsp.buf.format({
+                    bufnr = bufnr,
+                    filter = function(formatting_client)
+                      -- Only use null-ls for formatting
+                      return formatting_client.name == "null-ls"
+                    end,
+                  })
+                end)
               end,
             })
           end

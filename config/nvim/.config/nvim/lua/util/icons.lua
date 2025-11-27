@@ -1,47 +1,45 @@
 local icons = {}
 
 icons.mode = {
-  ["NORMAL"]  = "",
-  ["INSERT"]  = "",
-  ["VISUAL"]  = "󰍉",
-  ["V-LINE"]  = "󰍉",
-  ["V-BLOCK"] = "󰍉",
-  ["COMMAND"] = "",
+	["NORMAL"] = "",
+	["INSERT"] = "",
+	["VISUAL"] = "󰍉",
+	["V-LINE"] = "󰍉",
+	["V-BLOCK"] = "󰍉",
+	["COMMAND"] = "",
 }
 
 icons.diagnostic = {
-  -- error = "",
-  error = ' ',
-  warn = ' ',
-  info = ' ',
-  hint = ' '
+	-- error = "",
+	error = " ",
+	warn = " ",
+	info = " ",
+	hint = " ",
 }
 
 icons.platform = {
-  windows = "",
-  unix = "",
-  mac = "",
+	windows = "",
+	unix = "",
+	mac = "",
 }
 
 icons.separator = {
-  rounded = {
-    left = "",
-    right = "",
-  }
+	rounded = {
+		left = "",
+		right = "",
+	},
 }
 
 icons.filetype = {
-  readonly = "󰌾 "
+	readonly = "󰌾 ",
 }
 
-
 icons.git = {
-  logo = "󰊢",
-  branch = "",
-  added = "",
-  modified = "",
-  removed = "",
-
+	logo = "󰊢",
+	branch = "",
+	added = "",
+	modified = "",
+	removed = "",
 }
 
 return icons
