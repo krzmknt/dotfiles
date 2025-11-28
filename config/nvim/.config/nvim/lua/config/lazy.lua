@@ -309,21 +309,27 @@ require("lazy").setup({
 			"lewis6991/gitsigns.nvim",
 			dependencies = { "nvim-lua/plenary.nvim" },
 			config = function()
-				vim.api.nvim_set_hl(0, "GitSignsAddInline", { bg = "#2d4a3e", fg = "#a8ddb5" })
-				vim.api.nvim_set_hl(0, "GitSignsChangeInline", { bg = "#3d4057", fg = "#c8b8e8" })
-				vim.api.nvim_set_hl(0, "GitSignsDeleteInline", { bg = "#4a2d3e", fg = "#e8b8c8" })
+				local colors = _G.CustomColors
+				local icons = require("util.icons")
+
+				-- Inline highlights (word diff)
+				vim.api.nvim_set_hl(0, "GitSignsAddInline", { bg = "#1a3a2a", fg = colors.git.add })
+				vim.api.nvim_set_hl(0, "GitSignsChangeInline", { bg = "#3a3020", fg = colors.git.change })
+				vim.api.nvim_set_hl(0, "GitSignsDeleteInline", { bg = "#3a1a1a", fg = colors.git.delete })
+
+				-- Line highlights
 				vim.api.nvim_set_hl(0, "GitSignsAddLn", { bg = "#1a2e26" })
-				vim.api.nvim_set_hl(0, "GitSignsChangeLn", { bg = "#1f1e33" })
-				vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { bg = "#2e1a26" })
+				vim.api.nvim_set_hl(0, "GitSignsChangeLn", { bg = "#2e2a1a" })
+				vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { bg = "#2e1a1a" })
 
 				require("gitsigns").setup({
 					signs = {
-						add = { text = "│" },
-						change = { text = "│" },
-						delete = { text = "_" },
-						topdelete = { text = "‾" },
-						changedelete = { text = "~" },
-						untracked = { text = "┆" },
+						add = { text = icons.git.added },
+						change = { text = icons.git.modified },
+						delete = { text = icons.git.removed },
+						topdelete = { text = icons.git.removed },
+						changedelete = { text = icons.git.modified },
+						untracked = { text = icons.git.untracked },
 					},
 
 					signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`

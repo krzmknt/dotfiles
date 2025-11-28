@@ -69,11 +69,11 @@ local colors = {
 		hint = "#56B6C2",
 	},
 
-	-- Git colors
+	-- Git colors (unified)
 	git = {
-		add = "#d8589f", -- pink
-		change = "#4fa6ed", -- blue
-		delete = "#1f2329", -- grey
+		add = "#00ff7f", -- green
+		change = "#ffa500", -- orange
+		delete = "#ff6b6b", -- red
 	},
 }
 
@@ -255,9 +255,9 @@ hi("NvimTreeFolderName", { fg = colors.cyan, bg = "NONE" })
 hi("NvimTreeFolderIcon", { fg = colors.cyan, bg = "NONE" })
 hi("NvimTreeOpenedFolderName", { fg = colors.cyan, bg = "NONE", bold = true })
 hi("NvimTreeRootFolder", { fg = colors.purple, bg = "NONE", bold = true })
-hi("NvimTreeGitDirty", { fg = colors.orange, bg = "NONE" })
-hi("NvimTreeGitNew", { fg = colors.green, bg = "NONE" })
-hi("NvimTreeGitDeleted", { fg = colors.red, bg = "NONE" })
+hi("NvimTreeGitDirty", { fg = colors.git.change, bg = "NONE" })
+hi("NvimTreeGitNew", { fg = colors.git.add, bg = "NONE" })
+hi("NvimTreeGitDeleted", { fg = colors.git.delete, bg = "NONE" })
 
 -- Indent Blankline
 hi("IblIndent", { fg = colors.gray })

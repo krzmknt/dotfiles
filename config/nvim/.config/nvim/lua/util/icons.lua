@@ -40,6 +40,7 @@ icons.git = {
 	added = "",
 	modified = "",
 	removed = "",
+	untracked = "󰜛",
 }
 
 return icons

@@ -33,6 +33,16 @@ return {
 						colored = true,
 						draw_empty = true,
 						padding = { left = 0, right = 1 },
+						diff_color = {
+							added = { fg = colors.git.add },
+							modified = { fg = colors.git.change },
+							removed = { fg = colors.git.delete },
+						},
+						symbols = {
+							added = icons.git.added .. " ",
+							modified = icons.git.modified .. " ",
+							removed = icons.git.removed .. " ",
+						},
 					},
 				},
 				lualine_c = {},

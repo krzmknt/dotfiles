@@ -44,8 +44,8 @@ config.colors = {
 	cursor_border = "#ccaa00", -- カーソルの境界線色
 }
 
-config.text_background_opacity = 1
-config.window_background_opacity = 0.7
+config.text_background_opacity = 0.5
+config.window_background_opacity = 0.5
 config.macos_window_background_blur = 1
 
 -----------------------------
