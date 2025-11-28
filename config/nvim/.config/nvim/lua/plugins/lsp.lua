@@ -238,6 +238,11 @@ return {
 							require("lspconfig").eslint.setup({
 								capabilities = capabilities,
 								on_attach = on_attach,
+								settings = {
+									experimental = {
+										useFlatConfig = true, -- Use eslint.config.js (flat config)
+									},
+								},
 							})
 						end,
 

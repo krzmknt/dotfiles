@@ -7,6 +7,7 @@ local options = {
 	-- Mode
 	-----------------------------
 	showmode = false, -- Don't show the mode since we use a statusline plugin.
+	laststatus = 0, -- Disable bottom statusline (using winbar instead)
 
 	-----------------------------
 	-- Color

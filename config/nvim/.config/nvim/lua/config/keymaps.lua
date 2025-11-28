@@ -104,8 +104,8 @@ map(mode.normal, "<Leader>/", "<Plug>NERDCommenterToggle", opts)
 -- Cursor
 
 -- rainbowhxch/accelerated-jk.nvim' の設定
--- map(mode.normal, 'j', '<Plug>(accelerated_jk_gj)', opts)
--- map(mode.normal, 'k', '<Plug>(accelerated_jk_gk)', opts)
+map(mode.normal, "j", "<Plug>(accelerated_jk_gj)", opts)
+map(mode.normal, "k", "<Plug>(accelerated_jk_gk)", opts)
 
 -- Jump to the beginning of the line
 map(mode.normal_visual, "<Left>", "^", opts)

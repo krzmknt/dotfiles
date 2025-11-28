@@ -85,6 +85,35 @@ require("lazy").setup({
 			cmd = "Glance",
 		},
 
+		--- Diagnostics list
+		--- @see https://github.com/folke/trouble.nvim
+		{
+			"folke/trouble.nvim",
+			dependencies = { "nvim-tree/nvim-web-devicons" },
+			cmd = "Trouble",
+			keys = {
+				{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+				{ "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+				{ "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
+				{ "]d", function()
+					require("trouble").next({ skip_groups = true, jump = true })
+				end, desc = "Next diagnostic" },
+				{ "[d", function()
+					require("trouble").prev({ skip_groups = true, jump = true })
+				end, desc = "Previous diagnostic" },
+			},
+			opts = {
+				auto_close = false,
+				auto_open = false,
+				auto_preview = true,
+				focus = true,
+				icons = {
+					folder_closed = " ",
+					folder_open = " ",
+				},
+			},
+		},
+
 		------------------------------------
 		-- AI
 
@@ -383,10 +412,22 @@ require("lazy").setup({
 				"nvim-tree/nvim-web-devicons",
 			},
 			config = function()
+				local icons = require("util.icons")
 				require("nvim-tree").setup({
 					view = {
 						width = 50,
 						side = "left",
+					},
+					diagnostics = {
+						enable = true,
+						show_on_dirs = true,
+						show_on_open_dirs = false,
+						icons = {
+							hint = icons.diagnostic.hint,
+							info = icons.diagnostic.info,
+							warning = icons.diagnostic.warn,
+							error = icons.diagnostic.error,
+						},
 					},
 					update_focused_file = {
 						enable = true,

@@ -38,13 +38,8 @@ return {
 					truncate_names = true,
 					tab_size = 18,
 
-					-- Diagnostics
-					diagnostics = "nvim_lsp",
-					diagnostics_update_in_insert = false,
-					diagnostics_indicator = function(count, level, diagnostics_dict, context)
-						local icon = level:match("error") and " " or " "
-						return " " .. icon .. count
-					end,
+					-- Diagnostics (disabled - don't change display based on diagnostics)
+					diagnostics = false,
 
 					-- Color and style
 					color_icons = true,
