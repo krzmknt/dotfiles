@@ -28,15 +28,15 @@ return {
 					left_trunc_marker = "",
 					right_trunc_marker = "",
 
-					-- Name formatting
+					-- Name formatting (no truncation, auto-expand)
 					name_formatter = function(buf)
 						-- Hide buffer number, show only filename
 						return buf.name
 					end,
-					max_name_length = 18,
-					max_prefix_length = 15,
-					truncate_names = true,
-					tab_size = 18,
+					max_name_length = 100,
+					max_prefix_length = 100,
+					truncate_names = false,
+					tab_size = 0,
 
 					-- Diagnostics (disabled - don't change display based on diagnostics)
 					diagnostics = false,

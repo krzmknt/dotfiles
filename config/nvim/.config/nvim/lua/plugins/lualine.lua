@@ -22,29 +22,7 @@ return {
 			},
 			sections = {
 				lualine_a = {},
-				lualine_b = {
-					{
-						"branch",
-						draw_empty = false,
-						padding = { left = 1, right = 1 },
-					},
-					{
-						"diff",
-						colored = true,
-						draw_empty = true,
-						padding = { left = 0, right = 1 },
-						diff_color = {
-							added = { fg = colors.git.add },
-							modified = { fg = colors.git.change },
-							removed = { fg = colors.git.delete },
-						},
-						symbols = {
-							added = icons.git.added .. " ",
-							modified = icons.git.modified .. " ",
-							removed = icons.git.removed .. " ",
-						},
-					},
-				},
+				lualine_b = {},
 				lualine_c = {},
 				lualine_x = {},
 				lualine_y = {
@@ -83,6 +61,22 @@ return {
 						always_visible = true,
 						update_in_insert = true,
 						padding = { left = 1, right = 1 },
+					},
+					{
+						"diff",
+						colored = true,
+						draw_empty = false,
+						padding = { left = 1, right = 1 },
+						diff_color = {
+							added = { fg = colors.git.add },
+							modified = { fg = colors.git.change },
+							removed = { fg = colors.git.delete },
+						},
+						symbols = {
+							added = icons.git.added .. " ",
+							modified = icons.git.modified .. " ",
+							removed = icons.git.removed .. " ",
+						},
 					},
 				},
 			},
