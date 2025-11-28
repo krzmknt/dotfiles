@@ -62,9 +62,13 @@ if [ "$untracked" != "0" ]; then
   output+=" #[fg=#ff6b6b]$icon_untracked $untracked"
 fi
 
-# Show line diff
-output+=" #[fg=#00ff7f]$icon_added $added"
-output+=" #[fg=#ff6b6b]$icon_removed $removed"
+# Show line diff (only if non-zero)
+if [ "$added" != "0" ]; then
+  output+=" #[fg=#00ff7f]$icon_added $added"
+fi
+if [ "$removed" != "0" ]; then
+  output+=" #[fg=#ff6b6b]$icon_removed $removed"
+fi
 
 # Only show ahead/behind if there's a difference
 if [ "$ahead" != "0" ] || [ "$behind" != "0" ]; then
