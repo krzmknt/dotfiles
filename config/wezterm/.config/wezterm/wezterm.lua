@@ -44,9 +44,22 @@ config.colors = {
 	cursor_border = "#ccaa00", -- カーソルの境界線色
 }
 
-config.text_background_opacity = 0.5
-config.window_background_opacity = 0.5
-config.macos_window_background_blur = 1
+-----------------------------
+-- local settings
+-----------------------------
+-- Load local.lua if exists (not tracked by git)
+-- To customize opacity/blur settings, create local.lua:
+--
+--   return function(config)
+--       config.text_background_opacity = 0.7
+--       config.window_background_opacity = 0.7
+--       config.macos_window_background_blur = 0
+--   end
+--
+local ok, local_config = pcall(require, "local")
+if ok then
+	local_config(config)
+end
 
 -----------------------------
 -- tab bar
