@@ -1,9 +1,35 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
 local config = {}
 
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
+
+-----------------------------
+-- opacity control
+-----------------------------
+local opacity_step = 0.1
+local min_opacity = 0.1
+local max_opacity = 1.0
+
+wezterm.on("increase-opacity", function(window, _)
+	local overrides = window:get_config_overrides() or {}
+	local current = overrides.window_background_opacity or 1.0
+	local new_opacity = math.min(current + opacity_step, max_opacity)
+	overrides.window_background_opacity = new_opacity
+	overrides.text_background_opacity = new_opacity
+	window:set_config_overrides(overrides)
+end)
+
+wezterm.on("decrease-opacity", function(window, _)
+	local overrides = window:get_config_overrides() or {}
+	local current = overrides.window_background_opacity or 1.0
+	local new_opacity = math.max(current - opacity_step, min_opacity)
+	overrides.window_background_opacity = new_opacity
+	overrides.text_background_opacity = new_opacity
+	window:set_config_overrides(overrides)
+end)
 
 -----------------------------
 -- general
@@ -28,6 +54,17 @@ config.keys = {
 		key = "n",
 		mods = "SHIFT|CTRL",
 		action = wezterm.action.TogglePaneZoomState,
+	},
+	-- Opacity controls
+	{
+		key = "UpArrow",
+		mods = "CTRL|SHIFT",
+		action = act.EmitEvent("increase-opacity"),
+	},
+	{
+		key = "DownArrow",
+		mods = "CTRL|SHIFT",
+		action = act.EmitEvent("decrease-opacity"),
 	},
 }
 
