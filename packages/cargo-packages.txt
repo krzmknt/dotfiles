@@ -1,0 +1,8 @@
+# Rust CLI tools installed via cargo
+# One package per line. Comments start with #
+
+bat
+eza
+fd-find
+ripgrep
+tree-sitter-cli

@@ -1,0 +1,17 @@
+# Amazon Linux 2023 / Fedora packages
+# Core development tools
+git
+curl
+stow
+tmux
+neovim
+jq
+fzf
+wget
+tree
+gnupg2
+
+# Build essentials for cargo
+gcc
+pkg-config
+openssl-devel

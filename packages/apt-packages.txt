@@ -1,0 +1,17 @@
+# Ubuntu/Debian packages
+# Core development tools
+git
+curl
+stow
+tmux
+neovim
+jq
+fzf
+wget
+tree
+gnupg
+
+# Build essentials for cargo
+build-essential
+pkg-config
+libssl-dev

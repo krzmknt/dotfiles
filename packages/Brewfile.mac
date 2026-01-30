@@ -1,6 +1,13 @@
+# macOS-specific packages and applications
+# GUI applications and macOS-only tools
+
 tap "koekeishiya/formulae"
+
+# macOS-specific CLI tools
 brew "skhd"
 brew "yabai"
+
+# GUI Applications (Casks)
 cask "appcleaner"
 cask "docker"
 cask "git-credential-manager-core"

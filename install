@@ -1,77 +1,47 @@
 #!/bin/bash
+#
+# Cross-platform dotfiles installer
+# Supports: macOS, Ubuntu, Amazon Linux 2023, Fedora
+#
 
 set -e
 
 # ===========================
-# Clone this repo
-
-# If this repo is not installed at your home, clone it
+# Clone this repo (if needed)
 
 remote_repository_path=github.com/krzmknt/dotfiles
 local_repository_path=~/ghq/$remote_repository_path
-if [ ! -d $local_repository_path ]; then
-  git clone https://$remote_repository_path $local_repository_path
+
+if [ ! -d "$local_repository_path" ]; then
+  echo "Cloning dotfiles repository..."
+  mkdir -p ~/ghq/github.com/krzmknt
+  git clone "https://$remote_repository_path" "$local_repository_path"
 fi
-cd $local_repository_path
+
+cd "$local_repository_path"
 
 # ===========================
-# Homebrew
+# Run install scripts in order
 
-# Check if Homebrew is installed
-if ! command -v brew &>/dev/null; then
-  echo "Homebrew is not installed. Installing now..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+INSTALL_DIR="$local_repository_path/install.d"
 
-  # Configure environment variables (considering M1/M2 Macs)
-  if [[ $(uname -m) == "arm64" ]]; then
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-    eval "$($(brew --prefix)/bin/brew shellenv)"
-  else
-    echo 'eval "$(/usr/local/bin/brew shellenv)"' >> ~/.bash_profile
-    eval "$($(brew --prefix)/bin/brew shellenv)"
+echo "Starting dotfiles installation..."
+echo ""
+
+for script in "$INSTALL_DIR"/*.sh; do
+  if [[ -f "$script" ]]; then
+    echo "========================================"
+    echo "Running: $(basename "$script")"
+    echo "========================================"
+    source "$script"
+    echo ""
   fi
+done
 
-  echo "Homebrew has been installed."
-else
-  echo "Homebrew is already installed."
-fi
-
-# Check for the existence of the Brewfile
-BREWFILE="./Brewfile"
-if [[ ! -f "$BREWFILE" ]]; then
-  echo "Brewfile not found. Exiting script."
-  exit 1
-fi
-
-# Update Homebrew
-echo "Updating Homebrew..."
-brew update
-
-# Install packages based on the Brewfile
-echo "Installing packages from Brewfile..."
-brew bundle --file="$BREWFILE"
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Installing packages from Brewfile.mac..."
-    brew bundle --file=Brewfile.mac
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    echo "Installing packages from Brewfile.linux..."
-    brew bundle --file=Brewfile.linux
-fi
-
-# ===========================
-# Stow
-
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ claude
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ fish
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ hammerspoon
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ karabiner
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ mise
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ nvim
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ peco
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ skhd
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ stackline
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ tmux
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ wezterm
-stow -v -d ~/ghq/github.com/krzmknt/dotfiles/config -t ~ yabai
-
+echo "========================================"
+echo "Installation complete!"
+echo "========================================"
+echo ""
+echo "Please restart your shell or run:"
+echo "  source ~/.zshrc"
+echo ""

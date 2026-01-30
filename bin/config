@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# config - open dotfiles config and reload
+
+set -e
+
+DOTFILES_DIR=~/ghq/github.com/krzmknt/dotfiles
+CONFIG_DIR="$DOTFILES_DIR/config"
+
+plugin=$1
+
+if [[ -z "$plugin" ]]; then
+  echo "Error: Please specify a config name (e.g., config nvim, config wezterm)" >&2
+  echo "Available configs:" >&2
+  echo "  common:" >&2
+  ls "$CONFIG_DIR/common" 2>/dev/null | sed 's/^/    /' >&2
+  echo "  macos:" >&2
+  ls "$CONFIG_DIR/macos" 2>/dev/null | sed 's/^/    /' >&2
+  exit 1
+fi
+
+# Search in common first, then macos
+if [[ -d "$CONFIG_DIR/common/$plugin" ]]; then
+  config_path="$CONFIG_DIR/common/$plugin"
+elif [[ -d "$CONFIG_DIR/macos/$plugin" ]]; then
+  config_path="$CONFIG_DIR/macos/$plugin"
+else
+  echo "Error: Config '$plugin' not found" >&2
+  echo "Available configs:" >&2
+  echo "  common:" >&2
+  ls "$CONFIG_DIR/common" 2>/dev/null | sed 's/^/    /' >&2
+  echo "  macos:" >&2
+  ls "$CONFIG_DIR/macos" 2>/dev/null | sed 's/^/    /' >&2
+  exit 1
+fi
+
+# Count files in config directory
+files=($(find "$config_path" -type f 2>/dev/null))
+file_count=${#files[@]}
+
+if [[ $file_count -eq 1 ]]; then
+  ${EDITOR:-nvim} "${files[0]}"
+else
+  ${EDITOR:-nvim} "$config_path"
+fi
+
+# Reload config if applicable
+case $plugin in
+  zsh)
+    echo "Run: source ~/.zshrc"
+    ;;
+  fish)
+    echo "Run: source ~/.config/fish/config.fish"
+    ;;
+  tmux)
+    if [[ -n "$TMUX" ]]; then
+      tmux source-file ~/.tmux.conf
+      echo "tmux config reloaded"
+    else
+      echo "Run: tmux source-file ~/.tmux.conf"
+    fi
+    ;;
+  skhd)
+    skhd --reload
+    echo "skhd reloaded"
+    ;;
+  yabai)
+    yabai --restart-service
+    echo "yabai restarted"
+    ;;
+  karabiner)
+    echo "Karabiner auto-reloads on file change"
+    ;;
+esac

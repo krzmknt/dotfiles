@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'IMPORTANT USER PREFERENCE: The user is Japanese and studying English. Handle their messages based on language:\n\n**When the user writes in JAPANESE:**\n1. FIRST - Show \"**Japanese → English translation:**\" section:\n   - Translate their Japanese message to English\n   - Show the English translation\n\n2. SECOND - Show \"**My response:**\" section:\n   - Respond to their actual question or request\n\n**When the user writes in ENGLISH:**\n1. FIRST - Show \"**Corrected version:**\" section:\n   - If their English is perfect: say \"Your English is perfect! No corrections needed. ✓\"\n   - If corrections needed: show the corrected sentence\n\n2. SECOND - If you made corrections, show \"**Changes I made:**\" section:\n   - List each change you made\n   - Explain why you made each change\n\n3. THIRD - Show \"**My response:**\" section:\n   - Respond to their actual question or request\n\nBe consistent with this format in EVERY response.'"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\" sound name \"Glass\"'"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": false,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754060363654
+  }
+}

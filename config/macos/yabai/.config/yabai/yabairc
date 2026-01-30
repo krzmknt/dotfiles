@@ -1,0 +1,163 @@
+#!/usr/bin/env sh
+
+# See:
+# https://github.com/koekeishiya/yabai/blob/master/doc/yabai.asciidoc
+
+# ========================
+# Global Settings
+
+# Enable output of debug information to stdout.
+yabai -m config debug_output on
+
+# Specify top and bottom padding for a potential custom bar that you may be running.
+# main: Apply the given padding only to spaces located on the main display.
+# all: Apply the given padding to all spaces regardless of their display.
+# off: Do not apply any special padding.
+# yabai -m config external_bar all:20:20
+yabai -m config external_bar main:0:0
+
+# Changes the transparency of the macOS menubar.
+# If the value is 0.0, the menubar will no longer respond to mouse-events, effectively hiding the menubar permanently.
+# The menubar will automatically become fully opaque upon entering a native-fullscreen space, and adjusted down afterwards.
+yabai -m config menubar_opacity 1.0
+
+# [<BOOL_SEL>] When focusing a window, put the mouse at its center.
+yabai -m config mouse_follows_focus false
+
+# [autofocus|autoraise|off] Automatically focus the window under the mouse.
+yabai -m config focus_follows_mouse autofocus
+
+# default: Native macOS ordering.
+# vertical: Order by y-coordinate (followed by x-coordinate when equal).
+# horizontal: Order by x-coordinate (followed by y-coordinate when equal).
+yabai -m config display_arrangement_order horizontal
+
+# default: The display in which the window is created (standard macOS behaviour).
+# focused: The display that has focus when the window is created.
+# cursor: The display that currently holds the mouse cursor.
+yabai -m config window_origin_display cursor
+
+# Specify whether managed windows should become the first or second leaf-node.
+yabai -m config window_placement second_child
+
+# Specify where new managed windows will be inserted.
+yabai -m config window_insertion_point focused
+
+yabai -m config window_zoom_persist false
+
+# Draw shadow for windows.
+# System Integrity Protection must be partially disabled.
+yabai -m config window_shadow 1.0
+
+# Enable opacity for windows.
+# System Integrity Protection must be partially disabled.
+yabai -m config window_opacity true
+
+# Duration of transition between active / normal opacity.
+# System Integrity Protection must be partially disabled.
+yabai -m config window_opacity_duration 1.0
+
+# Opacity of the focused window.
+# System Integrity Protection must be partially disabled.
+yabai -m config active_window_opacity 1.0
+
+# Opacity of an unfocused window.
+# System Integrity Protection must be partially disabled.
+yabai -m config normal_window_opacity 0.5
+
+# Duration of window frame animation.
+# If 0.0, the change in dimension is not animated.
+# Requires Screen Recording permissions.
+# System Integrity Protection must be partially disabled.
+yabai -m config window_animation_duration 0
+
+# See: https://easings.net/
+yabai -m config window_animation_easing easeInOutBack
+
+# Color of the window --insert message and mouse_drag selection.
+# The purpose is to provide a visual preview of the new window frame.
+yabai -m config insert_feedback_color 0x00000000
+
+# Specify the size distribution when a window is split.
+yabai -m config split_ratio 0.5
+
+# Keyboard modifier used for moving and resizing windows.
+yabai -m config mouse_modifier alt
+
+# Action performed when pressing mouse_modifier + button1.
+yabai -m config mouse_action1 move
+
+# Action performed when pressing mouse_modifier + button2.
+yabai -m config mouse_action2 resize
+
+# Action performed when a bsp-managed window is dropped in the center of some other bsp-managed window.
+# [swap|stack]
+yabai -m config mouse_drop_action stack
+
+# ========================
+# Space Settings
+
+# Set the layout of the selected space.
+# [bsp|stack|float]
+yabai -m config layout bsp
+
+# split_type [vertical|horizontal|auto]
+# Specify how a window should be split.
+# vertical: The window is split along the y-axis.
+# horizontal: The window is split along the x-axis.
+# auto: The axis is determined based on width/height ratio.
+yabai -m config split_type
+
+padding=24
+
+# Padding added at the upper side of the selected space.
+yabai -m config top_padding 0
+
+# Padding added at the lower side of the selected space.
+yabai -m config bottom_padding $padding
+
+# Padding added at the left side of the selected space.
+yabai -m config left_padding $padding
+
+# Padding added at the right side of the selected space.
+yabai -m config right_padding $padding
+
+# Size of the gap that separates windows for the selected space.
+yabai -m config window_gap 24
+
+# Balance the window tree upon change, so that all windows occupy an equally sized area.
+yabai -m config auto_balance false
+
+# ========================
+# Settings for the specific displays
+
+# MacBook internal display
+# To show the uuid of the display, run `yabai -m query --displays`.
+space_indices_on_mbp_display="$(
+    yabai -m query --displays \
+        | jq -e 'map(select(.uuid == "2F917C32-1D54-4830-4A41-1078CDA43226")) | .[0].spaces[]'
+)"
+for index in "$space_indices_on_mbp_display"
+do
+    yabai -m config --space "$index" layout float
+done
+
+# ========================
+# Rules
+
+yabai -m rule --add app="^Calendar$"           manage=off
+yabai -m rule --add app="^Dictionary$"         manage=off
+yabai -m rule --add app="^System Settings$"    manage=off
+yabai -m rule --add app="^Disk Utility$"       manage=off
+yabai -m rule --add app="^Raycast$"            manage=off
+yabai -m rule --add app="^Finder$"             manage=off
+yabai -m rule --add app="^python$"             manage=off
+yabai -m rule --add app="^Music$"              manage=off
+yabai -m rule --add app="^Parallels Desktop$"  manage=off
+yabai -m rule --add app="^Windows 11$"         manage=off
+yabai -m rule --add app="^Stickies$"           manage=off
+yabai -m rule --add app="^zoom.us$"            manage=off
+yabai -m rule --add app="^Kindle$"             manage=off
+yabai -m rule --add app="^KiCad$"              manage=off
+
+echo "yabai configuration loaded..."
