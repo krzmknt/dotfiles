@@ -11,6 +11,7 @@ export PATH="$HOME/ghq/github.com/krzmknt/dotfiles/bin:$PATH"
 # API Keys
 [[ -f ~/keys/openai ]] && source ~/keys/openai
 [[ -f ~/keys/anthropic ]] && source ~/keys/anthropic
+[[ -f ~/keys/github ]] && source ~/keys/github
 
 # ===========================
 # Prompt
@@ -19,10 +20,45 @@ export PATH="$HOME/ghq/github.com/krzmknt/dotfiles/bin:$PATH"
 autoload -U colors && colors
 setopt PROMPT_SUBST
 
+# Short path: relative from git root (in repo) or absolute (outside repo)
+# Each directory component is truncated to max 3 characters
+_short_path() {
+  local git_root
+  git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+
+  local path
+  if [[ -n "$git_root" ]]; then
+    path=${PWD#$git_root}
+    path=${path#/}
+  else
+    path=$PWD
+  fi
+
+  if [[ -z "$path" ]]; then
+    echo ""
+    return
+  fi
+
+  local -a parts
+  parts=(${(s:/:)path})
+  local result="" part
+  for part in "${parts[@]}"; do
+    [[ -n "$result" ]] && result="$result/"
+    result="$result${part:0:3}"
+  done
+
+  # Preserve leading / for absolute paths
+  if [[ "$path" == /* ]]; then
+    echo "/$result"
+  else
+    echo "$result"
+  fi
+}
+
 # Simple prompt with yellow arrow (matching fish)
 # Using 256-color yellow (178) which is close to #e2b86b
 # Nerd Font chevron right (U+F054)
-PROMPT=$'%F{178}\uf054 %f'
+PROMPT=$'%F{178}$(_short_path) \uf054 %f'
 
 # Right prompt with AWS_PROFILE (matching fish)
 RPROMPT='%F{178}${AWS_PROFILE:+[$AWS_PROFILE]}%f'
@@ -98,15 +134,6 @@ up_directory() {
 }
 zle -N up_directory
 bindkey '\eu' up_directory
-
-# Ctrl + f - Launch nvim
-launch_nvim() {
-  BUFFER=""
-  nvim
-  zle reset-prompt
-}
-zle -N launch_nvim
-bindkey '^f' launch_nvim
 
 # ===========================
 # mise
@@ -223,3 +250,11 @@ bindkey -s '^T' 'awsps
 # <<< aws-profile-selector end <<<
 
 
+
+# pnpm
+export PNPM_HOME="/Users/krzmknt/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
