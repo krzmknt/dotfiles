@@ -5,3 +5,4 @@ config/nvim/.config/nvim/plugin/packer_compiled.lua
 .serena
 config/claude/.claude/settings.json
 config/wezterm/.config/wezterm/local.lua
+config/macos/karabiner/.config/karabiner/automatic_backups/
