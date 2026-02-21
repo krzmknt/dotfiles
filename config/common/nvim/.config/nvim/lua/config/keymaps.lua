@@ -211,11 +211,6 @@ map(mode.normal, "gh", ":Gitsigns preview_hunk<CR>", opts)
 map(mode.normal, "gj", ":Gitsigns next_hunk<CR>", opts)
 map(mode.normal, "gk", ":Gitsigns prev_hunk<CR>", opts)
 
--- Float G
-local float_g = require("float-g")
-float_g.setup()
-map(mode.normal, "<C-g>", float_g.open, opts)
-
 -- DiffView toggle function
 local function toggle_diffview()
 	local diffview_lib = require("diffview.lib")
