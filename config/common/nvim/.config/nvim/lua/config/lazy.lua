@@ -160,6 +160,8 @@ require("lazy").setup({
 						"javascript",
 						"json",
 						"lua",
+						"markdown",
+						"markdown_inline",
 						"python",
 						"tsx",
 						"typescript",
@@ -427,6 +429,17 @@ require("lazy").setup({
 							info = icons.diagnostic.info,
 							warning = icons.diagnostic.warn,
 							error = icons.diagnostic.error,
+						},
+					},
+					renderer = {
+						indent_markers = {
+							enable = true,
+							icons = {
+								corner = "└",
+								edge = "│",
+								item = "│",
+								none = " ",
+							},
 						},
 					},
 					update_focused_file = {

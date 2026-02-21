@@ -146,9 +146,14 @@ fi
 # ghq + fzf
 # ---------------------------
 ghq_fzf_repo() {
-  local selected_repository=$(ghq list -p | sed "s|$(ghq root)/||" | fzf \
+  local root=$(ghq root)
+  local selected_repository=$(ghq list -p \
+    | xargs -P 8 -I{} bash -c 'echo "$(git -C "$1" log -1 --format="%ct" 2>/dev/null || echo 0) $1"' _ {} \
+    | sort -rn \
+    | sed "s|^[0-9]* $root/||" \
+    | fzf \
     --prompt="repositories > " \
-    --preview="eza -la --icons --git $(ghq root)/{}" \
+    --preview="eza -la --icons --git $root/{}" \
     --preview-window=right:50%)
   if [[ -n "$selected_repository" ]]; then
     cd "$(ghq root)/$selected_repository"
